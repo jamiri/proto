@@ -1,0 +1,15 @@
+#sidebar.grid_5.alpha.shadow
+  #Categories
+    .SecHead.clearfix
+      %img.icon{:src => "images/home.png"}/
+      %h3
+        Categories
+    .SecBody.sidebarmenu
+      %ul#sidebarmenu1.alpha
+        = create_child_for_category @categories
+  / end of Categories
+  #Glossary
+    .SecHead  
+    .SecBody  
+  / end of Glossary
+/ end of sidebar

@@ -1,0 +1,93 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	background:url(../images/Body.jpg);
+}
+
+div#header, div#content{
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+div.SecHead{
+	background-color: #c2ab66;
+	border: solid #4b390f 1px;
+	margin-top: 3px;
+}
+
+div.SecBody{
+	background: url(../images/SecBody.png);
+	border: solid #4b390f 1px;
+}
+
+img.icon{
+	width: 32px;
+	height: 32px;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+
+div.SecHead h3{
+	display:inline;
+	margin: 0;
+	padding: 0 0 0 10px;
+	color: #4b390f;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size: 16px;
+}
+	
+/*--------------------------SideBar Menu---------------------*/
+.sidebarmenu ul{
+list-style-type: none;
+font: bold 13px Verdana;
+width: 190px; /* Main Menu Item widths */
+border-bottom: 1px solid #ccc;
+}
+ 
+.sidebarmenu ul li{
+position: relative;
+}
+
+/* Top level menu links style */
+.sidebarmenu ul li a{
+display: block;
+overflow: auto; /*force hasLayout in IE7 */
+color:  #c17138;
+text-decoration: none;
+padding: 6px;
+margin: 0;
+border-bottom: 1px solid #778;
+border-right: 1px solid #778;
+}
+
+.sidebarmenu ul li a:link, .sidebarmenu ul li a:visited, .sidebarmenu ul li a:active{
+background: transparent; /*background of tabs (default state)*/
+}
+
+.sidebarmenu ul li a:visited{
+color: #c17138;
+}
+
+.sidebarmenu ul li a:hover{
+background-color: #c1d668;
+color: #585f36;
+}
+
+/*Sub level menu items */
+.sidebarmenu ul li ul{
+position: absolute;
+width: 190px; /*Sub Menu Items width */
+top: 0;
+visibility: hidden;
+}
+
+ 
+/* Holly Hack for IE \*/
+* html .sidebarmenu ul li { float: left; height: 1%; }
+* html .sidebarmenu ul li a { height: 1%; }
+/* End */
+
+/*--------------------------------end of SideBar Menu---------------------*/
+

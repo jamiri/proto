@@ -1,0 +1,76 @@
+namespace :db do
+
+  task :environment do
+
+    require "active_record"
+    Dir.glob("./db/models/*.rb").each { |r| require r }
+    ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => './db/iosie_prototype.db'
+
+  end
+
+  desc "Migrate the database"
+  task :migrate => :environment do
+
+    #ActiveRecord::Base.logger = Logger.new(STDOUT)
+    ActiveRecord::Migration.verbose = true
+    ActiveRecord::Migrator.migrate("db/migrate")
+
+  end
+
+  desc "Test task"
+  task :test_task do
+
+    puts "Hello test task!"
+
+  end
+
+
+  desc "Generate fake data"
+  task :fake => :environment do
+
+    require "faker"
+
+    cats = Faker::Lorem.words ENV["unm"].to_i
+    cats.each do |cat|
+
+      c = Category.new
+      c.name = cat
+      c.description = cat
+      c.save
+
+    end
+
+  end
+
+  desc "Generate child for categories"
+  task :make_child => :environment do
+
+    require "faker"
+
+    Category.where(:name => ENV["name"]).each do |c|
+
+      fake_list = Faker::Lorem.words 3
+
+      fake_list.each do |item|
+
+        cat = Category.new
+        cat.name = item
+        cat.description = item
+        cat.parent = c
+        cat.save
+
+      end
+
+    end
+  end
+
+
+  desc "Clear data in db"
+  task :clear => :environment do
+
+    Category.delete_all
+
+  end
+
+
+end
