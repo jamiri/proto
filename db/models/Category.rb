@@ -4,6 +4,8 @@ class Category < ActiveRecord::Base
            :foreign_key => "parent_id"
   belongs_to :parent, :class_name => "Category"
 
+  has_many :lessons, :foreign_key => 'category_id'
+
 end
 
 
