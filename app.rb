@@ -18,7 +18,7 @@ class Main < Sinatra::Base
 
     @categories = Category.where(:parent_id => nil)
 
-    haml :index
+    erb :index
 
   end
 
