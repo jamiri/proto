@@ -1,0 +1,4 @@
+%form.searchform
+  %input.searchfield{:onblur => "if (this.value == '') {this.value = 'Search Content';}", :onfocus => "if (this.value == 'Search Content') {this.value = '';}", :type => "text", :value => "Search Content"}/
+  %input.searchbutton{:type => "button", :value => "Go"}/
+%a.advanced_search{:href => ""} Advanced Search

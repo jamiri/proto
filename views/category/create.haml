@@ -1,0 +1,14 @@
+.box
+  %form.create-category{:method => "post"}
+    %fieldset
+      %legend Add Category
+      Parent name:
+      %input.input.text{:name => "category[parent]", :type => "text"}
+      %br
+      Name:
+      %input{:name => "category[name]", :type => "text"}
+      %br
+      %input{:type => "submit", :value => "Add"}
+
+
+

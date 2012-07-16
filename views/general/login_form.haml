@@ -1,0 +1,5 @@
+%form.loginform
+  %input.emailfield{:onblur => "if (this.value == '') {this.value = 'Email';}", :onfocus => "if (this.value == 'Email') {this.value = '';}", :type => "text", :value => "Email"}/
+  %input.passfield{:onblur => "if (this.value == '') {this.value = 'Password';}", :onfocus => "if (this.value == 'Password') {this.value = '';}", :type => "text", :value => "Password"}/
+  %input.signinbutton{:type => "button", :value => "Sign in"}/
+%a.sign_up{:href => ""} Sign Up
