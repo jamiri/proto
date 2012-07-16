@@ -1,18 +1,17 @@
 %body
-  #header.container_24.clearfix
-    .SecHead
-      \ 
-      %br/
-    / toolbar
-    .SecBody
-      \ 
-      %br/
-    / body
-  / header
-  #content.container_24.clearfix
-    = haml :sidebar_left
-    #main.grid_19.omega
-    / end of main
-  / end of content
+  .head_bg
+    #container.container_24.clearfix
+      #header.grid_24.clearfix
+        .SecHead
+          = haml :"general/search_form"
+          = haml :"general/login_form"
+        / toolbar
+        .SecBody
+          #logo
+        / sec body
+      / header
+    / end of header container
+  / end of head bg
+  = haml :sidebar_left
   #footer.container_24.clearfix
   / footer

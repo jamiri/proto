@@ -1,15 +1,121 @@
-#sidebar.grid_5.alpha.shadow
-  #Categories
-    .SecHead.clearfix
-      %img.icon{:src => "images/home.png"}/
-      %h3
-        Categories
-    .SecBody.sidebarmenu
-      %ul#sidebarmenu1.alpha
-        = create_child_for_category @categories
-  / end of Categories
-  #Glossary
-    .SecHead  
-    .SecBody  
-  / end of Glossary
-/ end of sidebar
+#content.container_24.clearfix
+  #sidebar.grid_5
+    #Categories
+      .SecHead.clearfix
+        %img.icon{:src => "images/home.png"}/
+        %h3.title Categories
+      .SecBody8
+        .sidebarmenu
+          %ul#sidebarmenu1.alpha.parent
+            = create_child_for_category @categories
+      / end of SecBody
+    / end of Categories
+    #Glossary
+      .SecHead
+        %img.icon{:src => "images/home.png"}/
+        %h3.title Glossary
+      .SecBody
+        \ 
+    / end of Glossary
+    #TagCloud
+      .SecHead
+        %img.icon{:src => "images/home.png"}/
+        %h3.title Tag Cloud
+      .SecBody
+        \ 
+    / end of Tag Cloud
+  / end of sidebar
+  #main.grid_19.clearfix
+    #slider.grid_19.alpha.omega
+      .SecHead
+        %img.icon{:src => "images/home.png"}/
+        %h3.title What's New?
+      / no SecBody
+      #featured
+        %ul.ui-tabs-nav
+          %li#nav-fragment-1.ui-tabs-nav-item.ui-tabs-selected
+            %a{:href => "#fragment-1"}
+              %h4.title Lesson Title
+              %span.description
+                Added: 2 days ago
+                %br>/
+                Category: Towhid
+          %li#nav-fragment-2.ui-tabs-nav-item
+            %a{:href => "#fragment-2"}
+              %h4.title Lesson Title
+              %span.description
+                Added: 2 days ago
+                %br>/
+                Category: Towhid
+          %li#nav-fragment-3.ui-tabs-nav-item
+            %a{:href => "#fragment-3"}
+              %h4.title Lesson Title
+              %span.description
+                Added: 2 days ago
+                %br>/
+                Category: Towhid
+          %li#nav-fragment-4.ui-tabs-nav-item
+            %a{:href => "#fragment-4"}
+              %h4.title Lesson Title
+              %span.description
+                Added: 5 days ago
+                %br>/
+                Category: Towhid
+        / First Content
+        #fragment-1.ui-tabs-panel{:style => ""}
+          %img{:alt => "", :src => "images/slide1.jpg"}/
+          .info
+            %h2 Lesson Title
+            %p
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit....
+              %a{:href => "#"} View This Lesson!
+        / Second Content
+        #fragment-2.ui-tabs-panel.ui-tabs-hide{:style => ""}
+          %img{:alt => "", :src => "images/slide2.jpg"}/
+          .info
+            %h2 Lesson Title
+            %p
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit....
+              %a{:href => "#"} View This Lesson!
+        / Third Content
+        #fragment-3.ui-tabs-panel.ui-tabs-hide{:style => ""}
+          %img{:alt => "", :src => "images/slide3.jpg"}/
+          .info
+            %h2 Lesson Title
+            %p
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit....
+              %a{:href => "#"} View This Lesson!
+        / Fourth Content
+        #fragment-4.ui-tabs-panel.ui-tabs-hide{:style => ""}
+          %img{:alt => "", :src => "images/slide4.jpg"}/
+          .info
+            %h2 Lesson Title
+            %p
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit....
+              %a{:href => "#"} View This Lesson!
+      / end of Slider
+    / end of slider
+    #populars_container.grid_19.alpha.omega.clearfix
+      #Lessons.popular
+        .SecHead
+          %img.icon{:src => "images/home.png"}/
+          %h3.title Popular Lessons
+        .SecBody
+          \ 
+      / end of Lessons
+      #Entries.popular
+        .SecHead
+          %img.icon{:src => "images/home.png"}/
+          %h3.title Popular Entries
+        .SecBody
+          \ 
+      / end of Entries
+      #Suggestions.popular_last
+        .SecHead
+          %img.icon{:src => "images/home.png"}/
+          %h3.title Suggestions
+        .SecBody
+          \ 
+      / end of Suggestions
+  / end of main
+/ end of content

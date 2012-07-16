@@ -10,7 +10,7 @@ def create_child_for_category(root_categories)
 
   root_categories.each do |p|
 
-    str += "<li class='shadowed'><a href='#'>"
+    str += "<li ><a href='#'>"
     str += p.name + "</a>"
 
     if (p.sub_categories.count > 0)

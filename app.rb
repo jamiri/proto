@@ -24,36 +24,51 @@ class Main < Sinatra::Base
 
 
 
-#--------------- Category Controller -------------------------------------
+#***************************** Category Controller *************************************
 
   get "/add/category" do
-    haml :'create_category'
+    haml :'category/create'
   end
+
+
+#---------------------------------------------------------------------------------------------
+
 
   post "/add/category" do
-    haml :"new_category"
+    category = params[:category]
+
+    c = Category.new
+    c.name = category[:name]
+    c.parent = Category.where(:name => category[:parent]).first
+    c.save
+
+    haml :"category/new", :locals => {cat:c}
   end
 
-#--------------- End of Category Controller --------------------------------
+#***************************** End of Category Controller ******************************
 
 
 
 
-#--------------- Lesson Controller ---------------------------------------
+#***************************** Lesson Controller *************************************
 
   # GET -> makes the page for entering the lesson data
   get "/add/lesson" do
 
-    haml :'create_lesson'
+    haml :'create/lesson'
 
   end
+
+
+#---------------------------------------------------------------------------------------------
+
 
   # POST -> saves the lesson data in database
   post "/add/lesson" do
-    haml :'new_lesson'
+    haml :'lesson/new'
   end
 
-#--------------- End of Lesson Controller ---------------------------------
+#***************************** End of Lesson Controller ***********************************
 
 end
 
