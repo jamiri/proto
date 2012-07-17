@@ -27,7 +27,7 @@ class Main < Sinatra::Base
 #***************************** Category Controller *************************************
 
   get "/category/add/?" do
-    haml :'category/create'
+    erb :'category/create'
   end
 
 
@@ -42,7 +42,7 @@ class Main < Sinatra::Base
     c.parent = Category.where(:name => category[:parent]).first
     c.save
 
-    haml :"category/new", :locals => {cat:c}
+    erb :"category/new", :locals => {cat:c}
   end
 
 #***************************** End of Category Controller ******************************
@@ -55,7 +55,7 @@ class Main < Sinatra::Base
   # GET -> makes the page for entering the lesson data
   get "/lesson/add/?" do
 
-    haml :'create/lesson'
+    erb :'lesson/create'
 
   end
 
@@ -65,7 +65,7 @@ class Main < Sinatra::Base
 
   # POST -> saves the lesson data in database
   post "/lesson/add/?" do
-    haml :'lesson/new'
+    erb :'lesson/new'
   end
 
 #***************************** End of Lesson Controller ***********************************
