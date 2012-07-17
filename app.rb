@@ -26,7 +26,7 @@ class Main < Sinatra::Base
 
 #***************************** Category Controller *************************************
 
-  get "/add/category" do
+  get "/category/add/?" do
     haml :'category/create'
   end
 
@@ -34,7 +34,7 @@ class Main < Sinatra::Base
 #---------------------------------------------------------------------------------------------
 
 
-  post "/add/category" do
+  post "/category/add/?" do
     category = params[:category]
 
     c = Category.new
@@ -53,7 +53,7 @@ class Main < Sinatra::Base
 #***************************** Lesson Controller *************************************
 
   # GET -> makes the page for entering the lesson data
-  get "/add/lesson" do
+  get "/lesson/add/?" do
 
     haml :'create/lesson'
 
@@ -64,7 +64,7 @@ class Main < Sinatra::Base
 
 
   # POST -> saves the lesson data in database
-  post "/add/lesson" do
+  post "/lesson/add/?" do
     haml :'lesson/new'
   end
 
