@@ -6,11 +6,9 @@ require "./helpers/application_helper"
 
 class Main < Sinatra::Base
 
-
   before do
     @root_path = File.dirname(__FILE__)
   end
-
 
   # GET -> Root of the site
 
@@ -30,9 +28,7 @@ class Main < Sinatra::Base
     haml :'category/create'
   end
 
-
 #---------------------------------------------------------------------------------------------
-
 
   post "/add/category" do
     category = params[:category]
@@ -55,7 +51,7 @@ class Main < Sinatra::Base
   # GET -> makes the page for entering the lesson data
   get "/add/lesson" do
 
-    haml :'create/lesson'
+    haml :'lesson/create'
 
   end
 
