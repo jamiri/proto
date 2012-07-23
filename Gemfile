@@ -5,6 +5,7 @@ gem "sinatra"
 gem "activerecord"
 gem "haml"
 gem "sqlite3"
+gem "sinatra_more"
 
 group :devel do
     gem "thin"
