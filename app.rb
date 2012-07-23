@@ -6,9 +6,9 @@ require_relative "admin"
 
 class Main < Sinatra::Base
 
-  before do
-    @root_path = File.dirname(__FILE__)
-  end
+  #before do
+  #  @root_path = File.dirname(__FILE__)
+  #end
 
   # GET -> Root of the site
 

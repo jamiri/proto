@@ -9,7 +9,9 @@ class SalaamPodAdmin < Sinatra::Base
 
   register SinatraMore::MarkupPlugin
   register SinatraMore::RoutingPlugin
+  register Sinatra::Flash
 
+  enable :sessions
   set :views => 'views/admin'
   #set :erb, :layout => :admin_layout
 
@@ -38,7 +40,7 @@ class SalaamPodAdmin < Sinatra::Base
 
     lesson.save
 
-    #flash[:notice] = "New lesson has been successfully saved."
+    flash[:notice] = "New lesson has been successfully saved."
 
     redirect url_for(:index)
   end
