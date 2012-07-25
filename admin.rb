@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra_more/markup_plugin'
 require 'sinatra_more/routing_plugin'
+require "sinatra/flash"
 require "active_record"
 require_relative "db/ar_config"
 require_relative "db/models/Lesson"

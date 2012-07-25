@@ -37,7 +37,8 @@ class Main < Sinatra::Base
     c.parent = Category.where(:name => category[:parent]).first
     c.save
 
-    erb :"category/new", :locals => {cat:c}
+
+    erb :"category/new", :locals => {:cat => c}
   end
 
 #***************************** End of Category Controller ******************************
@@ -66,5 +67,6 @@ class Main < Sinatra::Base
 #***************************** End of Lesson Controller ***********************************
 
   use SalaamPodAdmin
-end
 
+
+end
