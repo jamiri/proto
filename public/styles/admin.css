@@ -1,0 +1,27 @@
+#top-bar {
+    background-color: #eeeeee;
+    border-bottom: 1px solid #aaa;
+    height: 25px;
+    box-shadow: 0px 0px 10px #aaa;
+    padding: 15px 1px 10px 25px;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-size: 18pt;
+    margin: 0px;
+}
+
+#main-wrapper {
+    padding: 30px;
+}
+
+.flash {
+    background-color: #90ee90;
+    border: 1px solid green;
+    box-shadow: 0px 0px 10px #cacaca;
+    padding: 7px;
+    margin: 10px 0;
+    font-family:sans-serif;
+    font-size: 12pt;
+}

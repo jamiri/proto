@@ -1,11 +1,27 @@
+DB_FILE = './db/iosie_prototype.db'
+
+#desc "Establish the connection to the database"
+task :environment do
+  require "active_record"
+
+  Dir.glob("./db/models/*.rb").each { |r| require r }
+  ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => DB_FILE
+end
+
 namespace :db do
 
-  task :environment do
-
+  desc "Remove the database"
+  task :remove do
     require "active_record"
-    Dir.glob("./db/models/*.rb").each { |r| require r }
-    ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => './db/iosie_prototype.db'
 
+    if File.exist?(DB_FILE)
+      STDOUT.print "The database file will be removed. Are you sure [yes/no]? "
+      input = STDIN.gets
+      if input =~ /yes/
+        File.delete(DB_FILE)
+        puts "The database file successfully removed."
+      end
+    end
   end
 
   desc "Migrate the database"
@@ -24,13 +40,21 @@ namespace :db do
 
   end
 
+end
 
-  desc "Generate fake data"
-  task :fake => :environment do
+namespace :category do
+
+  desc "Generate fake categories"
+  task :create_fake => :environment do
 
     require "faker"
 
-    cats = Faker::Lorem.words ENV["unm"].to_i
+    unless ENV["FAKE_COUNT"]
+      puts "How many fake categories do you want? (ie. FAKE_COUNT=5)"
+      next
+    end
+
+    cats = Faker::Lorem.words ENV["FAKE_COUNT"].to_i
     cats.each do |cat|
 
       c = Category.new
@@ -40,6 +64,7 @@ namespace :db do
 
     end
 
+    puts "#{ENV['FAKE_COUNT']} fake categories created."
   end
 
   desc "Generate child for categories"
@@ -65,16 +90,18 @@ namespace :db do
   end
 
 
-  desc "Clear data in db"
+  desc "Remove all categories"
   task :clear => :environment do
 
     Category.delete_all
+    puts "All categories removed."
 
   end
 
 
   desc "Run arbitrary custom commands"
   task :run => :environment do
+
     c = Category.find(1)
 
     l = Lesson.new
@@ -82,8 +109,6 @@ namespace :db do
     l.category = c
     p l.save
 
-
   end
 
 end
-

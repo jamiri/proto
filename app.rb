@@ -2,14 +2,9 @@ require "active_record"
 require "./db/ar_config"
 require "./db/models/Category"
 require "./helpers/application_helper"
-
+require_relative "admin"
 
 class Main < Sinatra::Base
-
-
-  before do
-    @root_path = File.dirname(__FILE__)
-  end
 
 
   # GET -> Root of the site
@@ -70,5 +65,6 @@ class Main < Sinatra::Base
 
 #***************************** End of Lesson Controller ***********************************
 
+  use SalaamPodAdmin
 end
 
