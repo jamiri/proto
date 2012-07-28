@@ -1,7 +1,7 @@
 
 
 # create an unordered list from a set of categories along with their descendants
-
+#
 def create_child_for_category(root_categories)
 
   # the string that is going to be returned
@@ -25,7 +25,9 @@ def create_child_for_category(root_categories)
   str
 
 end
+def create_glossary()
 
+end
 
 
 

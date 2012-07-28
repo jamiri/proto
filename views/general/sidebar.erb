@@ -1,45 +1,18 @@
 <div id="sidebar" class="grid_5">
 
-  <div id="Categories">
-    <div class="SecHead clearfix">
-      <img class="icon" src="images/home.png"/>
+  <!--Category -------------------------------------------------------------------------------------------------------------->
 
-      <h3 class="title">Categories</h3>
-    </div>
-    <div class="SecBody8">
-      <div class="sidebarmenu">
-        <ul id="sidebarmenu1" class="alpha parent">
+     <%= erb :'general/Category' %>
 
-          <%= create_child_for_category @categories %>
+  <!--Category -------------------------------------------------------------------------------------------------------------->
 
-        </ul>
-      </div>
-    </div>
-    <!--end of SecBody -->
-  </div>
-  <!-- end of Categories -->
+  <!--Glossary -------------------------------------------------------------------------------------------------------------->
 
-  <div id="Glossary">
-    <div class="SecHead">
-      <img class="icon" src="images/home.png"/>
-
-      <h3 class="title">Glossary</h3>
-    </div>
-    <div class="SecBody">&nbsp;
-    </div>
-  </div>
-  <!-- end of Glossary -->
-
-  <div id="TagCloud">
-    <div class="SecHead">
-      <img class="icon" src="images/home.png"/>
-
-      <h3 class="title">Tag Cloud</h3>
-    </div>
-    <div class="SecBody">&nbsp;
-    </div>
-  </div>
-  <!-- end of Tag Cloud-->
+     <%= erb :'general/Glossary' %>
+  <%= erb :'general/TagCload' %>
 
 </div>
+
+
+
 <!-- end of sidebar -->

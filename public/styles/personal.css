@@ -10,6 +10,12 @@ div#header, div#content{
 	border-radius: 7px;
 }
 
+
+#content{
+	margin-top: 10px;
+}
+
+
 h3.title{
 	padding:0;
 	vertical-align:middle;
@@ -17,15 +23,20 @@ h3.title{
 
 div.SecHead{
 	background-color: rgba(203,220,104,.7) ;
+	/*
 	background-image: linear-gradient(left , rgba(203,220,104,.7) 0%, rgba(79,93,31,.7) 100%);
 	background-image: -o-linear-gradient(left , rgba(203,220,104,.7) 0%, rgba(79,93,31,.7) 100%);
 	background-image: -moz-linear-gradient(left , rgba(203,220,104,.7) 0%, rgba(79,93,31,.7) 100%);
 	background-image: -webkit-linear-gradient(left , rgba(203,220,104,.7) 0%, rgba(79,93,31,.7) 100%);
 	background-image: -ms-linear-gradient(left , rgba(203,220,104,.7) 0%, rgba(79,93,31,.7) 100%);
+	*/
 	border: solid #4b390f 0px;
 	margin-top: 5px;
 	-moz-border-radius: 0.4em 0.4em 0em 0em;
 	border-radius: 0.4em 0.4em 0em 0em;
+	-moz-box-shadow: 0 0 5px #555;
+	-webkit-box-shadow: 0 0 5px #555;
+	box-shadow: 0 0 5px #555;
 }
 
 div.SecBody{
@@ -33,6 +44,9 @@ div.SecBody{
 	border: solid #4b390f 0px;
 	-moz-border-radius: 0em 0em 0.4em 0.4em;
 	border-radius: 0em 0em 0.4em 0.4em ;
+	-moz-box-shadow: 0 0 5px #555;
+	-webkit-box-shadow: 0 0 5px #555;
+	box-shadow: 0 0 5px #555;
 }
 
 img.icon{
@@ -53,17 +67,47 @@ div.SecHead h3{
 
 /*--------------------------Header---------------------*/
 
+.toolbar_bg{
+	width: 100%;
+	background-color: rgba(203,220,104,.7) ;
+	border-bottom: #630 solid 0px;
+	-moz-box-shadow: 0px 2px 5px rgba(0,0,0,.8);
+	-webkit-box-shadow: 0px 2px 5px rgba(0,0,0,.8);
+	box-shadow: 0px 2px 5px rgba(0,0,0,.8);
+}
+	
+
+.head_bg{
+	width: 100%;
+	background-color: rgba(170,150,80,.9) ;
+	border-bottom: #630 solid 0px;
+	-moz-box-shadow: 0px 2px 5px rgba(0,0,0,.5);
+	-webkit-box-shadow: 0px 2px 5px rgba(0,0,0,.5);
+	box-shadow: 0px 2px 5px rgba(0,0,0,.5);
+}
+
+.toolbar{
+	margin-top: 0;
+	border-bottom: #630 solid 0px;
+	/*-moz-box-shadow: 0 0 5px #333;
+	-webkit-box-shadow: 0 0 5px #333;
+	box-shadow: 0 0 5px #333;
+	-moz-border-radius: 0em 0em 0.4em 0.4em;
+	border-radius: 0em 0em 0.4em 0.4em ;*/
+}
+
 .searchform, .loginform {
 	display: inline-block;
 	zoom: 1; /* ie7 hack for display:inline-block */
 	*display: inline;
 	border: none;
-	padding: 5px;
+	padding-top: 5px;
+	padding-bottom: 3px;
 
 }
 
 .loginform{
-	margin-left: 260px;
+	margin-left: 310px;
 }
 
 .searchform input, .loginform input {
@@ -119,14 +163,38 @@ div#logo{
 	background:url(../images/islamifc.png) center center no-repeat;
 	height: 65px;
 	width: 305px;
-	padding: 15px;
+	padding: 60px 0px 5px;
+	float: left;
+	margin-right: 30px;
 }
+
+#about{
+	color: rgba(250,240,156, 1);
+	text-align:justify;
+	padding: 35px 15px 10px;
+	font: 13px "Comic Sans MS", cursive;
+}
+
+#about a, #about a:visited, #about a:link{
+	color: rgba(195,250,230,.8);
+	font-weight: bold;
+}
+
+#about a:hover{
+	color: rgba(195,250,230,1);
+	background: rgba(75,57,15,1);
+}
+
 
 /*--------------------------end of Header---------------------*/
 
 
 
 /*--------------------------SideBar Menu---------------------*/
+
+#Categories .SecBody{
+	background: transparent;
+}
 
 .sidebarmenu ul{
 	list-style-type: none;
@@ -192,15 +260,101 @@ visibility: hidden;
 * html .sidebarmenu ul li { float: left; height: 1%; }
 * html .sidebarmenu ul li a { height: 1%; }
 /* End */
-
 /*--------------------------------end of SideBar Menu---------------------*/
 
 
 
 
 
-/*--------------------------------Slider-----------------------------------*/
 
+
+/*--------------------------------Glossary -------------------------------*/
+#Glossary{
+	background: rgba(0,0,0,.2);
+	-moz-border-radius: 0.4em;
+	border-radius: 0.4em ;
+	text-align: justify;
+}
+
+#Glossary .searchfield{
+	width: 140px;
+	margin: 9px 0px 9px 6px;
+}
+
+
+.index{
+	padding: 10px;
+	background: rgba(250, 240, 156, .9);
+	-moz-border-radius: 0px 0px 7px 7px;
+	border-radius: 0px 0px 7px 7px;	
+}
+
+
+.index a{
+	text-decoration: none;
+	color: rgba(116,115,50,1);
+	padding: 0px 3px;
+}
+
+.index a:hover{
+	background: rgba(0,0,0,.1);
+}/*--------------------------------end of Glossary-------------------------*/
+
+
+
+
+
+
+/*--------------------------------Tag Cloud-------------------------------*/
+.tags{
+	padding: 10px;
+	text-align: justify;
+}
+
+.tags a{
+	text-decoration: none;
+	color: rgba(116,115,50,1);
+	padding: 2px;
+}
+
+.tags a:hover{
+	background: rgba(0,0,0,.1);
+}
+	
+.tags a.small{
+	font-size: .5em;
+}
+
+.tags a.medium{
+	font-size: 1em;
+}
+
+.tags a.large{
+	font-size: 1.3em;
+}
+/*--------------------------------end of Tag Cloud---------------------*/
+
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------Slider-----------------------------------*/
+#slider {
+	background: rgba(0,0,0,.1);
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	margin-bottom: 7px;
+	-moz-box-shadow: 0 0 5px #555;
+	-webkit-box-shadow: 0 0 5px #555;
+	box-shadow: 0 0 5px #555;
+}
+	
 #featured{  
     width:600px;  
     padding-right:150px;  
@@ -326,9 +480,12 @@ visibility: hidden;
     text-decoration:underline;  
 }
 
-
-
 /*--------------------------------end of Slider-----------------------------------*/
+
+
+
+
+
 
 
 
@@ -339,9 +496,165 @@ visibility: hidden;
 	display: inline-block;
 }
 
-.popular_last{
-	width: 244px;
-	display: inline-block;
+.last{
+	margin-right: 0px;
+}
+
+.popular a, .popular a:link, .popular a:visited, .popular a:active, .popular a:focus{
+	text-decoration: none;
+	display: block;
+	height: 50px;
+	padding: 10px 10px 12px 10px;
+	color: rgba(116,115,50,1);
+	border-bottom: 1px inset #555;
+}
+
+.popular a:hover{
+	background: rgba(0,0,0,.1);
+}
+
+.popular a img{
+	width: 70px;
+	height: 50px;
+	float: left;
+	margin: 0 10px 0 2px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	border: 1px solid #555;
+}
+
+.popular a h4{
+	color: #666;
+	padding-top: 5px;
 }
 
 /*--------------------------------end of Populars-----------------------------*/
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------Tabbed Area Lessons-----------------------------*/
+article.tabs
+{
+	position: relative;
+	display: block;
+	width: 713px;
+	margin: 2em auto;
+}
+
+article.tabs section
+{
+	position: absolute;
+	display: block;
+	top: 10px;
+	left:-20px;
+	padding: 10px 20px;
+	background-color: #ddd;
+	border-radius: 5px;
+	border: 1px solid #555;
+	box-shadow: 0 3px 3px rgba(0,0,0,0.1);
+	z-index: 0;
+	width: 713px;
+}
+
+article.tabs section:first-child
+{
+	z-index: 1;
+}
+
+article.tabs section h2
+{
+	position: absolute;
+	font-size: 1em;
+	font-weight: normal;
+	width: 120px;
+	height: 1.8em;
+	top: -1.8em;
+	left: 250px;
+	padding: 0;
+	margin: 0;
+	color: #999;
+	background-color: #ddd;
+	border-radius: 5px 5px 0 0;
+	border-top: 1px solid #555;
+	border-left: 1px solid #555;
+	border-right: 1px solid #555;
+}
+
+article.tabs section:nth-child(2) h2
+{
+	left: 372px;
+}
+
+article.tabs section:nth-child(3) h2
+{
+	left: 494px;
+}
+
+article.tabs section:nth-child(4) h2
+{
+	left: 616px;
+}
+
+article.tabs section h2 a
+{
+	display: block;
+	line-height: 1.8em;
+	text-align: center;
+	text-decoration: none;
+	color: inherit;
+	outline: 0 none;
+}
+
+article.tabs section,
+article.tabs section h2
+{
+	-webkit-transition: all 500ms ease;
+	-moz-transition: all 500ms ease;
+	-ms-transition: all 500ms ease;
+	-o-transition: all 500ms ease;
+	transition: all 500ms ease;
+}
+
+article.tabs section:target,
+article.tabs section:target h2
+{
+	color: #333;
+	background-color: #fff;
+	z-index: 2;
+}
+/*--------------------------------Tabbed Area Lessons-----------------------------*/
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------footer----------------------------*/
+
+.footer-wrapper{
+	margin-top: 15px;
+	background-color: rgba(170,150,80,.9) ;
+	border-top: #630 solid 1px;
+	-moz-box-shadow: 0px -2px 5px rgba(0,0,0,.5);
+	-webkit-box-shadow: 0px -2px 5px rgba(0,0,0,.5);
+	box-shadow: 0px -2px 5px rgba(0,0,0,.5);
+}
+
+#footer{
+	height: 30px;
+	left: 0;
+	padding: 20px;
+	color: rgba(250,240,156, 1);
+	font: 13px "Comic Sans MS", cursive;
+}
