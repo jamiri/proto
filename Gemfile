@@ -13,4 +13,5 @@ group :devel do
     gem "thin"
     gem "faker"
     #gem "shotgun"
+  gem "rake"
 end
