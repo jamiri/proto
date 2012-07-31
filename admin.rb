@@ -19,6 +19,12 @@ class SalaamPodAdmin < Sinatra::Base
   map(:index).to('/admin')
   map(:lesson_new).to("/admin/lesson/new")
   map(:lesson_create).to("/admin/lesson/create")
+  #map category module for manage
+  map(:category_new).to("/admin/category/new")
+  map(:category_create).to("/admin/category/create")
+  #map glossary module for manage
+  map(:glossary_new).to("/admin/glossary/new")
+  map(:glossary_create).to("/admin/glossary/create")
 
   get :index do
     erb :index
@@ -29,7 +35,43 @@ class SalaamPodAdmin < Sinatra::Base
 
     erb :'lesson/new'
   end
+  get :category_new do
+    @category = Category.new
 
+    erb :'category/new'
+  end
+  get :glossary_new do
+    @glossary = Glossary.new
+
+    erb :'glossary/new'
+  end
+  post :category_create do
+    category = params[:category]
+
+    c = Category.new
+    c.name = category[:name]
+    c.parent = Category.where(:name => category[:parent]).first
+    c.save
+
+    flash[:notice] = "New category has been successfully saved."
+
+    redirect url_for(:index)
+  end
+  post :glossary_create do
+    lsn = params[:glossary]
+
+    glossary = glossary.new
+    glossary.word = lsn['Word']
+    glossary.definition = lsn['definition']
+    glossary.article = lsn['article']
+    glossary.lookup_words = lsn['lookup_words']
+
+    glossary.save
+
+    flash[:notice] = "New glossary has been successfully saved."
+
+    redirect url_for(:index)
+  end
   post :lesson_create do
     lsn = params[:lesson]
 
