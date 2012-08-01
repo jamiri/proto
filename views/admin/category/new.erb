@@ -1,13 +1,4 @@
 <div class="box">
-  <form class="create-category" method="post">
-    <fieldset>
-
-      <legend>
-
-        Add Category
-
-      </legend>
-
       <% form_for @category, url_for(:category_create), :id => 'new' do |f| %>
           <ul>
             <li>
@@ -27,10 +18,5 @@
           </ul>
 
       <% end %>
-
-
-    </fieldset>
-
-  </form>
 </div>
 
