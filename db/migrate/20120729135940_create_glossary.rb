@@ -1,4 +1,4 @@
-class CreateGlossaries < ActiveRecord::Migration
+class CreateGlossary < ActiveRecord::Migration
 
   def change
 
