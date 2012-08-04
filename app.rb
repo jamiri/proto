@@ -3,13 +3,22 @@ require "active_record"
 require "./db/ar_config"
 require "./db/models/Category"
 require "./helpers/application_helper"
+require "sinatra/content_for2"
+require "sinatra/reloader"
+require 'sinatra_more/routing_plugin'
 require_relative "admin"
 
 class Main < Sinatra::Base
 
+  register Sinatra::Reloader
+  register SinatraMore::RoutingPlugin
+  helpers Sinatra::ContentFor2
   # GET -> Root of the site
 
-  get "/" do
+  map(:home).to('/')
+  map(:view_lesson).to('/lesson')
+
+  get :home do
 
     @categories = Category.where(:parent_id => nil)
 
@@ -17,6 +26,12 @@ class Main < Sinatra::Base
 
   end
 
+  # Temporary address for viewing the "lesson" page
+  get :view_lesson do
+    @categories = Category.where(:parent_id => nil)
+
+    erb :'lesson/index'
+  end
 
 
 #***************************** Category Controller *************************************
