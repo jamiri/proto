@@ -1,23 +1,68 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 <head>
-
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>iosie VISITOR</title>
-  <link rel="stylesheet" type="text/css" href="/styles/960grid/960_24_col.css"/>
-  <link rel="stylesheet" type="text/css" href="/styles/960grid/reset.css"/>
-  <link rel="stylesheet" type="text/css" href="/styles/960grid/text.css"/>
-  <link rel="stylesheet" type="text/css" href="/styles/personal.css"/>
 
-  <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
-  <script src="/js/jquery-ui.min.js" type="text/javascript"></script>
-  <script src="/js/menu.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="styles/960grid/960_24_col.css" />
+  <link rel="stylesheet" type="text/css" href="styles/960grid/reset.css" />
+  <link rel="stylesheet" type="text/css" href="styles/personal.css" />
 
+  <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+  <script src="js/jquery-ui-1.8.22.custom.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+
+      //Nested Side Bar Menu (Mar 20th, 09)
+      //By Dynamic Drive: http://www.dynamicdrive.com/style/
+      //Mostafa Nasehi :D
+
+      var menuids=["sidebarmenu1"] //Enter id(s) of each Side Bar Menu's main UL, separated by commas
+
+      function initsidebarmenu(){
+          for (var i=0; i<menuids.length; i++){
+              var ultags=document.getElementById(menuids[i]).getElementsByTagName("ul")
+              for (var t=0; t<ultags.length; t++){
+                  ultags[t].parentNode.getElementsByTagName("a")[0].className+=" subfolderstyle"
+                  if (ultags[t].parentNode.parentNode.id==menuids[i]) //if this is a first level submenu
+                      ultags[t].style.left=ultags[t].parentNode.offsetWidth+"px" //dynamically position first level submenus to be width of main menu item
+                  else //else if this is a sub level submenu (ul)
+                      ultags[t].style.left=ultags[t-1].getElementsByTagName("a")[0].offsetWidth+"px" //position menu to the right of menu item that activated it
+                  ultags[t].parentNode.onmouseover=function(){
+                      this.getElementsByTagName("ul")[0].style.display="block"
+                  }
+                  ultags[t].parentNode.onmouseout=function(){
+                      this.getElementsByTagName("ul")[0].style.display="none"
+                  }
+              }
+              for (var t=ultags.length-1; t>-1; t--){ //loop through all sub menus again, and use "display:none" to hide menus (to prevent possible page scrollbars
+                  ultags[t].style.visibility="visible"
+                  ultags[t].style.display="none"
+              }
+          }
+      }
+
+      if (window.addEventListener)
+          window.addEventListener("load", initsidebarmenu, false)
+      else if (window.attachEvent)
+          window.attachEvent("onload", initsidebarmenu)
+
+
+
+      $(document).ready(function(){
+          $("#featured > ul").tabs({fx:{height: "toggle"}}).tabs("rotate", 3000, true);
+          $("#featured > ul").mouseover(function(){
+              $(this).tabs('rotate', 0, false);
+          });
+          $("#featured > ul").mouseout(function(){
+              $(this).tabs({ fx: {opacity: 'toggle'}}).tabs('rotate', 3000);
+          });
+      });
+
+
+
+  </script>
 
 </head>
 
-
 <%= yield %>
-
 
 </html>
