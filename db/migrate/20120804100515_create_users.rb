@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
 
       t.string  :name
+      t.string  :mail_address
       t.string  :password
 
       #enable :0 for disable user login and 1 for enable user login
