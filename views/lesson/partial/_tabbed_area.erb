@@ -13,16 +13,19 @@
   <!--------------------------------------Main Script Content ------------------------------------>
   <div id="tabs-1" class="Script body">
 
+    <!-- /- Objective -->
     <div class="objectives">
       <h4>Objectives of this Lesson:</h4>
 
-      <ol>
-        <li>First Objective of this lesson</li>
-        <li>Second Objective of this lesson</li>
-        <li>Third Objective of this lesson</li>
-        <li>Forth Objective of this lesson</li>
-      </ol>
+      <% if @lesson.objectives.any? %>
+        <ol>
+        <% @lesson.objectives.each do |oj| %>
+          <li><%= oj %></li>
+        <% end %>
+        </ol>
+      <% end %>
     </div>
+    <!-- \- Objective -->
 
     <div class="script">
       <h4>Script of Lesson</h4>

@@ -1,22 +1,22 @@
 require "sinatra/base"
 require "active_record"
 require "./db/ar_config"
-require "./db/models/Category"
 require "./helpers/application_helper"
 require "sinatra/content_for2"
 require "sinatra/reloader"
-require 'sinatra_more/routing_plugin'
+require "sinatra_more/routing_plugin"
 require_relative "admin"
+Dir[File.dirname(__FILE__) + "/db/models/*.rb"].each {|file| require file }
 
 class Main < Sinatra::Base
 
   register Sinatra::Reloader
   register SinatraMore::RoutingPlugin
   helpers Sinatra::ContentFor2
-  # GET -> Root of the site
 
   map(:home).to('/')
-  map(:view_lesson).to('/lesson')
+  map(:view_lesson_fake).to('/lesson')
+  map(:view_lesson).to('/lesson/:id')
 
   get :home do
 
@@ -26,12 +26,25 @@ class Main < Sinatra::Base
 
   end
 
+  # ----- Lesson -----
+
   # Temporary address for viewing the "lesson" page
-  get :view_lesson do
+  get :view_lesson_fake do
     @categories = Category.where(:parent_id => nil)
 
     erb :'lesson/index'
   end
+
+  get :view_lesson do
+    #exception handling required!
+
+    @lesson = Lesson.find(params[:id])
+    @categories = Category.where(:parent_id => nil)
+
+    erb :'lesson/index'
+  end
+
+
 
 
 #***************************** Category Controller *************************************
@@ -82,6 +95,6 @@ class Main < Sinatra::Base
 #***************************** End of Lesson Controller ***********************************
 
   use SalaamPodAdmin
-
+  #use LessonController
 
 end
