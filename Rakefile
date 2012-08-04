@@ -2,7 +2,9 @@ DB_FILE = './db/iosie_prototype.db'
 
 #desc "Establish the connection to the database"
 task :environment do
-  require "active_record"
+  require 'active_record'
+  require 'active_support/core_ext/string/strip'
+  require 'fileutils'
 
   Dir.glob("./db/models/*.rb").each { |r| require r }
   ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => DB_FILE
@@ -24,20 +26,45 @@ namespace :db do
     end
   end
 
-  desc "Migrate the database"
-  task :migrate => :environment do
+  desc "create an ActiveRecord migration in ./db/migrate"
+  task :create_migration => :environment do
+    name = ENV['NAME']
+    if name.nil?
+      raise "No NAME specified. Example usage: `rake db:create_migration NAME=create_users`"
+    end
 
-    #ActiveRecord::Base.logger = Logger.new(STDOUT)
-    ActiveRecord::Migration.verbose = true
-    ActiveRecord::Migrator.migrate("db/migrate", ENV['VERSION'] ? ENV['VERSION'].to_i : nil)
+    migrations_dir = File.join("db", "migrate")
+    version = ENV["VERSION"] || Time.now.utc.strftime("%Y%m%d%H%M%S")
+    filename = "#{version}_#{name}.rb"
+    migration_class = name.split("_").map(&:capitalize).join
 
+    FileUtils.mkdir_p(migrations_dir)
+
+    File.open(File.join(migrations_dir, filename), 'w') do |file|
+      file.write <<-MIGRATION.strip_heredoc
+      class #{migration_class} < ActiveRecord::Migration
+        def up
+        end
+
+        def down
+        end
+      end
+      MIGRATION
+    end
   end
 
-  desc "Test task"
-  task :test_task do
+  desc "migrate the database (use version with VERSION=n)"
+  task :migrate => :environment do
+    version = ENV["VERSION"] ? ENV["VERSION"].to_i : nil
+    ActiveRecord::Migration.verbose = true
+    ActiveRecord::Migrator.migrate('db/migrate', version)
+  end
 
-    puts "Hello test task!"
-
+  desc "rolls back the migration (use steps with STEP=n)"
+  task :rollback => :environment do
+    step = ENV["STEP"] ? ENV["STEP"].to_i : 1
+    ActiveRecord::Migration.verbose = true
+    ActiveRecord::Migrator.rollback('db/migrate', step)
   end
 
 end
