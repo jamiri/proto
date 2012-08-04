@@ -2,7 +2,7 @@ class CreateGlossary < ActiveRecord::Migration
 
   def change
 
-    create_table :glossary do |t|
+    create_table :glossaries do |t|
 
       t.string :word
       t.string :definition
