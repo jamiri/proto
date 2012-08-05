@@ -6,7 +6,7 @@ require "sinatra/content_for2"
 require "sinatra/reloader"
 require "sinatra_more/routing_plugin"
 require_relative "admin"
-Dir[File.dirname(__FILE__) + "/db/models/*.rb"].each {|file| require file }
+Dir[File.dirname(__FILE__) + "/db/models/*.rb"].each { |file| require file }
 
 class Main < Sinatra::Base
 
@@ -40,9 +40,19 @@ class Main < Sinatra::Base
     erb :'lesson/index'
   end
 
+  # ----- Feedback -----
 
-  get :feedback do
+  post :feedback do
+    fb = params[:feedback]
 
+    feedback = Feedback.new
+    feedback.user_name = fb['user_name']
+    feedback.email = fb['email']
+    feedback.subject = fb['subject']
+    feedback.comment = fb['comment']
+    feedback.url = fb['url']
+
+    feedback.save
   end
 
 

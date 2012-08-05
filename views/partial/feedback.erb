@@ -4,11 +4,12 @@
 
 <div id="boxes">
   <div id="dialog" class="window">
+    <p id="feedback_thanks">Thank you for your comment!</p>
     <span id="feedback_h">Feedback</span>
     <p id="feedback_txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
       incididunt ut labore et dolore magna aliqua
     </p>
-    <% form_tag url_for(:feedback), :class => 'feedback_form' do %>
+    <% form_tag url_for(:feedback), :id => 'feedback_form' do %>
       <ul class="inputs">
         <li>
           <%= label_tag :user_name, :caption => 'Name:' %>

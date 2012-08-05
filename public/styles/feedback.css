@@ -57,28 +57,28 @@
     background-color: #fff;
     border: 4px solid orange;
     border-radius: 5px;
-    padding: 10px 30px 20px 30px;
+    padding: 20px 30px 20px 30px;
 }
 
-.feedback_form label {
+#feedback_form label {
     display: block;
     font-weight: bold;
 }
 
-.feedback_form input[type=text] {
+#feedback_form input[type=text] {
     border: 1px solid gray;
     font-size: 15pt;
     width: 98%;
 }
 
-.feedback_form textarea {
+#feedback_form textarea {
     border: 1px solid gray;
     font-size: 10pt;
     width: 98%;
     height: 100px;
 }
 
-.feedback_form .inputs li {
+#feedback_form .inputs li {
     margin-bottom: 10px;
 }
 
@@ -89,4 +89,12 @@
 }
 #feedback_txt {
     margin-bottom: 15px;
+}
+
+#feedback_thanks {
+    display: none;
+    font-size: 16pt;
+    text-align: center;
+    background-color: #90ee90;
+    padding: 10px;
 }

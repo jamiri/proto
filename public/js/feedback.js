@@ -43,4 +43,18 @@ $(document).ready(function() {
         $(this).fadeOut(200);
         $('.window').fadeOut(100);
     });
+
+    var feedback_form_options = {
+        success: function() {
+            $('#feedback_form, #feedback_txt, #feedback_h').css('display', 'none');
+            $('#feedback_thanks').show();
+            $('#mask, .window').delay(800).fadeOut(200);
+        },
+
+        beforeSerialize: function(form, options) {
+            $('#feedback_form input[name="feedback[url]"]').val(document.URL);
+        }
+    };
+
+    $('#feedback_form').ajaxForm(feedback_form_options);
 });
