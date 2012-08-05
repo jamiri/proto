@@ -56,16 +56,31 @@
       </p>
     </div>
 
+    <!-- /- References -->
     <div class="references">
       <h4>References</h4>
-      <ol>
-        <li id="ref1">Reference Title, writer, year of pub, publication, pages</li>
-        <li id="ref2">Reference Title, writer, year of pub, publication, pages</li>
-        <li id="ref3">Reference Title, writer, year of pub, publication, pages</li>
-        <li id="ref4">Reference Title, writer, year of pub, publication, pages</li>
-        <li id="ref5">Reference Title, writer, year of pub, publication, pages</li>
-      </ol>
+      <% if @lesson.references.any? %>
+        <ol>
+          <% @lesson.references.each do |ref| %>
+            <li>
+              <div style="margin: 0 30px 15px 0;">
+                <% unless ref.photo.nil? %>
+                  <img src="/<%= settings.ref_img_dir + "/" + ref.photo %>"
+                       style="float: left; margin: 10px 10px 0 10px; border: 1px solid gray;
+                              max-height: 150px; padding: 5px; background-color: #FFF;">
+                <% end %>
+                <div style="text-align: justify; clear: right; margin-left: 10px;">
+                  <strong><%= ref.title %></strong>
+                  <span><%= ref.description %></span>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ol>
+      <% end %>
     </div>
+    <!-- \- References -->
+
   </div>
   <!--------------------------------------Main Script Content ------------------------------------>
 

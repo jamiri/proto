@@ -15,8 +15,9 @@ class Main < Sinatra::Base
   helpers Sinatra::ContentFor2
 
   map(:home).to('/')
-  map(:view_lesson_fake).to('/lesson')
   map(:view_lesson).to('/lesson/:id')
+
+  set :ref_img_dir, 'assets/ref_img'
 
   get :home do
 
@@ -27,13 +28,6 @@ class Main < Sinatra::Base
   end
 
   # ----- Lesson -----
-
-  # Temporary address for viewing the "lesson" page
-  get :view_lesson_fake do
-    @categories = Category.where(:parent_id => nil)
-
-    erb :'lesson/index'
-  end
 
   get :view_lesson do
     #exception handling required!

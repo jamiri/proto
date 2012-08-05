@@ -6,6 +6,8 @@ class CreateReferences < ActiveRecord::Migration
 
       t.integer :lesson_id
       t.string :title
+      t.string :description
+      t.string :photo
 
       t.timestamps
 
