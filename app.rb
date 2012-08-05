@@ -12,10 +12,12 @@ class Main < Sinatra::Base
 
   register Sinatra::Reloader
   register SinatraMore::RoutingPlugin
+  register SinatraMore::MarkupPlugin
   helpers Sinatra::ContentFor2
 
   map(:home).to('/')
   map(:view_lesson).to('/lesson/:id')
+  map(:feedback).to('/feedback')
 
   set :ref_img_dir, 'assets/ref_img'
 
@@ -39,6 +41,9 @@ class Main < Sinatra::Base
   end
 
 
+  get :feedback do
+
+  end
 
 
 #***************************** Category Controller *************************************
@@ -89,6 +94,5 @@ class Main < Sinatra::Base
 #***************************** End of Lesson Controller ***********************************
 
   use SalaamPodAdmin
-  #use LessonController
 
 end
