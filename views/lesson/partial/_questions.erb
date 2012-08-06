@@ -1,24 +1,17 @@
 <!--------------------------------------Q and A Content ------------------------------------>
-<%
-
-   @questions.each do |q|
-%>
 <div id="tabs-3" class="body">
-
+  <% @lesson.questions.each do |q| %>
   <div class="QAbody">
     <div class="question">
       <span class="id"><%= User.find(q.user_id).name %></span>
       <p><%=q.question %></p>
     </div>
 
-
     <div class="answer">
       <span class="id"><%= q.answered_by %></span>
       <p><%=q.answer %></p>
     </div>
   </div><!--end of QAbody -->
+  <% end %>
 </div>
-<%
-    end
-%>
 <!--------------------------------------Q and A Content ------------------------------------>
