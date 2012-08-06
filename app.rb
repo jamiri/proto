@@ -31,18 +31,20 @@ class Main < Sinatra::Base
   # Temporary address for viewing the "lesson" page
   get :view_lesson_fake do
     @categories = Category.where(:parent_id => nil)
-
     erb :'lesson/index'
   end
+
 
   get :view_lesson do
     #exception handling required!
 
     @lesson = Lesson.find(params[:id])
     @categories = Category.where(:parent_id => nil)
+    @questions=Question.where(:lesson_id=>1)
 
     erb :'lesson/index'
   end
+
 
 
 
@@ -76,21 +78,8 @@ class Main < Sinatra::Base
 
 #***************************** Lesson Controller *************************************
 
-  # GET -> makes the page for entering the lesson data
-  get "/lesson/add/?" do
-
-    erb :'lesson/create'
-
-  end
 
 
-#---------------------------------------------------------------------------------------------
-
-
-  # POST -> saves the lesson data in database
-  post "/lesson/add/?" do
-    erb :'lesson/new'
-  end
 
 #***************************** End of Lesson Controller ***********************************
 

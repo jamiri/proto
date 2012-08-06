@@ -7,6 +7,7 @@ require_relative "db/ar_config"
 require_relative "db/models/Lesson"
 require_relative "db/models/Glossary"
 require_relative "db/models/Category"
+require_relative "db/models/Question"
 
 class SalaamPodAdmin < Sinatra::Base
 

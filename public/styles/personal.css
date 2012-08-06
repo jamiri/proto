@@ -584,7 +584,7 @@ visibility: hidden;
 .LessonTitle{
 	position: relative;
 	margin: 20px 20px 80px 18px;
-	width: 205px;
+	width: 265px;
 }
 
 .LessonTitle h1{
@@ -594,7 +594,7 @@ visibility: hidden;
 	padding: 5px 10px 8px;
 	background: rgba(255,196,0,0.6) ;
 	border: 1px solid #d19405;
-	width: 190px;
+	width: 250px;
 	-moz-border-radius: 7px;
 	border-radius: 7px;
 
@@ -610,7 +610,7 @@ visibility: hidden;
 	-moz-border-radius: 7px;
 	border-radius: 7px;
 	cursor: pointer;
-	margin-top: 6px;
+	margin-top: 4px;
 }
 
 /*--------------------------------end of Lesson Title-----------------------------*/
