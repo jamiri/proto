@@ -17,6 +17,8 @@ class Main < Sinatra::Base
   map(:home).to('/')
   map(:view_lesson_fake).to('/lesson')
   map(:view_lesson).to('/lesson/:id')
+  map(:view_audio).to('/files/audio/:file_name')
+  map(:view_video).to('/files/video/:file_name')
 
   get :home do
 
@@ -45,7 +47,16 @@ class Main < Sinatra::Base
     erb :'lesson/index'
   end
 
+  #*************************************** Begin Audio Controller **************************
 
+  get :view_audio do
+
+
+    File.read(File.join("files/audio", @params['file_name'])) # Get the file path
+
+  end
+
+  #*************************************** End Audio Controller **************************
 
 
 
