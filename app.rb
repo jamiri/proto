@@ -17,7 +17,9 @@ class Main < Sinatra::Base
 
   map(:home).to('/')
   map(:feedback).to('/feedback')
+  map(:sign_up).to('/sign_up')
   map(:view_lesson).to('/lesson/:id')
+  map(:index).to(".")
 
   set :ref_img_dir, 'assets/ref_img'
   set :lesson_dir, 'assets/lesson_av'
@@ -29,6 +31,24 @@ class Main < Sinatra::Base
     erb :index
 
   end
+  # -----------Sign Up--------------------------
+  post :sign_up do
+    fb = params[:sign_up]
+
+    user = User.new
+    user.name = fb['name']
+    user.mail_address = fb['mail_address']
+    user.password = fb['password']
+
+    user.save
+
+    #flash[:notice] = "Your account Was Created ."
+
+    redirect url_for(:index)
+
+  end
+
+
 
   # ----- Feedback -----
 
