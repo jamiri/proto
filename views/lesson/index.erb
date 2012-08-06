@@ -50,7 +50,10 @@
 				});
 	});
 
-  $(document).ready(function(){
+/*
+// Commented by Hussein Samadi
+//
+  $ (document).ready(function(){
     $("#jquery_jplayer_1").jPlayer({
       ready: function () {
         $(this).jPlayer("setMedia", {
@@ -62,11 +65,14 @@
       supplied: "m4a, oga"
     });
   });
+*/
 
 </script>
 <% end %>
 
 <body>
+  <%= erb :"partial/feedback" %>
+
   <%= erb :"partial/header" %>
 
   <div id="content" class="container_24 clearfix">

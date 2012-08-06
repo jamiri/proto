@@ -61,7 +61,6 @@ class SalaamPodAdmin < Sinatra::Base
 
     redirect url_for(:index)
 
-
   end
 
 

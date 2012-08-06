@@ -33,16 +33,31 @@
 
     </div>
 
+    <!-- /- References -->
     <div class="references">
       <h4>References</h4>
-      <ol>
-        <li id="ref1">Reference Title, writer, year of pub, publication, pages</li>
-        <li id="ref2">Reference Title, writer, year of pub, publication, pages</li>
-        <li id="ref3">Reference Title, writer, year of pub, publication, pages</li>
-        <li id="ref4">Reference Title, writer, year of pub, publication, pages</li>
-        <li id="ref5">Reference Title, writer, year of pub, publication, pages</li>
-      </ol>
+      <% if @lesson.references.any? %>
+        <ol>
+          <% @lesson.references.each do |ref| %>
+            <li>
+              <div style="margin: 0 30px 15px 0;">
+                <% unless ref.photo.nil? %>
+                  <img src="/<%= settings.ref_img_dir + "/" + ref.photo %>"
+                       style="float: left; margin: 10px 10px 0 10px; border: 1px solid gray;
+                              max-height: 150px; padding: 5px; background-color: #FFF;">
+                <% end %>
+                <div style="text-align: justify; clear: right; margin-left: 10px;">
+                  <strong><%= ref.title %></strong>
+                  <span><%= ref.description %></span>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ol>
+      <% end %>
     </div>
+    <!-- \- References -->
+
   </div>
   <!--------------------------------------Main Script Content ------------------------------------>
 
@@ -142,12 +157,9 @@
     <%= erb :"lesson/partial/_questions" %>
   <!--------------------------------------Q and A Content ------------------------------------>
 
-  <!--------------------------------------Discussion Content ------------------------------------>
-  <div id="tabs-4" class="Discussion body">
-    <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-    <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-  </div>
-  <!--------------------------------------Discussion Content ------------------------------------>
+  <!-- /- Discussion Content -->
+  <%= erb :'lesson/partial/_discussion' %>
+  <!-- \- Discussion Content -->
 
   </div>
 
