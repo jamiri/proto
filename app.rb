@@ -12,13 +12,16 @@ class Main < Sinatra::Base
 
   register Sinatra::Reloader
   register SinatraMore::RoutingPlugin
+  register SinatraMore::MarkupPlugin
   helpers Sinatra::ContentFor2
 
   map(:home).to('/')
   map(:view_lesson_fake).to('/lesson')
+  map(:feedback).to('/feedback')
   map(:view_lesson).to('/lesson/:id')
   map(:view_audio).to('/files/audio/:file_name')
   map(:view_video).to('/files/video/:file_name')
+  set :ref_img_dir, 'assets/ref_img'
 
   get :home do
 
@@ -27,6 +30,22 @@ class Main < Sinatra::Base
     erb :index
 
   end
+
+  # ----- Feedback -----
+
+  post :feedback do
+    fb = params[:feedback]
+
+    feedback = Feedback.new
+    feedback.user_name = fb['user_name']
+    feedback.email = fb['email']
+    feedback.subject = fb['subject']
+    feedback.comment = fb['comment']
+    feedback.url = fb['url']
+
+    feedback.save
+  end
+
 
   # ----- Lesson -----
 
