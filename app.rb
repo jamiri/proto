@@ -1,22 +1,68 @@
+# require core classes and modules
+
+require 'sinatra/base'
 require "active_record"
+require "sinatra/reloader"
+require 'sinatra_more/markup_plugin'
+require 'sinatra_more/routing_plugin'
+require "sinatra/flash"
+require "json"
+
+
+# require configuration files
+
 require "./db/ar_config"
-require "./db/models/Category"
 require "./helpers/application_helper"
 require_relative "admin"
+
+
+
+# require models
+
+require "./db/models/Category"
+require "./db/models/GlossaryEntry"
+
+
+
+
 
 class Main < Sinatra::Base
 
 
+  configure :development do
+    register Sinatra::Reloader
+  end
+
+  register SinatraMore::MarkupPlugin
+  register SinatraMore::RoutingPlugin
+  register Sinatra::Flash
+
+
+  enable :sessions
+
+  map(:index).to("/")
+
+  map(:lesson).to("/lesson/:id")
+  map(:lookup_words).to("/lesson/:id/lookup_words")
+
+
+
+  #get :index do
+  #  content_type :json
+  #  { :key1 => 'value1', :key2 => 'value2' }.to_json
+  #
+  #end
+
+
   # GET -> Root of the site
 
-  get "/" do
+  get :index do
 
     @categories = Category.where(:parent_id => nil)
 
     erb :index
 
   end
-
 
 
 #***************************** Category Controller *************************************
@@ -44,14 +90,38 @@ class Main < Sinatra::Base
 #***************************** End of Category Controller ******************************
 
 
-
-
 #***************************** Lesson Controller *************************************
 
-  # GET -> makes the page for entering the lesson data
-  get "/lesson/add/?" do
+  get :lesson do
 
-    erb :'lesson/create'
+    begin
+
+      @lesson = Lesson.find(params[:id])
+
+      message = @lesson.title
+
+    rescue ActiveRecord::RecordNotFound
+
+      message = "not_found"
+
+    end
+
+
+
+
+    erb :"lesson/show"
+
+  end
+
+
+  get :lookup_words do
+
+    words = Lesson.find(params[:id]).glossary_words;
+
+    definitions = get_meaning_for words
+    content_type :json
+
+    Hash[words.split(",").zip(definitions)].to_json
 
   end
 
@@ -59,7 +129,7 @@ class Main < Sinatra::Base
 #---------------------------------------------------------------------------------------------
 
 
-  # POST -> saves the lesson data in database
+# POST -> saves the lesson data in database
   post "/lesson/add/?" do
     erb :'lesson/new'
   end

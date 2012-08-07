@@ -9,9 +9,9 @@ gem "faker"
 gem "sinatra_more"
 gem "sinatra-flash"
 
-group :devel do
-    gem "thin"
-    gem "faker"
-    #gem "shotgun"
+group :development do
+  gem "thin"
+  gem "faker"
   gem "rake"
+  gem "sinatra-contrib"
 end

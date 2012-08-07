@@ -1,3 +1,3 @@
-class Glossary  < ActiveRecord::Base
+class GlossaryEntry  < ActiveRecord::Base
   # To change this template use File | Settings | File Templates.
 end

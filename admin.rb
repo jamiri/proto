@@ -5,7 +5,6 @@ require "sinatra/flash"
 require "active_record"
 require_relative "db/ar_config"
 require_relative "db/models/Lesson"
-require_relative "db/models/Glossary"
 require_relative "db/models/Category"
 
 class SalaamPodAdmin < Sinatra::Base
@@ -32,18 +31,6 @@ class SalaamPodAdmin < Sinatra::Base
     erb :index
   end
 
-  get :lesson_new do
-    @lesson = Lesson.new
-
-    erb :'lesson/new'
-  end
-
-
-  get :category_new do
-    @category = Category.new
-
-    erb :'category/new'
-  end
 
 
 
@@ -65,13 +52,11 @@ class SalaamPodAdmin < Sinatra::Base
 
 
 
-
   get :glossary_new do
     @glossary = Glossary.new
 
     erb :'glossary/new'
   end
-
 
 
 
