@@ -1,8 +1,8 @@
 <div id="boxes">
   <div id="dialog_sign_up" class="window">
-    <p id="feedback_thanks">Thank you for sign up!</p>
+    <p id="sign_up_thanks">Thank you for sign up!</p>
     <span id="sign_up_h">Sign Up</span>
-    <p id="sign_up_txt"></p>
+    <p id="sign_up_txt">Sign Up</p>
     <% form_tag url_for(:sign_up), :id => 'sign_up_form' do %>
         <ul class="inputs">
           <li>
@@ -23,7 +23,7 @@
           </li>
         </ul>
 
-        <%= hidden_field_tag :url, :name => 'feedback[url]' %>
+        <%= hidden_field_tag :url, :name => 'sign_up[url]' %>
 
         <%= button_tag "Cancel", :class => "close" %>
         <%= submit_tag "Send" %>
