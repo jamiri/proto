@@ -1,33 +1,22 @@
-# require core classes and modules
-
-require 'sinatra/base'
+require "sinatra/base"
 require "active_record"
-require "sinatra/reloader"
-require 'sinatra_more/markup_plugin'
-require 'sinatra_more/routing_plugin'
-require "sinatra/flash"
-require "json"
-
-
-# require configuration files
-
 require "./db/ar_config"
 require "./helpers/application_helper"
-require "sinatra/content_for2"
 require "sinatra/reloader"
 require "sinatra_more/routing_plugin"
+require 'sinatra_more/markup_plugin'
+require "sinatra/flash"
+require "json"
 require_relative "admin"
-
-Dir[File.dirname(__FILE__) + "/db/models/*.rb"].each {|file| require file }
+Dir[File.dirname(__FILE__) + "/db/models/*.rb"].each { |file| require file }
 
 class Main < Sinatra::Base
+
 
   register Sinatra::Reloader
   register SinatraMore::RoutingPlugin
   register SinatraMore::MarkupPlugin
-  helpers Sinatra::ContentFor2
   register Sinatra::Flash
-
 
 
   map(:home).to('/')
@@ -35,8 +24,6 @@ class Main < Sinatra::Base
   map(:sign_up).to('/sign_up')
   map(:view_lesson).to('/lesson/:id')
   map(:index).to(".")
-  map(:index).to("/")
-  map(:lesson).to("/lesson/:id")
   map(:lookup_words).to("/lesson/:id/lookup_words")
 
 
@@ -48,7 +35,6 @@ class Main < Sinatra::Base
 
   set :ref_img_dir, 'assets/ref_img'
   set :lesson_dir, 'assets/lesson_av'
-  get :index do
 
   get :home do
 
@@ -57,6 +43,7 @@ class Main < Sinatra::Base
     erb :index
 
   end
+
   # -----------Sign Up--------------------------
   post :sign_up do
     fb = params[:sign_up]
@@ -69,12 +56,10 @@ class Main < Sinatra::Base
     user.save
 
     #flash[:notice] = "Your account Was Created ."
-#***************************** Category Controller *************************************
 
     redirect url_for(:index)
 
   end
-
 
 
   # ----- Feedback -----
@@ -92,35 +77,15 @@ class Main < Sinatra::Base
     feedback.save
   end
 
-
   # ----- Lesson -----
 
   get :view_lesson do
     #exception handling required!
-#***************************** Lesson Controller *************************************
 
     @lesson = Lesson.find(params[:id])
     @categories = Category.where(:parent_id => nil)
-  get :lesson do
 
     erb :'lesson/index'
-    begin
-
-      @lesson = Lesson.find(params[:id])
-
-      message = @lesson.title
-
-    rescue ActiveRecord::RecordNotFound
-
-      message = "not_found"
-
-    end
-
-
-
-
-    erb :"lesson/show"
-
   end
 
 
@@ -135,16 +100,6 @@ class Main < Sinatra::Base
 
   end
 
-
-#---------------------------------------------------------------------------------------------
-
-
-# POST -> saves the lesson data in database
-  post "/lesson/add/?" do
-    erb :'lesson/new'
-  end
-
-#***************************** End of Lesson Controller ***********************************
 
   use SalaamPodAdmin
 

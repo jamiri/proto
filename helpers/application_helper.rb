@@ -38,6 +38,7 @@ def get_meaning_for(words_list)
   end
 
   definition_list
+end
 
 def create_navbar(id)
 
