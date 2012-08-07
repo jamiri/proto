@@ -69,6 +69,7 @@ DEPENDENCIES
   haml
   rake
   sinatra
+  sinatra-contrib
   sinatra-content-for2
   sinatra-flash
   sinatra-reloader

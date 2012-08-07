@@ -1,5 +1,16 @@
-require "sinatra/base"
+# require core classes and modules
+
+require 'sinatra/base'
 require "active_record"
+require "sinatra/reloader"
+require 'sinatra_more/markup_plugin'
+require 'sinatra_more/routing_plugin'
+require "sinatra/flash"
+require "json"
+
+
+# require configuration files
+
 require "./db/ar_config"
 require "./helpers/application_helper"
 require "sinatra/content_for2"
@@ -15,15 +26,29 @@ class Main < Sinatra::Base
   register SinatraMore::RoutingPlugin
   register SinatraMore::MarkupPlugin
   helpers Sinatra::ContentFor2
+  register Sinatra::Flash
+
+
 
   map(:home).to('/')
   map(:feedback).to('/feedback')
   map(:sign_up).to('/sign_up')
   map(:view_lesson).to('/lesson/:id')
   map(:index).to(".")
+  map(:index).to("/")
+  map(:lesson).to("/lesson/:id")
+  map(:lookup_words).to("/lesson/:id/lookup_words")
+
+
+  configure :development do
+    register Sinatra::Reloader
+  end
+
+  enable :sessions
 
   set :ref_img_dir, 'assets/ref_img'
   set :lesson_dir, 'assets/lesson_av'
+  get :index do
 
   get :home do
 
@@ -44,6 +69,7 @@ class Main < Sinatra::Base
     user.save
 
     #flash[:notice] = "Your account Was Created ."
+#***************************** Category Controller *************************************
 
     redirect url_for(:index)
 
@@ -71,13 +97,56 @@ class Main < Sinatra::Base
 
   get :view_lesson do
     #exception handling required!
+#***************************** Lesson Controller *************************************
 
     @lesson = Lesson.find(params[:id])
     @categories = Category.where(:parent_id => nil)
+  get :lesson do
 
     erb :'lesson/index'
+    begin
+
+      @lesson = Lesson.find(params[:id])
+
+      message = @lesson.title
+
+    rescue ActiveRecord::RecordNotFound
+
+      message = "not_found"
+
+    end
+
+
+
+
+    erb :"lesson/show"
+
   end
 
+
+  get :lookup_words do
+
+    words = Lesson.find(params[:id]).glossary_words;
+
+    definitions = get_meaning_for words
+    content_type :json
+
+    Hash[words.split(",").zip(definitions)].to_json
+
+  end
+
+
+#---------------------------------------------------------------------------------------------
+
+
+# POST -> saves the lesson data in database
+  post "/lesson/add/?" do
+    erb :'lesson/new'
+  end
+
+#***************************** End of Lesson Controller ***********************************
+
   use SalaamPodAdmin
+
 
 end

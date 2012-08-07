@@ -5,13 +5,14 @@ gem "sinatra"
 gem "activerecord"
 gem "haml"
 gem "sqlite3"
+gem "faker"
 gem "sinatra_more"
 gem "sinatra-flash"
-gem "sinatra-content-for2"
 
-group :devel do
+group :development do
   gem "thin"
   gem "faker"
   gem "rake"
+  gem "sinatra-contrib"
   gem "sinatra-reloader"
 end

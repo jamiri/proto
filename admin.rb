@@ -35,14 +35,6 @@ class SalaamPodAdmin < Sinatra::Base
 
 
 
-  get :category_new do
-    @category = Category.new
-
-    erb :'category/new'
-  end
-
-
-
   post :category_create do
 
     category = params[:category]
@@ -55,6 +47,7 @@ class SalaamPodAdmin < Sinatra::Base
     flash[:notice] = "New category has been successfully saved."
 
     redirect url_for(:index)
+
 
   end
 
