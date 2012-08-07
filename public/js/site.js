@@ -18,7 +18,8 @@ function addTags(data) {
     for (var word in data) {
 
         lesson_script = lesson_script.replaceAll
-            (word, "<a href='/' class='glossary_entry' title='" + data[word] + "'>" + word + "</a>");
+            (word, "<a href='/glossary/"+ word + "' class='glossary_entry' title='"
+                + data[word] + "'>" + word + "</a>");
 
     }
 
