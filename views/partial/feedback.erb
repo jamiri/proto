@@ -1,0 +1,41 @@
+<div id="feedback">
+  <a href="#dialog" name="modal">Feedback</a>
+</div>
+
+<div id="boxes">
+  <div id="dialog" class="window">
+    <p id="feedback_thanks">Thank you for your comment!</p>
+    <span id="feedback_h">Feedback</span>
+    <p id="feedback_txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+      incididunt ut labore et dolore magna aliqua
+    </p>
+    <% form_tag url_for(:feedback), :id => 'feedback_form' do %>
+      <ul class="inputs">
+        <li>
+          <%= label_tag :user_name, :caption => 'Name:' %>
+          <%= text_field_tag :user_name, :name => 'feedback[user_name]' %>
+        </li>
+        <li>
+          <%= label_tag :email %>
+          <%= text_field_tag :email, :name => 'feedback[email]' %>
+        </li>
+        <li>
+          <%= label_tag :subject %>
+          <%= text_field_tag :subject, :name => 'feedback[subject]' %>
+        </li>
+        <li>
+          <%= label_tag :comment %>
+          <%= text_area_tag :comment, :name => 'feedback[comment]' %>
+        </li>
+      </ul>
+
+      <%= hidden_field_tag :url, :name => 'feedback[url]' %>
+
+      <%= button_tag "Cancel", :class => "close" %>
+      <%= submit_tag "Send" %>
+  <% end %>
+
+  </div>
+</div>
+
+<div id="mask"></div>

@@ -5,8 +5,8 @@ require "sinatra/flash"
 require "active_record"
 require_relative "db/ar_config"
 require_relative "db/models/Lesson"
-require_relative "db/models/Glossary"
 require_relative "db/models/Category"
+require_relative "db/models/Question"
 
 class SalaamPodAdmin < Sinatra::Base
 
@@ -32,11 +32,7 @@ class SalaamPodAdmin < Sinatra::Base
     erb :index
   end
 
-  get :lesson_new do
-    @lesson = Lesson.new
 
-    erb :'lesson/new'
-  end
 
 
   get :category_new do
@@ -59,7 +55,6 @@ class SalaamPodAdmin < Sinatra::Base
     flash[:notice] = "New category has been successfully saved."
 
     redirect url_for(:index)
-
 
   end
 

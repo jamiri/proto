@@ -1,0 +1,11 @@
+<!--lesson header -------------------------------------------------------------->
+<div id="Lesson_Header" class="grid_24 clearfix">
+
+  <ul id="breadcrumbs">
+    <li><a href="<%= url_for(:home) %>">Home</a></li>
+    <%= create_navbar @lesson.category_id %>
+  </ul>
+  <div class="LessonTitle"><h1> :: <%=@lesson.title %>  </h1><span class="LessonInfo" onclick="location.href='#';" title="Lesson Info"></span></div>
+
+</div>
+<!--end of lesson header------------------------------------------------------->

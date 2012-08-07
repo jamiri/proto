@@ -1,8 +1,10 @@
+
 @charset "utf-8";
 /* CSS Document */
 
 body{
-	background:url(../images/Body.jpg);
+	background:rgb(242,233,198) url(../images/bg.png);
+	font-family: "Segoe UI", Arial, sans-serif; font-size: 1em;
 }
 
 div#header, div#content{
@@ -62,7 +64,6 @@ div.SecHead h3{
 	margin: 0;
 	padding: 0;
 	color: rgb(85,67,17);
-	font: bold 15px "Palatino Linotype", "Book Antiqua", Palatino, ser
 }
 
 /*--------------------------Header---------------------*/
@@ -103,15 +104,16 @@ div.SecHead h3{
 	border: none;
 	padding-top: 5px;
 	padding-bottom: 3px;
+	font-family:  Segoe UI;
 
 }
 
 .loginform{
-	margin-left: 310px;
+	margin-left: 284px;
 }
 
 .searchform input, .loginform input {
-	font: normal 10px/100% Arial, Helvetica, sans-serif;
+	font: Segoe UI 10px;
 }
 .searchform .searchfield, .loginform .emailfield, .loginform .passfield {
 	background: rgba(224,228,180,1);
@@ -130,13 +132,15 @@ div.SecHead h3{
 	box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
 }
 
-.searchform .searchbutton, .loginform .signinbutton {
+.searchbutton, .signinbutton {
 	color: rgb(243,238,175);
 	border: solid 1px #494949;
-	font: 11px bold;
+	font: Segoe UI 8px bold;
 	text-align: center;
 	height: 21px;
 	width: 22px;
+	padding: 2px;
+	cursor: pointer;
 	text-shadow: 0 1px 1px rgba(0,0,0,.6);
 
 	-webkit-border-radius: .5em;
@@ -146,8 +150,6 @@ div.SecHead h3{
 	background: rgb(56,46,21);
 	background: -webkit-gradient(linear, left top, left bottom, from(#A08C67), to(#454545));
 	background: -moz-linear-gradient(top,  #A08C67,  #454545);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#A08C67', endColorstr='#454545'); /* ie7 */
-	-ms-filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#A08C67', endColorstr='#454545'); /* ie8 */
 }
 
 .loginform .signinbutton {
@@ -156,7 +158,7 @@ div.SecHead h3{
 
 a.advanced_search, a.sign_up{
 	color: rgb(56,46,21);
-	font: 12px bold Arial, Helvetica, sans-serif;
+	font: Segoe UI 10px bold;
 }
 
 div#logo{
@@ -172,7 +174,7 @@ div#logo{
 	color: rgba(250,240,156, 1);
 	text-align:justify;
 	padding: 35px 15px 10px;
-	font: 13px "Comic Sans MS", cursive;
+	font: 13px;
 }
 
 #about a, #about a:visited, #about a:link{
@@ -198,23 +200,23 @@ div#logo{
 
 .sidebarmenu ul{
 	list-style-type: none;
-	font: bold 13px Verdana;
+	font: bold 13px;
 	width: 189px; /* Main Menu Item widths */
 
 }
 
 .sidebarmenu ul.parent li{
 	position: relative;
-	z-index: 9999;
-	background-color: rgba(250, 240, 156, 0.5);
+	z-index: 5000;
+	background-color: rgba(250, 240, 156, 0.7);
 	-moz-border-radius: 0.4em;
 	border-radius: 0.4em ;
 }
  
 .sidebarmenu ul :not(.parent) li{
 	position: relative;
-	background-color: rgba(255, 240, 156, .8);
-	z-index: 9999;
+	background-color: rgba(255, 240, 156, 1);
+	z-index: 5000;
 	-moz-border-radius: 0.4em;
 	border-radius: 0.4em ;
 }
@@ -536,98 +538,237 @@ visibility: hidden;
 
 
 
+/*--------------------------------Lesson Title-----------------------------*/
+#breadcrumbs {
+	 overflow:auto;
+	 font-size:.8em; 
+	 font-weight:bold;
+	 margin-left: 10px;
+}
+
+#breadcrumbs li { 
+	float:left; 
+	padding-left:8px;
+}
+
+#breadcrumbs li a { 
+	display: block;
+	height: 16px;
+	padding:0 24px 2px 0; 
+	background:transparent url(../images/masir.png) no-repeat right center;
+}
+
+#breadcrumbs li a:link, #breadcrumbs li a:visited,
+#breadcrumbs li a:hover, #breadcrumbs li a:focus { 
+	text-decoration:none; 
+	 color: rgba(0,0,0,.6);
+}
+
+
+
+#breadcrumbs li {
+
+}
+
+#Lesson_Header{
+	background-color: rgba(203,220,104,.7) ;
+	border-bottom: #630 solid 0px;
+	-moz-box-shadow: 0px 2px 5px rgba(0,0,0,.8);
+	-webkit-box-shadow: 0px 2px 5px rgba(0,0,0,.8);
+	box-shadow: 0px 2px 5px rgba(0,0,0,.8);
+	padding: 10px;
+	margin-top: -5px;
+
+}
+
+.LessonTitle{
+	position: relative;
+	margin: 20px 20px 80px 18px;
+	width: 265px;
+}
+
+.LessonTitle h1{
+	position: absolute;
+	left: 0px;
+	font-size: 1.3em;
+	padding: 5px 10px 8px;
+	background: rgba(255,196,0,0.6) ;
+	border: 1px solid #d19405;
+	width: 250px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+
+}
+
+.LessonInfo{
+	position: absolute;
+	right: 0;
+	display: block;
+	width: 32px;
+	height: 32px;
+	background:  url(../images/info.png) center center;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	cursor: pointer;
+	margin-top: 4px;
+}
+
+/*--------------------------------end of Lesson Title-----------------------------*/
+
+
+
 
 
 
 /*--------------------------------Tabbed Area Lessons-----------------------------*/
-article.tabs
-{
-	position: relative;
-	display: block;
-	width: 713px;
-	margin: 2em auto;
+
+#tabs{
+	margin-left: -2px;
+	width: 768px;
+	margin-top: -42px;
+	background: none;
+	border: none;
 }
 
-article.tabs section
-{
-	position: absolute;
-	display: block;
-	top: 10px;
-	left:-20px;
-	padding: 10px 20px;
-	background-color: #ddd;
-	border-radius: 5px;
-	border: 1px solid #555;
-	box-shadow: 0 3px 3px rgba(0,0,0,0.1);
-	z-index: 0;
-	width: 713px;
+#tabs ul{
+	background: none;
+	border: none;
+	font-size: .9em;
 }
 
-article.tabs section:first-child
-{
-	z-index: 1;
+.body{
+	-moz-box-shadow: 0px 2px 7px rgba(0,0,0,.4);
+	-webkit-box-shadow: 0px 2px 7px rgba(0,0,0,.4);
+	box-shadow: 0px 2px 7px rgba(0,0,0,.4);
+	border-top: 2px inset rgba(0,0,0,.6);
+	min-height: 745px;
+	padding: 10px;
 }
 
-article.tabs section h2
-{
-	position: absolute;
-	font-size: 1em;
-	font-weight: normal;
-	width: 120px;
-	height: 1.8em;
-	top: -1.8em;
-	left: 250px;
-	padding: 0;
-	margin: 0;
-	color: #999;
-	background-color: #ddd;
-	border-radius: 5px 5px 0 0;
-	border-top: 1px solid #555;
-	border-left: 1px solid #555;
-	border-right: 1px solid #555;
+
+ol{
+	list-style:decimal;
+	margin-left: 30px;
 }
 
-article.tabs section:nth-child(2) h2
-{
-	left: 372px;
+.objectives, .references{
+	background: rgba(0,0,0,.2);
+	padding: 0px 10px 10px 10px;
 }
 
-article.tabs section:nth-child(3) h2
-{
-	left: 494px;
+.objectives, .script, .references{
+	margin: 20px 5px;
+	line-height: 30px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	-moz-box-shadow: 0px 0px 7px rgb(0,0,0);
+	-webkit-box-shadow: 0px 0px 7px rgb(0,0,0);
+	box-shadow: 0px 0px 7px rgb(0,0,0);
 }
 
-article.tabs section:nth-child(4) h2
-{
-	left: 616px;
-}
-
-article.tabs section h2 a
-{
-	display: block;
-	line-height: 1.8em;
+.objectives h4, .script h4, .references h4{
+	border-bottom: 1px dashed #555;
+	margin-bottom: 15px;
 	text-align: center;
-	text-decoration: none;
-	color: inherit;
-	outline: 0 none;
 }
 
-article.tabs section,
-article.tabs section h2
-{
-	-webkit-transition: all 500ms ease;
-	-moz-transition: all 500ms ease;
-	-ms-transition: all 500ms ease;
-	-o-transition: all 500ms ease;
-	transition: all 500ms ease;
+.script{
+	text-align: justify;
+	padding: 20px;
+	background: rgb(255,255,255);
 }
 
-article.tabs section:target,
-article.tabs section:target h2
-{
-	color: #333;
-	background-color: #fff;
-	z-index: 2;
+.script img{
+	width: 300px;
+	height: 300px;
+	border: 2px inset #C60;
+	padding: 5px;
+	margin: 15px 25px 15px 0px;
+	float: left;
+}
+
+.script p a{
+	color: #C60;
+	font-weight: bold;
+}
+
+
+.MicroBlog .post{
+	padding: 20px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	-moz-box-shadow: 0px 0px 7px rgba(0,0,0,.4);
+	-webkit-box-shadow: 0px 0px 7px rgba(0,0,0,.4);
+	box-shadow: 0px 0px 7px rgba(0,0,0,.4);
+	text-align: justify;
+	margin: 20px 10px;
+	background: rgb(255,255,255);	
+}
+
+.MicroBlog .date{
+	color: rgba(0,0,0,.3);
+}
+
+.MicroBlog .comments,
+.MicroBlog .comments a, .MicroBlog .comments a:active, .MicroBlog .comments a:visited{
+	color: rgba(0,0,0,.3);
+	float:right;
+}
+
+
+.id{
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+
+.comment_post{
+	background: rgba(0,0,0,.1);
+	border-bottom: 1px solid #000;
+	margin: 15px 0px;
+	padding: 10px;
+}
+
+
+.comment_post small{
+	font-size: 15px;
+	color: #555;
+}
+
+.comment_post p{
+	margin-top: 2px;
+}
+
+.MicroBlog p{
+	border-top: 1px dashed #000;
+	margin-top: 20px;
+	padding-top: 5px;
+}
+
+.question, .answer{
+	padding: 20px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	-moz-box-shadow: 0px 0px 7px rgba(0,0,0,.4);
+	-webkit-box-shadow: 0px 0px 7px rgba(0,0,0,.4);
+	box-shadow: 0px 0px 7px rgba(0,0,0,.4);
+}
+
+.QAbody{
+	background: #fff;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	margin: 25px 10px;
+}
+
+.question{
+	background: rgba(0,0,0,.2) url(../images/q.png) bottom right no-repeat;
+	margin-top: 10px;
+}
+
+.answer{
+	background: url(../images/a.png) top right no-repeat;
+	margin-bottom: 10px;
 }
 /*--------------------------------Tabbed Area Lessons-----------------------------*/
 
@@ -656,5 +797,5 @@ article.tabs section:target h2
 	left: 0;
 	padding: 20px;
 	color: rgba(250,240,156, 1);
-	font: 13px "Comic Sans MS", cursive;
+	font: 13px "Segoe UI";
 }

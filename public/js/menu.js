@@ -4,9 +4,10 @@
 
 var menuids=["sidebarmenu1"] //Enter id(s) of each Side Bar Menu's main UL, separated by commas
 
-function initsidebarmenu(){
+$(document).ready(function() {
     for (var i=0; i<menuids.length; i++){
         var ultags=document.getElementById(menuids[i]).getElementsByTagName("ul")
+
         for (var t=0; t<ultags.length; t++){
             ultags[t].parentNode.getElementsByTagName("a")[0].className+=" subfolderstyle"
             if (ultags[t].parentNode.parentNode.id==menuids[i]) //if this is a first level submenu
@@ -20,19 +21,13 @@ function initsidebarmenu(){
                 this.getElementsByTagName("ul")[0].style.display="none"
             }
         }
+
         for (var t=ultags.length-1; t>-1; t--){ //loop through all sub menus again, and use "display:none" to hide menus (to prevent possible page scrollbars
             ultags[t].style.visibility="visible"
             ultags[t].style.display="none"
         }
     }
-}
-
-if (window.addEventListener)
-    window.addEventListener("load", initsidebarmenu, false)
-else if (window.attachEvent)
-    window.attachEvent("onload", initsidebarmenu)
-
-
+});
 
 $(document).ready(function(){
     $("#featured > ul").tabs({fx:{height: "toggle"}}).tabs("rotate", 3000, true);

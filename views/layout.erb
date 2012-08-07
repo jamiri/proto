@@ -1,23 +1,25 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title><%= yield_content :title %></title>
 
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>iosie VISITOR</title>
-  <link rel="stylesheet" type="text/css" href="/styles/960grid/960_24_col.css"/>
-  <link rel="stylesheet" type="text/css" href="/styles/960grid/reset.css"/>
-  <link rel="stylesheet" type="text/css" href="/styles/960grid/text.css"/>
-  <link rel="stylesheet" type="text/css" href="/styles/personal.css"/>
+  <link rel="stylesheet" type="text/css" href="/styles/960grid/960_24_col.css" />
+  <link rel="stylesheet" type="text/css" href="/styles/960grid/reset.css" />
+  <link rel="stylesheet" type="text/css" href="/styles/personal.css" />
+  <link rel="stylesheet" type="text/css" href="/styles/feedback.css" />
+  <link rel="stylesheet" type="text/css" href="/styles/sign_up.css" />
+  <%= yield_content :custom_css %>
 
   <script src="/js/jquery-1.7.2.min.js" type="text/javascript"></script>
-  <script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+  <script src="/js/jquery-ui-1.8.22.custom.min.js" type="text/javascript"></script>
   <script src="/js/menu.js" type="text/javascript"></script>
-
+  <script src="/js/feedback.js" type="text/javascript"></script>
+  <script src="/js/jquery.form.js" type="text/javascript"></script>
+  <%= yield_content :custom_js %>
 
 </head>
 
-
 <%= yield %>
-
 
 </html>
