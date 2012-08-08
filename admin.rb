@@ -32,7 +32,11 @@ class SalaamPodAdmin < Sinatra::Base
     erb :index
   end
 
+  get :lesson_new do
+    @lesson = Lesson.new
 
+    erb :'lesson/new'
+  end
 
 
   post :category_create do
@@ -52,15 +56,11 @@ class SalaamPodAdmin < Sinatra::Base
   end
 
 
-
-
   get :glossary_new do
     @glossary = Glossary.new
 
     erb :'glossary/new'
   end
-
-
 
 
   post :glossary_create do
