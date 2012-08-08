@@ -5,7 +5,6 @@ gem "sinatra"
 gem "activerecord"
 gem "haml"
 gem "sqlite3"
-gem "faker"
 gem "sinatra_more"
 gem "sinatra-flash"
 
