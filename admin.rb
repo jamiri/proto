@@ -37,6 +37,13 @@ class SalaamPodAdmin < Sinatra::Base
 
     erb :'lesson/new'
   end
+  
+  
+  get :category_new do
+    @category = Category.new
+
+    erb :'category/new'
+  end
 
 
   post :category_create do
