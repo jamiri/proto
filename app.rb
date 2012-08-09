@@ -25,6 +25,7 @@ class Main < Sinatra::Base
   map(:view_lesson).to('/lesson/:id')
   map(:index).to(".")
   map(:lookup_words).to("/lesson/:id/lookup_words")
+  map(:content_suggestion).to("/suggest_content")
 
 
   configure :development do
@@ -99,6 +100,23 @@ class Main < Sinatra::Base
     Hash[words.split(",").zip(definitions)].to_json
 
   end
+
+  # ----- Content Suggestion -----
+
+  post :content_suggestion do
+
+    fb = params[:content_suggestion]
+
+    content_suggestion = ContentSuggestion.new
+    content_suggestion.name = fb['name']
+    content_suggestion.email = fb['email']
+    content_suggestion.subject = fb['subject']
+    content_suggestion.content = fb['content']
+
+    content_suggestion.save
+
+  end
+
 
 
   use SalaamPodAdmin

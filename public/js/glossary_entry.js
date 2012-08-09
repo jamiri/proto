@@ -1,10 +1,10 @@
 
-// Please observe that the code in this file is not optimized nor it handles all occassions
-// rather this is done to make a quick and dirty prototype
-
 $(window).ready(function () {
 
+        // get the lesson id from lesson_id attribute of an element with "lesson_script" id
         var lesson_id = document.getElementById("lesson_script").getAttribute("lesson_id");
+
+        // get all the words with their respective meanings from the server in Json format
         $.getJSON("/lesson/" + lesson_id + "/lookup_words", addTags);
 
     }
@@ -13,16 +13,20 @@ $(window).ready(function () {
 
 function addTags(data) {
 
+    // get the script of lesson
     var lesson_script = document.getElementById("lesson_script").innerHTML;
+
 
     for (var word in data) {
 
+        // enclose all occurences of a word inside lesson script with span tag
         lesson_script = lesson_script.replaceAll
             (word, "<a href='/glossary/"+ word + "' class='glossary_entry' title='"
                 + data[word] + "'>" + word + "</a>");
 
     }
 
+    // replace lesson script with new content consisting of span tags
     document.getElementById("lesson_script").innerHTML = lesson_script;
 
     addTooltips(data);

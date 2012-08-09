@@ -1,0 +1,100 @@
+#content_suggestion {
+    height: 100px;
+    width: 200px;
+    position: fixed;
+    top: 40%;
+    right: -120px;
+    z-index: 1000;
+    text-align: center;
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+#content_suggestion a {
+    border-radius: 10px 10px 0 0;
+    font-family: Tahoma, sans-serif;
+    letter-spacing: 3px;
+    font-size: 17px;
+    font-weight: bold;
+    display: block;
+    background: #06c;
+    /*height: 15px;*/
+    /*width: 70px;*/
+    padding: 5px 0px;
+    color: #fff;
+    text-decoration: none;
+}
+
+#content_suggestion a:hover {
+    background: #f00;
+}
+
+/* Z-index of #mask must lower than #boxes .window */
+#mask {
+    position:fixed;
+    z-index:9000;
+    background-color:#000;
+    display:none;
+    opacity: 0.8;
+}
+
+#boxes .window {
+    position:fixed;
+    width:440px;
+    /*height:200px;*/
+    display:none;
+    z-index:9500;
+    padding:20px;
+}
+
+/* Customize your modal window here, you can add background image too */
+#boxes #dialog_content_suggestion {
+    width:450px;
+    /*height:203px;*/
+    background-color: #fff;
+    border: 4px solid orange;
+    border-radius: 5px;
+    padding: 20px 30px 20px 30px;
+}
+
+#content_suggestion_form label {
+    display: block;
+    font-weight: bold;
+}
+
+#content_suggestion_form input[type=text] {
+    border: 1px solid gray;
+    font-size: 15pt;
+    width: 98%;
+}
+
+#content_suggestion_form textarea {
+    border: 1px solid gray;
+    font-size: 10pt;
+    width: 98%;
+    height: 100px;
+}
+
+#content_suggestion_form .inputs li {
+    margin-bottom: 10px;
+}
+
+#conten_suggestion_h {
+    display: block;
+    font-size: 25pt;
+    font-weight: bold;
+}
+#conten_suggestion_txt {
+    margin-bottom: 15px;
+}
+
+#content_suggestion_thanks {
+    display: none;
+    font-size: 16pt;
+    text-align: center;
+    background-color: #90ee90;
+    padding: 10px;
+}
