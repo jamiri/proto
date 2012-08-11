@@ -1,5 +1,3 @@
-// Commented by Hussein Samadi
-//
 $(document).ready(function () {
     $("#jquery_jplayer_1").jPlayer({
         ready:function () {

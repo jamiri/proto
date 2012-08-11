@@ -23,7 +23,6 @@ class Main < Sinatra::Base
   map(:feedback).to('/feedback')
   map(:sign_up).to('/sign_up')
   map(:view_lesson).to('/lesson/:id')
-  map(:index).to(".")
   map(:lookup_words).to("/lesson/:id/lookup_words")
   map(:content_suggestion).to("/suggest_content")
 
@@ -58,7 +57,7 @@ class Main < Sinatra::Base
 
     #flash[:notice] = "Your account Was Created ."
 
-    redirect url_for(:index)
+    redirect url_for(:home)
 
   end
 
@@ -92,7 +91,7 @@ class Main < Sinatra::Base
 
   get :lookup_words do
 
-    words = Lesson.find(params[:id]).glossary_words;
+    words = Lesson.find(params[:id]).glossary_words
 
     definitions = get_meaning_for words
     content_type :json
@@ -118,8 +117,6 @@ class Main < Sinatra::Base
   end
 
 
-
   use SalaamPodAdmin
-
 
 end
