@@ -140,3 +140,69 @@ namespace :category do
 
 
 end
+
+namespace :lesson do
+
+  desc "Create fake lessons"
+  task :create_fake => :environment do
+
+    require "faker"
+
+    count = ENV['COUNT'] ? ENV['COUNT'].to_i : 1
+
+    count.times do
+      lesson = Lesson.new
+      lesson.title = Faker::Lorem.sentence rand(1..7) # maximum title length = 7 words
+      lesson.description = Faker::Lorem.paragraph rand(1..3) # maximum description length = 7 sentences
+      script = Faker::Lorem.paragraphs(rand(5..30)) # maximum script length = 30 paragraphs
+      lesson.script = script.join('<br />')
+      lesson.author = Faker::Name.name
+
+      # category
+      categories = Category.find(:all)
+      lesson.category = categories[rand(categories.count)]
+
+      # objectives
+      rand(1..5).times do
+        lesson.objectives << Objective.new(:title => Faker::Lorem.sentence(rand(5..10)))
+      end
+
+      # references
+      rand(1..5).times do
+        lesson.references << Reference.new(
+          :title => Faker::Lorem.words(rand(2..5)).join(' '),
+          :description => Faker::Lorem.sentences(rand(1..3)).join(' ')
+        )
+      end
+
+      # questions
+      rand(2..5).times do
+        lesson.questions << Question.new(
+          :user => User.find(:all).sample,
+          :question => Faker::Lorem.sentence(rand(5..20)),
+          :answer => Faker::Lorem.sentences(rand(1..5)).join(' '),
+          :answered_by => Faker::Name.name
+        )
+      end
+
+      # glossary
+      script_words = script.join(' ').scan(%r{\w+}).uniq
+      sample_words = script_words.sample(rand(5..20))
+      lesson.glossary_words = sample_words.join(',')
+
+      sample_words.each do |word|
+        if word.length > 2
+          GlossaryEntry.new(
+              :entry => word,
+              :short_definition => Faker::Lorem.sentences(1).first
+          ).save
+        end
+      end
+
+      # Save the lesson!
+      lesson.save
+
+      puts "A new lesson created. The id is #{lesson.id}."
+    end
+  end
+end
