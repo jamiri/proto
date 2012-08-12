@@ -1,35 +1,33 @@
-<div id="boxes">
-  <div id="dialog_sign_up" class="window">
-    <p id="feedback_thanks">Thank you for sign up!</p>
-    <span id="sign_up_h">Sign Up</span>
-    <p id="sign_up_txt"></p>
-    <% form_tag url_for(:sign_up), :id => 'sign_up_form' do %>
-        <ul class="inputs">
-          <li>
-            <%= label_tag :name, :caption => 'Name:' %>
-            <%= text_field_tag :user_name, :name => 'sign_up[name]' %>
-          </li>
-          <li>
-            <%= label_tag :mail_address %>
-            <%= text_field_tag :mail_address, :name => 'sign_up[mail_address]' %>
-          </li>
-          <li>
-            <%= label_tag :password %>
-            <%= password_field_tag :password, :name => 'sign_up[password]' %>
-          </li>
-          <li>
-            <%= label_tag :password ,:caption => 'Reenter password:'%>
-            <%= password_field_tag :password, :name => 'sign_up[verify_password]' %>
-          </li>
-        </ul>
+<div id="dialog_sign_up" class="window">
 
-        <%= hidden_field_tag :url, :name => 'feedback[url]' %>
+  <h1>Sign Up</h1>
 
-        <%= button_tag "Cancel", :class => "close" %>
-        <%= submit_tag "Send" %>
-    <% end %>
+  <p class="window_txt"></p>
 
-  </div>
+  <% form_tag url_for(:sign_up), :id => 'sign_up_form' do %>
+      <ul class="inputs">
+        <li>
+          <%= label_tag :name, :caption => 'Name:' %>
+          <%= text_field_tag :user_name, :name => 'sign_up[name]' %>
+        </li>
+        <li>
+          <%= label_tag :mail_address %>
+          <%= text_field_tag :mail_address, :name => 'sign_up[mail_address]' %>
+        </li>
+        <li>
+          <%= label_tag :password %>
+          <%= password_field_tag :password, :name => 'sign_up[password]' %>
+        </li>
+        <li>
+          <%= label_tag :password ,:caption => 'Reenter password:'%>
+          <%= password_field_tag :password, :name => 'sign_up[verify_password]' %>
+        </li>
+      </ul>
+
+      <%= hidden_field_tag :url, :name => 'feedback[url]' %>
+
+      <%= button_tag "Cancel", :class => "close" %>
+      <%= submit_tag "Send" %>
+  <% end %>
+
 </div>
-
-<div id="mask"></div>

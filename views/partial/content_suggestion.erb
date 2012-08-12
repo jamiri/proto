@@ -1,14 +1,16 @@
-<div id="content_suggestion">
-  <a href="#dialog_content_suggestion" name="modal">Suggest a Topic</a>
-</div>
+<a id="content_suggestion_btn" href="#dialog_content_suggestion" name="modal">Suggest a Topic</a>
 
-<div id="boxes">
-  <div id="dialog_content_suggestion" class="window">
-    <p id="content_suggestion_thanks">Thank you for your suggestion!</p>
-    <span id="content_suggestion_h">Suggest a Topic</span>
-    <p id="content_suggestion_txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+<div id="dialog_content_suggestion" class="window">
+  <p id="content_suggestion_thanks" class="thanks_msg">Thank you for your suggestion!</p>
+
+  <div id="cs_form_wrapper">
+    <h1>Suggest a Topic</h1>
+
+    <p class="window_txt">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
       incididunt ut labore et dolore magna aliqua
     </p>
+
     <% form_tag url_for(:content_suggestion), :id => 'content_suggestion_form' do %>
         <ul class="inputs">
           <li>
@@ -32,10 +34,6 @@
         <%= button_tag "Cancel", :class => "close" %>
         <%= submit_tag "Send" %>
     <% end %>
-
   </div>
+
 </div>
-
-
-
-<div id="mask"></div>

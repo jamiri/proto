@@ -1,14 +1,16 @@
-<div id="feedback">
-  <a href="#dialog" name="modal">Feedback</a>
-</div>
+<a id="feedback_btn" href="#feedback_dialog" name="modal">Feedback</a>
 
-<div id="boxes">
-  <div id="dialog" class="window">
-    <p id="feedback_thanks">Thank you for your comment!</p>
-    <span id="feedback_h">Feedback</span>
-    <p id="feedback_txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+<div id="feedback_dialog" class="window">
+  <p id="feedback_thanks" class="thanks_msg">Thank you for your comment!</p>
+
+  <div id="feedback_form_wrapper">
+    <h1>Feedback</h1>
+
+    <p class="window_txt">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
       incididunt ut labore et dolore magna aliqua
     </p>
+
     <% form_tag url_for(:feedback), :id => 'feedback_form' do %>
       <ul class="inputs">
         <li>
@@ -33,9 +35,7 @@
 
       <%= button_tag "Cancel", :class => "close" %>
       <%= submit_tag "Send" %>
-  <% end %>
-
+    <% end %>
   </div>
-</div>
 
-<div id="mask"></div>
+</div>

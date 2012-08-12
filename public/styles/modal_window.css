@@ -1,0 +1,55 @@
+/* Z-index of #mask must lower than .window */
+#mask {
+    position: fixed;
+    z-index: 9000;
+    background-color: #000;
+    display: none;
+    opacity: 0.8;
+}
+
+.window {
+    position:fixed;
+    width:440px;
+    display:none;
+    z-index:9500;
+    padding:20px;
+}
+
+.window h1 {
+    font-size: 25pt;
+    font-weight: bold;
+}
+
+.window p.window_txt {
+    margin-bottom: 15px;
+}
+
+.window label {
+    display: block;
+    font-weight: bold;
+}
+
+.window input[type=text], .window input[type=password] {
+    border: 1px solid gray;
+    font-size: 15pt;
+    width: 98%;
+}
+
+.window textarea {
+    border: 1px solid gray;
+    font-size: 10pt;
+    width: 98%;
+    height: 100px;
+}
+
+.window .inputs li {
+    margin-bottom: 10px;
+}
+
+.window p.thanks_msg {
+    display: none;
+    font-size: 16pt;
+    text-align: center;
+    background-color: #90ee90;
+    padding: 10px;
+}
