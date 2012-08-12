@@ -1,6 +1,20 @@
-<form class="loginform">
-  <input class="emailfield" type="text" value="Email" onfocus="if (this.value == 'Email') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Email';}" />
-  <input class="passfield" type="text" value="Password" onfocus="if (this.value == 'Password') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Password';}" />
-  <input class="signinbutton" type="button" value="Sign in" />
-</form>
-<a href="" class="sign_up"><a href="#dialog_sign_up" name="modal">Sign Up</a><%= erb :"partial/sign_up" %></a>
+
+<% if session['user_name']==nil %>
+
+    <% form_tag url_for(:login), :id => 'login_form',:class=>"loginform" do %>
+         <%= text_field_tag :user_name,:class=>"emailfield", :name => 'login[user_name]',:value=>"Email", :onfocus=>"if (this.value == 'Email') {this.value = '';}" ,:onblur=>"if (this.value == '') {this.value = 'Email';}" %>
+          <%= text_field_tag :password, :name => 'login[password]' ,:class=>"passfield",:value=>"Password",:onkeypress=>"this.type='password';", :onfocus=>"if (this.value == 'Password') {this.value = '';}" ,:onblur=>"if (this.value == '') {this.value = 'Password';this.type='text';}else{this.type='password'}"%>
+         <%= hidden_field_tag :url, :name => 'login[url]' %>
+         <%= submit_tag  "Sign in" ,:class=>"signinbutton" %>
+
+        <% end %>
+    <a  href="" class="sign_up"><a href="#dialog_sign_up" name="modal">Sign Up</a><%= erb :"partial/sign_up" %></a>
+    <a  href="" class="forgot_password"><a href="#dialog_forgot_password" name="modal">Forgot Password?</a><%= erb :"partial/forgot_password" %></a>
+
+<% else %>
+
+    <%= session['user_name'] %>
+    <a href="<%=:sign_out %>" class="sign_up">Sign Out</a>
+
+<% end%>
+
