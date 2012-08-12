@@ -105,15 +105,14 @@ div.SecHead h3{
 	padding-top: 5px;
 	padding-bottom: 3px;
 	font-family:  Segoe UI;
-
 }
 
 .loginform{
-	margin-left: 284px;
+	margin-left: 5px;
 }
 
 .searchform input, .loginform input {
-	font: Segoe UI 10px;
+	font: Segoe UI 8px;
 }
 .searchform .searchfield, .loginform .emailfield, .loginform .passfield {
 	background: rgba(224,228,180,1);

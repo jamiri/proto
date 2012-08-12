@@ -1,6 +1,8 @@
 <!--------------------------------------Q and A Content ------------------------------------>
 <div id="tabs-3" class="body">
-  <% @lesson.questions.each do |q| %>
+
+ <div class="items">
+  <% @lesson.questions.first(5).each do |q| %>
   <div class="QAbody">
     <div class="question">
       <span class="id"><%= User.find(q.user_id).name %></span>
@@ -13,5 +15,7 @@
     </div>
   </div><!--end of QAbody -->
   <% end %>
+</div>
+  <div id="lastPostsLoader"></div>
 </div>
 <!--------------------------------------Q and A Content ------------------------------------>
