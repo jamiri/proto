@@ -1,11 +1,9 @@
-
-
 # create an unordered list from a set of categories along with their descendants
 #
 def create_child_for_category(root_categories)
 
   # the string that is going to be returned
-  str = ""
+  str = String.new
 
   root_categories.each do |p|
 
@@ -21,22 +19,41 @@ def create_child_for_category(root_categories)
   str
 
 end
+
+
+#
+def get_meaning_for(words_list)
+
+  definition_list = []
+
+  words = words_list.split(",")
+
+  words.each do |word|
+
+    definition = GlossaryEntry.find_by_entry(word).short_definition
+
+    definition_list << definition
+
+  end
+
+  definition_list
+end
+
+# This code can be optimized.
 def create_navbar(id)
 
   # the string that is going to be returned
   str = ""
 
-
-
-      cat=Category.find(id)
-      str= "<li><a href='#'>"<< cat.name<< "</a></li>"+str
-  if(cat.parent_id.nil?)
+  cat=Category.find(id)
+  str= "<li><a href='#'>"<< cat.name<< "</a></li>"+str
+  if cat.parent_id.nil?
 
     str
 
   else
 
-     str= create_navbar(cat.parent_id)+str
+    str= create_navbar(cat.parent_id)+str
     str
 
   end

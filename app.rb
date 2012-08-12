@@ -2,24 +2,36 @@ require "sinatra/base"
 require "active_record"
 require "./db/ar_config"
 require "./helpers/application_helper"
-require "sinatra/content_for2"
 require "sinatra/reloader"
 require "sinatra_more/routing_plugin"
+require 'sinatra_more/markup_plugin'
+require "sinatra/flash"
+require "json"
 require_relative "admin"
-Dir[File.dirname(__FILE__) + "/db/models/*.rb"].each {|file| require file }
+Dir[File.dirname(__FILE__) + "/db/models/*.rb"].each { |file| require file }
 
 class Main < Sinatra::Base
+
 
   register Sinatra::Reloader
   register SinatraMore::RoutingPlugin
   register SinatraMore::MarkupPlugin
-  helpers Sinatra::ContentFor2
+  register Sinatra::Flash
+
 
   map(:home).to('/')
   map(:feedback).to('/feedback')
   map(:sign_up).to('/sign_up')
   map(:view_lesson).to('/lesson/:id')
-  map(:index).to(".")
+  map(:lookup_words).to("/lesson/:id/lookup_words")
+  map(:content_suggestion).to("/suggest_content")
+
+
+  configure :development do
+    register Sinatra::Reloader
+  end
+
+  enable :sessions
 
   set :ref_img_dir, 'assets/ref_img'
   set :lesson_dir, 'assets/lesson_av'
@@ -31,6 +43,7 @@ class Main < Sinatra::Base
     erb :index
 
   end
+
   # -----------Sign Up--------------------------
   post :sign_up do
     fb = params[:sign_up]
@@ -44,10 +57,9 @@ class Main < Sinatra::Base
 
     #flash[:notice] = "Your account Was Created ."
 
-    redirect url_for(:index)
+    redirect url_for(:home)
 
   end
-
 
 
   # ----- Feedback -----
@@ -65,7 +77,6 @@ class Main < Sinatra::Base
     feedback.save
   end
 
-
   # ----- Lesson -----
 
   get :view_lesson do
@@ -76,6 +87,35 @@ class Main < Sinatra::Base
 
     erb :'lesson/index'
   end
+
+
+  get :lookup_words do
+
+    words = Lesson.find(params[:id]).glossary_words
+
+    definitions = get_meaning_for words
+    content_type :json
+
+    Hash[words.split(",").zip(definitions)].to_json
+
+  end
+
+  # ----- Content Suggestion -----
+
+  post :content_suggestion do
+
+    fb = params[:content_suggestion]
+
+    content_suggestion = ContentSuggestion.new
+    content_suggestion.name = fb['name']
+    content_suggestion.email = fb['email']
+    content_suggestion.subject = fb['subject']
+    content_suggestion.content = fb['content']
+
+    content_suggestion.save
+
+  end
+
 
   use SalaamPodAdmin
 

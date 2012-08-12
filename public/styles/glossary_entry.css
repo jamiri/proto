@@ -1,0 +1,12 @@
+
+#lesson_script a, #lesson_script a:visited, #lesson_script a:active {
+    color: #0A246A;
+    text-decoration: none;
+    border-bottom: 1px blue dotted;
+}
+
+#lesson_script a:hover {
+    color: #5493ff;
+    text-decoration: underline;
+    border: none;
+}

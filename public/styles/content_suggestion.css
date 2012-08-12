@@ -1,30 +1,31 @@
-#feedback_btn {
+#content_suggestion_btn {
     position: fixed;
     display: block;
     /*width: 170px;*/
     top: 45%;
-    left: -70px;
     z-index: 1000;
     text-align: center;
     transform: rotate(-90deg);
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
-    border-radius: 0 0 10px 10px;
+    border-radius: 10px 10px 0 0;
     font-family: Tahoma, sans-serif;
-    letter-spacing: 8px;
+    letter-spacing: 3px;
     font-size: 17px;
     font-weight: bold;
-    background-color: #f00;
+    background-color: #06c;
     color: #fff;
     padding: 5px 10px 5px 15px;
     text-decoration: none;
+    right: -88px;
 }
 
-#feedback_btn:hover {
-    background-color: #06c;
+#content_suggestion_btn:hover {
+    background: #f00;
 }
 
-#feedback_dialog {
+/* Customize your modal window here, you can add background image too */
+#dialog_content_suggestion {
     width:450px;
     /*height:203px;*/
     background-color: #fff;

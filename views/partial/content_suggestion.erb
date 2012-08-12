@@ -1,0 +1,39 @@
+<a id="content_suggestion_btn" href="#dialog_content_suggestion" name="modal">Suggest a Topic</a>
+
+<div id="dialog_content_suggestion" class="window">
+  <p id="content_suggestion_thanks" class="thanks_msg">Thank you for your suggestion!</p>
+
+  <div id="cs_form_wrapper">
+    <h1>Suggest a Topic</h1>
+
+    <p class="window_txt">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+      incididunt ut labore et dolore magna aliqua
+    </p>
+
+    <% form_tag url_for(:content_suggestion), :id => 'content_suggestion_form' do %>
+        <ul class="inputs">
+          <li>
+            <%= label_tag :name, :caption => 'Name:' %>
+            <%= text_field_tag :name, :name => 'content_suggestion[name]' %>
+          </li>
+          <li>
+            <%= label_tag :email %>
+            <%= text_field_tag :email, :name => 'content_suggestion[email]' %>
+          </li>
+          <li>
+            <%= label_tag :subject %>
+            <%= text_field_tag :subject, :name => 'content_suggestion[subject]' %>
+          </li>
+          <li>
+            <%= label_tag :content %>
+            <%= text_area_tag :content, :name => 'content_suggestion[content]' %>
+          </li>
+        </ul>
+
+        <%= button_tag "Cancel", :class => "close" %>
+        <%= submit_tag "Send" %>
+    <% end %>
+  </div>
+
+</div>

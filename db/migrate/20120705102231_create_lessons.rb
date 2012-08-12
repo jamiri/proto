@@ -11,7 +11,10 @@ class CreateLessons < ActiveRecord::Migration
       t.string :audio_path
       t.string :video_path
       t.string :author
+
+      # H. Samadi: I think publication_time should be removed. We already have timestamps.
       t.datetime :publication_time
+
       t.integer :category_id
 
       t.timestamps
