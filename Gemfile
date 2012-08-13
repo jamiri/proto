@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #gem "sinatra", :require => "sinatra/base"
 gem "sinatra"
 gem "activerecord"
-gem "haml"
+#gem "haml"
 gem "sqlite3"
 gem "sinatra_more"
 gem "sinatra-flash"

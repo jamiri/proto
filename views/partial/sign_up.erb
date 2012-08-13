@@ -1,25 +1,25 @@
 <div id="boxes">
   <div id="dialog_sign_up" class="window">
-    <p id="sign_up_thanks">Thank you for sign up!</p>
+    <p id="sign_up_thanks" class="thanks_msg">Thank you for sign up!</p>
     <span id="sign_up_h">Sign Up</span>
-    <p id="sign_up_txt">Sign Up</p>
+    <p id="sign_up_txt">Signing up for an account is FREE.</p>
     <% form_tag url_for(:sign_up), :id => 'sign_up_form' do %>
         <ul class="inputs">
           <li>
             <%= label_tag :name, :caption => 'Name:' %>
-            <%= text_field_tag :user_name, :name => 'sign_up[name]' %>
+            <%= text_field_tag :user_name, :name => 'sign_up[name]' %>*
           </li>
           <li>
             <%= label_tag :mail_address %>
-            <%= text_field_tag :mail_address, :name => 'sign_up[mail_address]' %>
+            <%= text_field_tag :mail_address, :name => 'sign_up[mail_address]' %>*
           </li>
           <li>
             <%= label_tag :password %>
-            <%= password_field_tag :password, :name => 'sign_up[password]' %>
+            <%= password_field_tag :password, :name => 'sign_up[password]' %>*
           </li>
           <li>
-            <%= label_tag :password ,:caption => 'Reenter password:'%>
-            <%= password_field_tag :password, :name => 'sign_up[verify_password]' %>
+            <%= label_tag :password ,:caption => 'Password Confirm:'%>
+            <%= password_field_tag :password, :name => 'sign_up[verify_password]' %>*
           </li>
         </ul>
 
