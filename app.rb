@@ -8,9 +8,6 @@ require "sinatra_more/routing_plugin"
 require 'sinatra_more/markup_plugin'
 require "sinatra/flash"
 require "json"
-#------------ For Sending Mail --------------------------------
-require 'tlsmail'
-#-------------------------------------------------------------------
 require_relative "admin"
 Dir[File.dirname(__FILE__) + "/db/models/*.rb"].each { |file| require file }
 
