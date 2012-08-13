@@ -39,13 +39,14 @@ class Main < Sinatra::Base
   set :ref_img_dir, 'assets/ref_img'
   set :lesson_dir, 'assets/lesson_av'
 
-   get :home do
+  get :home do
 
     @categories = Category.where(:parent_id => nil)
 
     erb :index
 
   end
+
   # -----------Sign Up--------------------------
   post :sign_up do
     fb = params[:sign_up]
@@ -63,7 +64,6 @@ class Main < Sinatra::Base
 
   end
 
-
   post :login do
 
     fb = params[:login]
@@ -71,15 +71,13 @@ class Main < Sinatra::Base
     u = fb['user_name']
     p = fb['password']
 
-    #--------------- where command statement for checking password--------------
+    user = User.find_by_mail_address_and_password(fb['user_name'], fb['password'])
 
-    user=User.where("mail_address='" + u + "' and password='" + p + "'")
+    if user.present?
+      session['user_name'] = u
+    end
 
-   if user.count>0
-      session['user_name']=u
-   end
-   #
-   redirect url_for(:home)
+    redirect url_for(:home)
 
   end
 
@@ -87,15 +85,13 @@ class Main < Sinatra::Base
 
   get :sign_out do
 
-  session['user_name']=nil
+    session['user_name']=nil
 
-  redirect url_for(:home)
+    redirect url_for(:home)
 
   end
 
   # ----- Feedback -----
-
-
   post :feedback do
     fb = params[:feedback]
 
@@ -109,6 +105,7 @@ class Main < Sinatra::Base
     feedback.save
     
   end
+
   get :question_page do
 
     @lesson_id=params[:lesson_id].to_i

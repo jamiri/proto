@@ -1,21 +1,22 @@
 <!--------------------------------------Q and A Content ------------------------------------>
 <div id="tabs-3" class="body">
 
- <div class="items">
-  <% @lesson.questions.first(5).each do |q| %>
-  <div class="QAbody">
-    <div class="question">
-      <span class="id"><%= User.find(q.user_id).name %></span>
-      <p><%=q.question %></p>
-    </div>
+  <div class="items">
+    <% @lesson.questions.first(5).each do |q| %>
+    <div class="QAbody">
+     <div class="question">
+       <span class="id"><%= User.find(q.user_id).name %></span>
+       <p><%=q.question %></p>
+     </div>
 
-    <div class="answer">
-      <span class="id"><%= q.answered_by %></span>
-      <p><%=q.answer %></p>
-    </div>
-  </div><!--end of QAbody -->
-  <% end %>
-</div>
+     <div class="answer">
+       <span class="id"><%= q.answered_by %></span>
+       <p><%=q.answer %></p>
+     </div>
+    </div><!--end of QAbody -->
+    <% end %>
+  </div>
+
   <div id="lastPostsLoader"></div>
 </div>
 <!--------------------------------------Q and A Content ------------------------------------>
