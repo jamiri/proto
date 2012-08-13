@@ -8,7 +8,6 @@ gem "sqlite3"
 gem "sinatra_more"
 gem "sinatra-flash"
 gem "sinatra-content-for2"
-gem 'tlsmail'
 
 group :development do
   gem "thin"
