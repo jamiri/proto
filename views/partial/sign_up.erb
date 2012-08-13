@@ -1,8 +1,11 @@
-<div id="boxes">
-  <div id="dialog_sign_up" class="window">
-    <p id="sign_up_thanks" class="thanks_msg">Thank you for sign up!</p>
-    <span id="sign_up_h">Sign Up</span>
-    <p id="sign_up_txt">Signing up for an account is FREE.</p>
+<div id="dialog_sign_up" class="window orange_window">
+  <p id="sign_up_thanks" class="thanks_msg">Thank you for sign up!</p>
+
+  <div id="sign_up_form_wrapper">
+    <h1>Sign Up</h1>
+
+    <p class="window_txt">Signing up for an account is FREE.</p>
+
     <% form_tag url_for(:sign_up), :id => 'sign_up_form' do %>
         <ul class="inputs">
           <li>
@@ -22,11 +25,9 @@
             <%= password_field_tag :password, :name => 'sign_up[verify_password]' %>*
           </li>
         </ul>
+
         <%= button_tag "Cancel", :class => "close" %>
         <%= submit_tag "Sign Up" %>
     <% end %>
-
   </div>
 </div>
-
-<div id="mask"></div>
