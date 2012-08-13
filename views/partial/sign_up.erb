@@ -22,9 +22,6 @@
             <%= password_field_tag :password, :name => 'sign_up[verify_password]' %>*
           </li>
         </ul>
-
-        <%= hidden_field_tag :url, :name => 'sign_up[url]' %>
-
         <%= button_tag "Cancel", :class => "close" %>
         <%= submit_tag "Sign Up" %>
     <% end %>

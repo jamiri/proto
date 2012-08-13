@@ -49,10 +49,6 @@ $(document).ready(function() {
             $('#sign_up_form, #sign_up_txt, #sign_up_h').css('display', 'none');
             $('#sign_up_thanks').show();
             $('#mask, .window').delay(800).fadeOut(200);
-        },
-
-        beforeSerialize: function(form, options) {
-            $('#sign_up_form input[name="sign_up[url]"]').val(document.URL);
         }
     };
 
