@@ -30,7 +30,13 @@ def get_meaning_for(words_list)
 
   words.each do |word|
 
-    definition = GlossaryEntry.find_by_entry(word).short_definition
+    entry = GlossaryEntry.find_by_entry(word)
+
+    if entry
+      definition = GlossaryEntry.find_by_entry(word).short_definition
+    else
+      definition = "No Definition Found"
+    end
 
     definition_list << definition
 
