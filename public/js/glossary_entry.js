@@ -19,10 +19,17 @@ function addTags(data) {
 
     for (var word in data) {
 
+
+        // replace all apostrophes in the definition with their respecting code
+        var escaped_definition = data[word].replaceAll("'", "&#39;");
+
+        // replace all double quotations in the definition with their respecting code
+        escaped_definition = escaped_definition.replaceAll('"', '&quot;');
+
         // enclose all occurences of a word inside lesson script with span tag
         lesson_script = lesson_script.replaceAll
             (word, "<a href='/glossary/"+ word + "' class='glossary_entry' title='"
-                + data[word] + "'>" + word + "</a>");
+                + escaped_definition + "'>" + word + "</a>");
 
     }
 
