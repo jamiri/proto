@@ -19,6 +19,8 @@ class Main < Sinatra::Base
   register SinatraMore::MarkupPlugin
   register Sinatra::Flash
 
+  enable :sessions
+
   map(:home).to('/')
   map(:feedback).to('/feedback')
   map(:sign_up).to('/sign_up')
@@ -34,7 +36,7 @@ class Main < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  enable :sessions
+
 
   set :ref_img_dir, 'assets/ref_img'
   set :lesson_dir, 'assets/lesson_av'
@@ -110,6 +112,8 @@ class Main < Sinatra::Base
 
     @lesson_id=params[:lesson_id].to_i
     @page=params[:page].to_i
+    @rows=Lesson.find(@lesson_id).questions.offset(5*@page ).limit(5)
+
     erb :'lesson/partial/question_row', :layout => false
 
   end
@@ -121,6 +125,7 @@ class Main < Sinatra::Base
 
     @lesson = Lesson.find(params[:id])
     @categories = Category.where(:parent_id => nil)
+    @rows=@lesson.questions.limit(5)
 
     erb :'lesson/index'
   end
