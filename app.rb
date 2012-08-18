@@ -9,6 +9,7 @@ require 'sinatra_more/markup_plugin'
 require "sinatra/flash"
 require "json"
 require_relative "admin"
+
 Dir[File.dirname(__FILE__) + "/db/models/*.rb"].each { |file| require file }
 
 
@@ -33,7 +34,9 @@ class Main < Sinatra::Base
 
 
   configure :development do
+
     register Sinatra::Reloader
+
   end
 
 
@@ -66,6 +69,8 @@ class Main < Sinatra::Base
 
   end
 
+  #----------------- Sign In --------------------
+
   post :login do
 
     fb = params[:login]
@@ -75,8 +80,10 @@ class Main < Sinatra::Base
 
     user = User.find_by_mail_address_and_password(fb['user_name'], fb['password'])
 
-    if user.present?
+    if user.present?  && user.enable
+
       session['user_name'] = u
+
     end
 
     redirect url_for(:home)
@@ -95,6 +102,7 @@ class Main < Sinatra::Base
 
   # ----- Feedback -----
   post :feedback do
+
     fb = params[:feedback]
 
     feedback = Feedback.new
@@ -128,6 +136,7 @@ class Main < Sinatra::Base
     @rows=@lesson.questions.limit(5)
 
     erb :'lesson/index'
+
   end
 
 
@@ -149,6 +158,7 @@ class Main < Sinatra::Base
     fb = params[:content_suggestion]
 
     content_suggestion = ContentSuggestion.new
+
     content_suggestion.name = fb['name']
     content_suggestion.email = fb['email']
     content_suggestion.subject = fb['subject']
