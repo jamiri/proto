@@ -5,9 +5,11 @@ task :environment do
   require 'active_record'
   require 'active_support/core_ext/string/strip'
   require 'fileutils'
+  require 'logger'
 
   Dir.glob("./db/models/*.rb").each { |r| require r }
   ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => DB_FILE
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
 end
 
 namespace :db do
