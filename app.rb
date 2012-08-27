@@ -149,11 +149,12 @@ class Main < Sinatra::Base
 
     lesson_id = params[:lesson_id].to_i
     page = params[:page].to_i
-    microblogs = BlogPost.where(:lesson_id => lesson_id).offset(5 * page).limit(5)
+    microblogs = BlogPost.where(:lesson_id => lesson_id).includes(:comments => :user).offset(5 * page).limit(5)
 
     content_type :json
 
-    microblogs.to_json
+    microblogs.to_json(:only => [:id, :title, :content], :methods => :posted_on, :include =>
+        {:comments => {:include => :user}})
 
   end
 
@@ -161,6 +162,9 @@ class Main < Sinatra::Base
   get :lookup_words do
 
     words = Lesson.find(params[:id]).glossary_words
+
+    #TODO: word lookup can be optimized
+    #word_w_defs = GlossaryEntry.where(:entry => words.split(','))
 
     definitions = get_meaning_for words
     content_type :json

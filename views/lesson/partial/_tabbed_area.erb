@@ -62,14 +62,36 @@
 
   <!--------------------------------------Micro Blog Content ------------------------------------>
   <div id="tabs-2" class="MicroBlog body">
+    <div class="post proto">
+      <h2>__title__</h2>
+      <span class="date">posted on __date__</span>
+      <span class="comments"><a href="#dialog__id__">__num__ comments</a></span>
+      <p>__content__</p>
+    </div>
+    <div class="comment_post proto">
+      <span class="id">__user_name__</span> <small>says:</small>
+      <p>__comment_body__</p>
+    </div>
+    <div class="microblog_comment proto" id="dialog__id__" title="Comments on __title__"></div>
 
     <% if @lesson.blog_posts.any? %>
       <% @lesson.blog_posts.each do |mcblog| %>
         <div class="post">
           <h2><%= mcblog.title %></h2>
           <span class="date">posted on <%= mcblog.posted_on.strftime('%B %e, %Y') %></span>
-          <!--<span class="comments"><a href="#" id="dialog_link1">18 comments</a></span>-->
+          <span class="comments"><a href="#dialog<%= mcblog.id %>"><%= mcblog.comments.size %> comments</a></span>
           <p><%= mcblog.content %></p>
+
+          <% if mcblog.comments.any? %>
+            <div class="microblog_comment" id="dialog<%= mcblog.id %>" title="Comments on <%=mcblog.title %>">
+              <% mcblog.comments.each do |comment| %>
+                <div class="comment_post">
+                  <span class="id"><%= comment.user.name %></span> <small>says:</small>
+                  <p><%= comment.comment %></p>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     <% end %>

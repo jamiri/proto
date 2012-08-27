@@ -2,7 +2,7 @@ class BlogPost < ActiveRecord::Base
 
   attr_accessible :title, :content
 
-  belongs_to :lessons
+  belongs_to :lesson
 
   has_many :comments, :foreign_key => 'blog_post_id'
 

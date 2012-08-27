@@ -5,7 +5,11 @@
     <link rel="stylesheet" type="text/css" href="/styles/jquery-ui-1.8.22.custom.css">
     <link rel="stylesheet" type="text/css" href="/styles/glossary_entry.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/tipTip.css"/>
-
+    <style>
+        .proto {
+            display: none;
+        }
+    </style>
 <% end %>
 
 <% content_for :custom_js do %>
@@ -16,73 +20,15 @@
     <script src="/js/question_infinite_scroll.js" type="text/javascript"></script>
     <script src="/js/infini_scroll.js" type="text/javascript"></script>
     <script src="/js/strftime.js" type="text/javascript"></script>
+    <script src="/js/microblog.js" type="text/javascript"></script>
 
     <script type="text/javascript">
         $(function () {
-
             //Tabs
             $("#tabs").tabs();
-
-            // Dialog
-            $('#dialog1').dialog({
-                autoOpen:false,
-                width:600
-
-            });
-
-            $('#dialog2').dialog({
-                autoOpen:false,
-                width:600
-
-            });
-
-            $('#dialog3').dialog({
-                autoOpen:false,
-                width:600
-
-            });
-
-            // Dialog Link
-            $('#dialog_link1').click(function () {
-                $('#dialog1').dialog('open');
-                return false;
-            });
-
-            $('#dialog_link2').click(function () {
-                $('#dialog2').dialog('open');
-                return false;
-            });
-
-            $('#dialog_link3').click(function () {
-                $('#dialog3').dialog('open');
-                return false;
-            });
         });
     </script>
 
-    <script type="text/javascript">
-
-      $(document).ready(function () {
-
-        // init auto scrolling for microblogs
-        initInfiniScroll($('.MicroBlog').get(0), function(page) {
-          return window.location.href + "/microblog/" + page;
-        }, function(data) {
-          $(data).each(function() {
-
-            var blogElem = $('<div class="post">').append(
-                    $('<h2>').html(this.blog_post.title)
-            ).append(
-                    $('<span class="date">').html('posted on ' + new Date(this.blog_post.created_at).strftime('%B %d, %Y'))
-            ).append(
-                    $('<p>').html(this.blog_post.content)
-            ).appendTo($('.MicroBlog'))
-
-          });
-        });
-      });
-
-    </script>
 <% end %>
 
 <!-- /-- Body -->
