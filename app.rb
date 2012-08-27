@@ -31,6 +31,7 @@ class Main < Sinatra::Base
   map(:content_suggestion).to("/suggest_content")
   map(:sign_out).to('/sign_out')
   map(:question_page).to('/lesson/:lesson_id/question/page/:page')
+  map(:fetch_microblog).to('/lesson/:lesson_id/microblog/:page')
 
 
   configure :development do
@@ -131,11 +132,28 @@ class Main < Sinatra::Base
   get :view_lesson do
     #exception handling required!
 
-    @lesson = Lesson.find(params[:id])
-    @categories = Category.where(:parent_id => nil)
-    @rows=@lesson.questions.limit(5)
+    @lesson = Lesson.where(:id => params[:id])
+      .includes(:objectives, :references, :category)
+      .first
+
+    @categories = Category.where(:parent_id => nil).includes(:sub_categories)
 
     erb :'lesson/index'
+
+  end
+
+  # ----- Load microblogs -----
+
+  get :fetch_microblog do
+    #TODO: exception handling required
+
+    lesson_id = params[:lesson_id].to_i
+    page = params[:page].to_i
+    microblogs = BlogPost.where(:lesson_id => lesson_id).offset(5 * page).limit(5)
+
+    content_type :json
+
+    microblogs.to_json
 
   end
 

@@ -1,5 +1,5 @@
 class CreateBlogPosts< ActiveRecord::Migration
-  # To change this template use File | Settings | File Templates.
+
   def change
 
     create_table :blog_posts do |t|
@@ -12,4 +12,5 @@ class CreateBlogPosts< ActiveRecord::Migration
     end
 
   end
+
 end

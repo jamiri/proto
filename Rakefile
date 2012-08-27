@@ -201,6 +201,14 @@ namespace :lesson do
         end
       end
 
+      # microblog
+      rand(2..5).times do
+        lesson.blog_posts << BlogPost.new(
+            :title => Faker::Lorem.sentence(rand(2..10)),
+            :content => Faker::Lorem.paragraphs(rand(1..5)).join(' ')
+        )
+      end
+
       # Save the lesson!
       lesson.save
 

@@ -62,93 +62,18 @@
 
   <!--------------------------------------Micro Blog Content ------------------------------------>
   <div id="tabs-2" class="MicroBlog body">
-    <div class="post">
-      <h2>Post Title</h2>
-      <span class="date">posted on january 24, 2012</span>
-      <span class="comments"><a href="#" id="dialog_link1">18 comments</a></span>
-      <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
 
-      <div id="dialog1" title="Comments on Post 1">
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
+    <% if @lesson.blog_posts.any? %>
+      <% @lesson.blog_posts.each do |mcblog| %>
+        <div class="post">
+          <h2><%= mcblog.title %></h2>
+          <span class="date">posted on <%= mcblog.posted_on.strftime('%B %e, %Y') %></span>
+          <!--<span class="comments"><a href="#" id="dialog_link1">18 comments</a></span>-->
+          <p><%= mcblog.content %></p>
         </div>
+      <% end %>
+    <% end %>
 
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="post">
-      <h2>Post Title</h2>
-      <span class="date">posted on october 14, 2012</span>
-      <span class="comments"><a href="#" id="dialog_link2">22 comments</a></span>
-      <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-
-      <div id="dialog2" title="Comments on Post 2">
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="post">
-      <h2>Post Title</h2>
-      <span class="date">posted on october 14, 2012</span>
-      <span class="comments"><a href="#" id="dialog_link3">22 comments</a></span>
-      <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-
-
-      <div id="dialog3" title="Comments on Post 3">
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-      </div>
-    </div>
   </div>
   <!--------------------------------------Micro Blog Content ------------------------------------>
 
@@ -159,6 +84,10 @@
   <!-- /- Discussion Content -->
   <%= erb :'lesson/partial/_discussion' %>
   <!-- \- Discussion Content -->
+
+    <div id="lastPostsLoader" style="display: none;">
+      <img src="/images/bigLoader.gif">
+    </div>
 
   </div>
 
