@@ -1,4 +1,5 @@
-<% Lesson.find(@lesson_id).questions.offset(5*@page).limit(5).each do |q| %>
+
+<% @rows.each do |q| %>
     <div class="QAbody">
       <div class="question">
         <span class="id"><%= User.find(q.user_id).name %></span>

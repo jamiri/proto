@@ -9,6 +9,7 @@ require 'sinatra_more/markup_plugin'
 require "sinatra/flash"
 require "json"
 require_relative "admin"
+
 Dir[File.dirname(__FILE__) + "/db/models/*.rb"].each { |file| require file }
 
 
@@ -18,6 +19,8 @@ class Main < Sinatra::Base
   register SinatraMore::RoutingPlugin
   register SinatraMore::MarkupPlugin
   register Sinatra::Flash
+
+  enable :sessions
 
   map(:home).to('/')
   map(:feedback).to('/feedback')
@@ -31,10 +34,12 @@ class Main < Sinatra::Base
 
 
   configure :development do
+
     register Sinatra::Reloader
+
   end
 
-  enable :sessions
+
 
   set :ref_img_dir, 'assets/ref_img'
   set :lesson_dir, 'assets/lesson_av'
@@ -64,6 +69,8 @@ class Main < Sinatra::Base
 
   end
 
+  #----------------- Sign In --------------------
+
   post :login do
 
     fb = params[:login]
@@ -73,8 +80,10 @@ class Main < Sinatra::Base
 
     user = User.find_by_mail_address_and_password(fb['user_name'], fb['password'])
 
-    if user.present?
+    if user.present?  && user.enable
+
       session['user_name'] = u
+
     end
 
     redirect url_for(:home)
@@ -93,6 +102,7 @@ class Main < Sinatra::Base
 
   # ----- Feedback -----
   post :feedback do
+
     fb = params[:feedback]
 
     feedback = Feedback.new
@@ -110,6 +120,8 @@ class Main < Sinatra::Base
 
     @lesson_id=params[:lesson_id].to_i
     @page=params[:page].to_i
+    @rows=Lesson.find(@lesson_id).questions.offset(5*@page ).limit(5)
+
     erb :'lesson/partial/question_row', :layout => false
 
   end
@@ -121,8 +133,10 @@ class Main < Sinatra::Base
 
     @lesson = Lesson.find(params[:id])
     @categories = Category.where(:parent_id => nil)
+    @rows=@lesson.questions.limit(5)
 
     erb :'lesson/index'
+
   end
 
 
@@ -144,6 +158,7 @@ class Main < Sinatra::Base
     fb = params[:content_suggestion]
 
     content_suggestion = ContentSuggestion.new
+
     content_suggestion.name = fb['name']
     content_suggestion.email = fb['email']
     content_suggestion.subject = fb['subject']
