@@ -1,5 +1,6 @@
 # create an unordered list from a set of categories along with their descendants
-#
+
+# This code can be optimized
 def create_child_for_category(root_categories)
 
   # the string that is going to be returned
@@ -44,6 +45,7 @@ def get_meaning_for(words_list)
 
   definition_list
 end
+
 
 # This code can be optimized.
 def create_navbar(id)
