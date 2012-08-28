@@ -6,27 +6,25 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var question_page = 1;
+var question_page = 0;
 
 var ended = false;
-alert("sssssssssss");
+
 $(document).ready(function () {
 
     function lastAddedLiveFunc() {
 
-        question_page = question_page +1;
-        if (!ended) {
-
-
+        if (ended) {
+        } else {
 
             $('div#lastPostsLoader').html('<img src="/images/bigLoader.gif">');
 
-            //$.getJSON(window.location.href + "/question/page/" + String(question_page), addTags);
+            $.getJSON(window.location.href + "/question/page/" + String(question_page), addTags_question_row);
 
         }
+        question_page = question_page +1;
     };
-
-    //lastAddedLiveFunc();
+    lastAddedLiveFunc();
     $(window).scroll(function () {
 
         var wintop = $(window).scrollTop(),
@@ -44,24 +42,29 @@ $(document).ready(function () {
     });
 
 });
-function addTags(data) {
 
-    var sub_data;
 
-    var txt;
+function addTags_question_row(data) {
 
-    data=JSON.parse(data);
+    var txt,i=0;
 
+    // Load data rows.And create question And answer in javascript.
     for (var row in data) {
 
-        var sub_data = data[row];
+        i++;
 
-           txt = '<div class="QAbody"><div class="question"><span class="id">' + sub_row.user_name + '</span><p>' + sub_row.question + '</p></div>';
+        txt = '<div class="QAbody"><div class="question"><span class="id">' + row + "." + data[row]["user_name"] + '</span><p>' + data[row]["question"] + '</p></div>';
 
-           txt = txt + <div class="answer"><span class="id">' + sub_row.answered_by + '</span><p>' + sub_row.answer + '</p></div></div>';
+        txt = txt + '<div class="answer"><span class="id">' + data[row]["answered_by"] + '</span><p>' + data[row]["answer"] + '</p></div></div>';
 
-           $(".items").append(data);
+        $(".items").append(txt);
 
+    }
+
+    // This code is for end of load the new page.Because we need for end of new page
+    if(i<1)
+    {
+        ended=true;
     }
 
     $('div#lastPostsLoader').empty();

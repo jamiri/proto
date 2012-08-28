@@ -134,7 +134,7 @@ class Main < Sinatra::Base
 
     content_type :json
 
-    json_string=ids.to_json
+    ids.to_json
 
   end
 
