@@ -116,13 +116,25 @@ class Main < Sinatra::Base
     
   end
 
+
   get :question_page do
 
     @lesson_id=params[:lesson_id].to_i
     @page=params[:page].to_i
+
     @rows=Lesson.find(@lesson_id).questions.offset(5*@page ).limit(5)
 
-    erb :'lesson/partial/question_row', :layout => false
+    ids={}
+
+  @rows.each do | row |
+
+      ids[row.id]= {"question" => (row.question==nil ? "" :row.question)  , "answer" => (row.answer==nil ? "" : row.answer) , "user_name" => User.find(row.user_id).name  , "user_id" => row.user_id, "answered_by" => (row.answered_by==nil ? "" : User.find(row.user_id))}
+
+  end
+
+    content_type :json
+
+    json_string=ids.to_json
 
   end
 
@@ -134,6 +146,7 @@ class Main < Sinatra::Base
     @lesson = Lesson.find(params[:id])
     @categories = Category.where(:parent_id => nil)
     @rows=@lesson.questions.limit(5)
+
 
     erb :'lesson/index'
 
