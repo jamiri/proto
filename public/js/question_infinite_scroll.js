@@ -61,7 +61,7 @@ function addTags_question_row(data) {
 
     }
 
-    // This code is for end of load the new page.Because we need for end of new page
+    // This code is for end of load the new page.Because we need end the new page.
     if(i<1)
     {
         ended=true;
