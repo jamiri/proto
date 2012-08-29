@@ -237,7 +237,10 @@ namespace :doc do
     RailsERD::Diagram::Graphviz.create()
 
     FileUtils.mkdir("docs") unless File.directory?("docs")
-    FileUtils.mv('erd.pdf', 'docs/erd.pdf')
+
+    # the "erd" file name format is: erd_{current datetime}_{current schema version}
+    FileUtils.mv('erd.pdf',
+                 "docs/erd_#{Time.now.strftime('%Y%m%d%H%M%S')}_#{ActiveRecord::Migrator.current_version}.pdf")
 
   end
 
