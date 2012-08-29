@@ -22,8 +22,10 @@ $(document).ready(function () {
             $.getJSON(window.location.href + "/question/page/" + String(question_page), addTags_question_row);
 
         }
-        question_page = question_page +1;
-    };
+        question_page = question_page + 1;
+    }
+
+    ;
     lastAddedLiveFunc();
     $(window).scroll(function () {
 
@@ -35,7 +37,7 @@ $(document).ready(function () {
         var qaIsSelected = $('#qa').hasClass("ui-tabs-selected");
 
         if (((wintop / (docheight - winheight)) > scrolltrigger)
-             && qaIsSelected && !ended) {
+            && qaIsSelected && !ended) {
 
             lastAddedLiveFunc();
         }
@@ -46,25 +48,26 @@ $(document).ready(function () {
 
 function addTags_question_row(data) {
 
-    var txt,i=0;
+    var txt, i = 0;
 
     // Load data rows.And create question And answer in javascript.
     for (var row in data) {
 
         i++;
 
-        txt = '<div class="QAbody"><div class="question"><span class="id">' + data[row]["user_name"] + '</span><p>' + data[row]["question"] + '</p></div>';
+        txt = '<div class="QAbody"><div class="question"><span class="id">' +
+            data[row]["user_name"] + '</span><p>' + data[row]["question"] + '</p></div>';
 
-        txt = txt + '<div class="answer"><span class="id">' + data[row]["answered_by"] + '</span><p>' + data[row]["answer"] + '</p></div></div>';
+        txt = txt + '<div class="answer"><span class="id">' + data[row]["answered_by"] + '</span><p>' +
+            data[row]["answer"] + '</p></div></div>';
 
         $(".items").append(txt);
 
     }
 
     // This code is for end of load the new page.Because we need end the new page.
-    if(i<1)
-    {
-        ended=true;
+    if (i < 1) {
+        ended = true;
     }
 
     $('div#lastPostsLoader').empty();

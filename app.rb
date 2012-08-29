@@ -41,7 +41,6 @@ class Main < Sinatra::Base
   end
 
 
-
   set :ref_img_dir, 'assets/ref_img'
   set :lesson_dir, 'assets/lesson_av'
 
@@ -81,7 +80,7 @@ class Main < Sinatra::Base
 
     user = User.find_by_mail_address_and_password(fb['user_name'], fb['password'])
 
-    if user.present?  && user.enable
+    if user.present? && user.enable
 
       session['user_name'] = u
 
@@ -95,7 +94,7 @@ class Main < Sinatra::Base
 
   get :sign_out do
 
-    session['user_name']=nil
+    session['user_name'] = nil
 
     redirect url_for(:home)
 
@@ -114,22 +113,28 @@ class Main < Sinatra::Base
     feedback.url = fb['url']
 
     feedback.save
-    
+
   end
 
   get :question_page do
 
-    @lesson_id=params[:lesson_id].to_i
-    @page=params[:page].to_i
-    @rows=Lesson.find(@lesson_id).questions.offset(5*@page ).limit(5)
+    @lesson_id = params[:lesson_id].to_i
+    @page = params[:page].to_i
+    @rows = Lesson.find(@lesson_id).questions.offset(5 * @page).limit(5)
 
-    ids={}
+    ids = {}
 
-  @rows.each do | row |
+    @rows.each do |row|
 
-      ids[row.id]= {"question" => (row.question==nil ? "" :row.question)  , "answer" => (row.answer==nil ? "" : row.answer) , "user_name" => User.find(row.user_id).name  , "user_id" => row.user_id, "answered_by" => (row.answered_by==nil ? "" : User.find(row.user_id))}
+      ids[row.id] = {
+          "question" => (row.question == nil ? "" : row.question),
+          "answer" => (row.answer == nil ? "" : row.answer),
+          "user_name" => User.find(row.user_id).name,
+          "user_id" => row.user_id,
+          "answered_by" => (row.answered_by == nil ? "" : User.find(row.user_id))
+      }
 
-  end
+    end
 
     content_type :json
 
@@ -142,9 +147,7 @@ class Main < Sinatra::Base
   get :view_lesson do
     #exception handling required!
 
-    @lesson = Lesson.where(:id => params[:id])
-      .includes(:objectives, :references, :category)
-      .first
+    @lesson = Lesson.where(:id => params[:id]).includes(:objectives, :references, :category).first
 
     @categories = Category.where(:parent_id => nil).includes(:sub_categories)
 
@@ -168,7 +171,7 @@ class Main < Sinatra::Base
 
   end
 
-
+  #
   get :lookup_words do
 
     words = Lesson.find(params[:id]).glossary_words
