@@ -53,7 +53,7 @@ function addTags_question_row(data) {
 
         i++;
 
-        txt = '<div class="QAbody"><div class="question"><span class="id">' + row + "." + data[row]["user_name"] + '</span><p>' + data[row]["question"] + '</p></div>';
+        txt = '<div class="QAbody"><div class="question"><span class="id">' + data[row]["user_name"] + '</span><p>' + data[row]["question"] + '</p></div>';
 
         txt = txt + '<div class="answer"><span class="id">' + data[row]["answered_by"] + '</span><p>' + data[row]["answer"] + '</p></div></div>';
 
