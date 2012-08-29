@@ -3,162 +3,113 @@
 <div id="main" class="grid_19 clearfix">
 
   <div id="tabs">
-  <ul>
-    <li><a href="#tabs-1">Main Script</a></li>
-    <li><a href="#tabs-2">Micro Blog</a></li>
-    <li id="qa"><a href="#tabs-3">Q & A</a></li>
-    <li><a href="#tabs-4">Discussion</a></li>
-  </ul>
+    <ul>
+      <li><a href="#tabs-1">Main Script</a></li>
+      <li><a href="#tabs-2">Micro Blog</a></li>
+      <li id="qa"><a href="#tabs-3">Q & A</a></li>
+      <li><a href="#tabs-4">Discussion</a></li>
+    </ul>
 
-  <!--------------------------------------Main Script Content ------------------------------------>
-  <div id="tabs-1" class="Script body">
+    <!--------------------------------------Main Script Content ------------------------------------>
+    <div id="tabs-1" class="Script body">
 
-    <!-- /- Objective -->
-    <div class="objectives">
-      <h4>Objectives of this Lesson:</h4>
+      <!-- /- Objective -->
+      <div class="objectives">
+        <h4>Objectives of this Lesson:</h4>
 
-      <% if @lesson.objectives.any? %>
-        <ol>
-        <% @lesson.objectives.each do |oj| %>
-          <li><%= oj %></li>
+        <% if @lesson.objectives.any? %>
+            <ol>
+              <% @lesson.objectives.each do |oj| %>
+                  <li><%= oj %></li>
+              <% end %>
+            </ol>
         <% end %>
-        </ol>
-      <% end %>
-    </div>
-    <!-- \- Objective -->
+      </div>
+      <!-- \- Objective -->
 
-    <div class="script" id="lesson_script" lesson_id="<%= @lesson.id %>" >
-      <h4>Script of Lesson</h4>
-      <%= @lesson.script %>
-    </div>
+      <div class="script" id="lesson_script" lesson_id="<%= @lesson.id %>" >
+        <h4>Script of Lesson</h4>
+        <%= @lesson.script %>
+      </div>
 
-    <!-- /- References -->
-    <div class="references">
-      <h4>References</h4>
-      <% if @lesson.references.any? %>
-        <ol>
-          <% @lesson.references.each do |ref| %>
-            <li>
-              <div style="margin: 0 30px 15px 0;">
-                <% unless ref.photo.nil? %>
-                  <img src="/<%= settings.ref_img_dir + "/" + ref.photo %>"
-                       style="float: left; margin: 10px 10px 0 10px; border: 1px solid gray;
-                              max-height: 150px; padding: 5px; background-color: #FFF;">
+      <!-- /- References -->
+      <div class="references">
+        <h4>References</h4>
+        <% if @lesson.references.any? %>
+            <ol>
+              <% @lesson.references.each do |ref| %>
+                  <li>
+                    <div style="margin: 0 30px 15px 0;">
+                      <% unless ref.photo.nil? %>
+                          <img src="/<%= settings.ref_img_dir + "/" + ref.photo %>"
+                               style="float: left; margin: 10px 10px 0 10px; border: 1px solid gray;
+                                       max-height: 150px; padding: 5px; background-color: #FFF;">
+                      <% end %>
+                      <div style="text-align: justify; clear: right; margin-left: 10px;">
+                        <strong><%= ref.title %></strong>
+                        <span><%= ref.description %></span>
+                      </div>
+                    </div>
+                  </li>
+              <% end %>
+            </ol>
+        <% end %>
+      </div>
+      <!-- \- References -->
+
+    </div>
+    <!--------------------------------------Main Script Content ------------------------------------>
+
+    <!--------------------------------------Micro Blog Content ------------------------------------>
+    <div id="tabs-2" class="MicroBlog body">
+      <div class="post proto">
+        <h2>__title__</h2>
+        <span class="date">posted on __date__</span>
+        <span class="comments"><a href="#dialog__id__">__num__ comments</a></span>
+        <p>__content__</p>
+      </div>
+      <div class="comment_post proto">
+        <span class="id">__user_name__</span> <small>says:</small>
+        <p>__comment_body__</p>
+      </div>
+      <div class="microblog_comment proto" id="dialog__id__" title="Comments on __title__"></div>
+
+      <% if @lesson.blog_posts.any? %>
+          <% @lesson.blog_posts.each do |mcblog| %>
+              <div class="post">
+                <h2><%= mcblog.title %></h2>
+                <span class="date">posted on <%= mcblog.posted_on.strftime('%B %e, %Y') %></span>
+                <span class="comments"><a href="#dialog<%= mcblog.id %>"><%= mcblog.comments.size %> comments</a></span>
+                <p><%= mcblog.content %></p>
+
+                <% if mcblog.comments.any? %>
+                    <div class="microblog_comment" id="dialog<%= mcblog.id %>" title="Comments on <%=mcblog.title %>">
+                      <% mcblog.comments.each do |comment| %>
+                          <div class="comment_post">
+                            <span class="id"><%= comment.user.name %></span> <small>says:</small>
+                            <p><%= comment.comment %></p>
+                          </div>
+                      <% end %>
+                    </div>
                 <% end %>
-                <div style="text-align: justify; clear: right; margin-left: 10px;">
-                  <strong><%= ref.title %></strong>
-                  <span><%= ref.description %></span>
-                </div>
               </div>
-            </li>
           <% end %>
-        </ol>
       <% end %>
+
     </div>
-    <!-- \- References -->
+    <!--------------------------------------Micro Blog Content ------------------------------------>
 
-  </div>
-  <!--------------------------------------Main Script Content ------------------------------------>
+    <!--------------------------------------Q and A Content ------------------------------------>
+    <%= erb :"lesson/partial/_questions" %>
+    <!--------------------------------------Q and A Content ------------------------------------>
 
-  <!--------------------------------------Micro Blog Content ------------------------------------>
-  <div id="tabs-2" class="MicroBlog body">
-    <div class="post">
-      <h2>Post Title</h2>
-      <span class="date">posted on january 24, 2012</span>
-      <span class="comments"><a href="#" id="dialog_link1">18 comments</a></span>
-      <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+    <!-- /- Discussion Content -->
+    <%= erb :'lesson/partial/_discussion' %>
+    <!-- \- Discussion Content -->
 
-      <div id="dialog1" title="Comments on Post 1">
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-      </div>
+    <div id="lastPostsLoader" style="display: none;">
+      <img src="/images/bigLoader.gif">
     </div>
-
-    <div class="post">
-      <h2>Post Title</h2>
-      <span class="date">posted on october 14, 2012</span>
-      <span class="comments"><a href="#" id="dialog_link2">22 comments</a></span>
-      <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-
-      <div id="dialog2" title="Comments on Post 2">
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="post">
-      <h2>Post Title</h2>
-      <span class="date">posted on october 14, 2012</span>
-      <span class="comments"><a href="#" id="dialog_link3">22 comments</a></span>
-      <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-
-
-      <div id="dialog3" title="Comments on Post 3">
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-
-        <div class="comment_post">
-          <span class="id">UserID</span><small>says:</small>
-          <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--------------------------------------Micro Blog Content ------------------------------------>
-
-  <!--------------------------------------Q and A Content ------------------------------------>
-  <%= erb :"lesson/partial/_questions" %>
-  <!--------------------------------------Q and A Content ------------------------------------>
-
-  <!-- /- Discussion Content -->
-  <%= erb :'lesson/partial/_discussion' %>
-  <!-- \- Discussion Content -->
 
   </div>
 
