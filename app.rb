@@ -32,6 +32,7 @@ class Main < Sinatra::Base
   map(:sign_out).to('/sign_out')
   map(:question_page).to('/lesson/:lesson_id/question/page/:page')
   map(:fetch_microblog).to('/lesson/:lesson_id/microblog/:page')
+  map(:new_microblog).to('/lesson/:lesson_id/microblog/create')
 
 
   configure :development do
@@ -116,6 +117,7 @@ class Main < Sinatra::Base
 
   end
 
+  # TODO: this code can still be optimized.
   get :question_page do
 
     @lesson_id = params[:lesson_id].to_i
@@ -147,7 +149,9 @@ class Main < Sinatra::Base
   get :view_lesson do
     #exception handling required!
 
-    @lesson = Lesson.where(:id => params[:id]).includes(:objectives, :references, :category).first
+    @lesson = Lesson.where(:id => params[:id])
+      .includes(:objectives, :references, :category)
+      .first
 
     @categories = Category.where(:parent_id => nil).includes(:sub_categories)
 
@@ -171,7 +175,23 @@ class Main < Sinatra::Base
 
   end
 
-  #
+  post :new_microblog do
+    #TODO: exception handling
+
+    comment_d = params[:comment]
+
+    microblog = BlogPost.find(comment_d[:blog_post_id])
+
+    microblog.comments << Comment.new(
+        :comment => comment_d[:body],
+        :user_id => 1
+    )
+
+    # TODO: the new comment should be returned.
+    200 # return status code
+  end
+
+
   get :lookup_words do
 
     words = Lesson.find(params[:id]).glossary_words

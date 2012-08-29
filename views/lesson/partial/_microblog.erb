@@ -1,0 +1,50 @@
+<div id="tabs-2" class="MicroBlog body">
+  <%= erb :'lesson/partial/_prototypes' %>
+
+  <% if @lesson.blog_posts.any? %>
+    <% @lesson.blog_posts.each do |mcblog| %>
+      <div class="post">
+        <h2><%= mcblog.title %></h2>
+        <span class="date">posted on <%= mcblog.posted_on.strftime('%B %e, %Y') %></span>
+            <span class="comments">
+              <a href="#dialog<%= mcblog.id %>">
+                <% if mcblog.comments.any? %>
+                  <%= mcblog.comments.size %> comment(s)
+                <% else %>
+                  Post a new comment
+                <% end %>
+              </a>
+            </span>
+        <p><%= mcblog.content %></p>
+
+        <div class="microblog_comment" id="dialog<%= mcblog.id %>" title="Comments on <%=mcblog.title %>">
+          <% if mcblog.comments.any? %>
+            <% mcblog.comments.each do |comment| %>
+              <div class="comment_post">
+                <span class="id"><%= comment.user.name %></span> <small>says:</small>
+                <p><%= comment.comment %></p>
+              </div>
+            <% end %>
+          <% end %>
+
+          <!------ Comment form ------>
+          <form name="comment_form_<%= mcblog.id %>" method="post"
+                action="<%= url_for(:new_microblog, :lesson_id => @lesson.id) %>"
+                class="blog_post_comment_form">
+            <div class="comment_post">
+              <label for="comment" style="font-weight: bold; display: block; padding: 0 10px 0 0;">
+                Comment:
+                <textarea name="comment[body]" style="padding: 4px; width: 100%;"></textarea>
+              </label>
+              <div style="text-align: right;">
+                <input type="hidden" name="comment[blog_post_id]" value="<%= mcblog.id %>">
+                <input type="submit" name="submit" value="Submit" style="margin: 0;">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+</div>
