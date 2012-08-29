@@ -26,7 +26,7 @@ function addTags(data) {
         // replace all double quotations in the definition with their respecting code
         escaped_definition = escaped_definition.replaceAll('"', '&quot;');
 
-        // enclose all occurences of a word inside lesson script with span tag
+        // enclose all occurences of a word inside lesson script with a tag
         lesson_script = lesson_script.replaceAll
             (word, "<a href='/glossary/"+ word + "' class='glossary_entry' title='"
                 + escaped_definition + "'>" + word + "</a>");
