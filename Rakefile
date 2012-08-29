@@ -5,9 +5,11 @@ task :environment do
   require 'active_record'
   require 'active_support/core_ext/string/strip'
   require 'fileutils'
+  require 'logger'
 
   Dir.glob("./db/models/*.rb").each { |r| require r }
   ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => DB_FILE
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
 end
 
 namespace :db do
@@ -155,7 +157,7 @@ namespace :lesson do
       lesson.title = Faker::Lorem.sentence rand(1..7) # maximum title length = 7 words
       lesson.description = Faker::Lorem.paragraph rand(1..3) # maximum description length = 7 sentences
       script = Faker::Lorem.paragraphs(rand(5..30)) # maximum script length = 30 paragraphs
-      lesson.script = script.join('<br />')
+      lesson.script = script.join('<br>')
       lesson.author = Faker::Name.name
 
       # category
@@ -193,10 +195,27 @@ namespace :lesson do
       sample_words.each do |word|
         if word.length > 2
           GlossaryEntry.new(
-              :entry => word,
-              :short_definition => Faker::Lorem.sentences(1).first
+            :entry => word,
+            :short_definition => Faker::Lorem.sentences(1).first
           ).save
         end
+      end
+
+      # microblog
+      rand(0..10).times do
+        blogpost = BlogPost.new(
+          :title => Faker::Lorem.sentence(rand(2..10)),
+          :content => Faker::Lorem.paragraphs(rand(1..5)).join(' ')
+        )
+
+        rand(0..10).times do
+          blogpost.comments << Comment.new(
+            :comment => Faker::Lorem.sentences(rand(1..5)).join(' '),
+            :user => User.find(:all).sample
+          )
+        end
+
+        lesson.blog_posts << blogpost
       end
 
       # Save the lesson!
