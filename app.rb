@@ -123,7 +123,17 @@ class Main < Sinatra::Base
     @page=params[:page].to_i
     @rows=Lesson.find(@lesson_id).questions.offset(5*@page ).limit(5)
 
-    erb :'lesson/partial/question_row', :layout => false
+    ids={}
+
+  @rows.each do | row |
+
+      ids[row.id]= {"question" => (row.question==nil ? "" :row.question)  , "answer" => (row.answer==nil ? "" : row.answer) , "user_name" => User.find(row.user_id).name  , "user_id" => row.user_id, "answered_by" => (row.answered_by==nil ? "" : User.find(row.user_id))}
+
+  end
+
+    content_type :json
+
+    ids.to_json
 
   end
 

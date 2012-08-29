@@ -10,4 +10,5 @@ class BlogPost < ActiveRecord::Base
     #TODO: decision: created_at or updated_at?
     created_at
   end
+
 end

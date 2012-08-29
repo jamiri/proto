@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var question_page = 1;
+var question_page = 0;
 
 var ended = false;
 
@@ -14,34 +14,18 @@ $(document).ready(function () {
 
     function lastAddedLiveFunc() {
 
-        question_page = question_page +1;
+        if (ended) {
+        } else {
 
-        if (!ended) {
-            //alert("hello");
             $('div#lastPostsLoader').html('<img src="/images/bigLoader.gif">');
 
-            $.get(window.location.href + "/question/page/" + String(question_page), function (data) {
-                if (data.trim() != "") {
-                    //console.log('add data..');
+            $.getJSON(window.location.href + "/question/page/" + String(question_page), addTags_question_row);
 
-                    $(".items").append(data);
-
-                }
-                else
-
-                    ended = true;
-
-                $('div#lastPostsLoader').empty();
-
-            });
         }
-    }
-
-    ;
-
-//lastAddedLiveFunc();
+        question_page = question_page +1;
+    };
+    lastAddedLiveFunc();
     $(window).scroll(function () {
-
 
         var wintop = $(window).scrollTop(),
             docheight = $(document).height(),
@@ -56,4 +40,33 @@ $(document).ready(function () {
             lastAddedLiveFunc();
         }
     });
+
 });
+
+
+function addTags_question_row(data) {
+
+    var txt,i=0;
+
+    // Load data rows.And create question And answer in javascript.
+    for (var row in data) {
+
+        i++;
+
+        txt = '<div class="QAbody"><div class="question"><span class="id">' + row + "." + data[row]["user_name"] + '</span><p>' + data[row]["question"] + '</p></div>';
+
+        txt = txt + '<div class="answer"><span class="id">' + data[row]["answered_by"] + '</span><p>' + data[row]["answer"] + '</p></div></div>';
+
+        $(".items").append(txt);
+
+    }
+
+    // This code is for end of load the new page.Because we need end the new page.
+    if(i<1)
+    {
+        ended=true;
+    }
+
+    $('div#lastPostsLoader').empty();
+
+}

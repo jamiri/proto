@@ -2,20 +2,8 @@
 <div id="tabs-3" class="body">
 
   <div class="items">
-    <% @lesson.questions.each do |q| %>
-    <div class="QAbody">
-     <div class="question">
-       <span class="id"><%= q.user.name %></span>
-       <p><%=q.question %></p>
-     </div>
-
-     <div class="answer">
-       <span class="id"><%= q.answered_by %></span>
-       <p><%=q.answer %></p>
-     </div>
-    </div><!--end of QAbody -->
-    <% end %>
   </div>
 
+  <div id="lastPostsLoader"></div>
 </div>
 <!--------------------------------------Q and A Content ------------------------------------>
