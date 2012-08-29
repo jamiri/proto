@@ -31,6 +31,7 @@ class Main < Sinatra::Base
   map(:content_suggestion).to("/suggest_content")
   map(:sign_out).to('/sign_out')
   map(:question_page).to('/lesson/:lesson_id/question/page/:page')
+  map(:fetch_microblog).to('/lesson/:lesson_id/microblog/:page')
 
 
   configure :development do
@@ -116,12 +117,10 @@ class Main < Sinatra::Base
     
   end
 
-
   get :question_page do
 
     @lesson_id=params[:lesson_id].to_i
     @page=params[:page].to_i
-
     @rows=Lesson.find(@lesson_id).questions.offset(5*@page ).limit(5)
 
     ids={}
@@ -143,12 +142,29 @@ class Main < Sinatra::Base
   get :view_lesson do
     #exception handling required!
 
-    @lesson = Lesson.find(params[:id])
-    @categories = Category.where(:parent_id => nil)
-    @rows=@lesson.questions.limit(5)
+    @lesson = Lesson.where(:id => params[:id])
+      .includes(:objectives, :references, :category)
+      .first
 
+    @categories = Category.where(:parent_id => nil).includes(:sub_categories)
 
     erb :'lesson/index'
+
+  end
+
+  # ----- Load microblogs -----
+
+  get :fetch_microblog do
+    #TODO: exception handling required
+
+    lesson_id = params[:lesson_id].to_i
+    page = params[:page].to_i
+    microblogs = BlogPost.where(:lesson_id => lesson_id).includes(:comments => :user).offset(5 * page).limit(5)
+
+    content_type :json
+
+    microblogs.to_json(:only => [:id, :title, :content], :methods => :posted_on, :include =>
+        {:comments => {:include => :user}})
 
   end
 
@@ -156,6 +172,9 @@ class Main < Sinatra::Base
   get :lookup_words do
 
     words = Lesson.find(params[:id]).glossary_words
+
+    #TODO: word lookup can be optimized
+    #word_w_defs = GlossaryEntry.where(:entry => words.split(','))
 
     definitions = get_meaning_for words
     content_type :json
