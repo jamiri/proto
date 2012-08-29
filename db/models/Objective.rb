@@ -1,4 +1,5 @@
 class Objective < ActiveRecord::Base
+
   attr_accessible :title
 
   belongs_to :lesson
@@ -6,4 +7,5 @@ class Objective < ActiveRecord::Base
   def to_s
     title
   end
+
 end
