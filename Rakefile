@@ -225,3 +225,20 @@ namespace :lesson do
     end
   end
 end
+
+namespace :doc do
+
+  desc "Create ERD for the project and saves it to /docs/erd.pdf"
+  task :erd => :environment do
+
+    require "rails_erd/diagram/graphviz"
+    require "fileutils"
+
+    RailsERD::Diagram::Graphviz.create()
+
+    FileUtils.mkdir("docs") unless File.directory?("docs")
+    FileUtils.mv('erd.pdf', 'docs/erd.pdf')
+
+  end
+
+end
