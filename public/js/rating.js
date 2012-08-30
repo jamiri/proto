@@ -10,8 +10,7 @@ function vote(amnt){
 
     $.ajax({
         type: "GET",
-        url: "/vote",
-        data: "lesson_id=1&vote_val=" + amnt,
+        url: window.location.href+"/rating/" + amnt,
         dataType: "json",
         success: function(amnt){
             $('#current-rating').width(amnt * 25);

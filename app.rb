@@ -32,7 +32,7 @@ class Main < Sinatra::Base
   map(:sign_out).to('/sign_out')
   map(:question_page).to('/lesson/:lesson_id/question/page/:page')
   map(:fetch_microblog).to('/lesson/:lesson_id/microblog/:page')
-  map(:vote).to('/vote')
+  map(:lesson_rating).to('/lesson/:lesson_id/rating/:rate_val')
 
 
 
@@ -55,11 +55,11 @@ class Main < Sinatra::Base
   end
 
 
-  # ----------- Begin Vote --------------------------------
-  get :vote do
+  # ----------- Begin rating --------------------------------
+  get :lesson_rating do
 
     lesson_id = params[:lesson_id]
-    amount = params[:vote_val]
+    amount = params[:rate_val]
 
     vote = LessonRating.new
     vote.lesson_id = lesson_id
@@ -71,7 +71,7 @@ class Main < Sinatra::Base
     amount
 
   end
-  # ----------- End Vote --------------------------------
+  # ----------- End rating --------------------------------
 
   # -----------Sign Up--------------------------
   post :sign_up do
@@ -139,20 +139,20 @@ class Main < Sinatra::Base
 
   get :question_page do
 
-    @lesson_id = params[:lesson_id].to_i
-    @page = params[:page].to_i
-    rows = Lesson.where(@lesson_id).questions.offset(5 * @page).limit(5)
+    lesson_id = params[:lesson_id].to_i
+    page = params[:page].to_i
+    rows = Lesson.find(lesson_id).questions.offset(5 * page).limit(5)
 
     ids = {}
 
     rows.each do |row|
 
       ids[row.id] = {
-          "question" => (row.question == nil ? "" : row.question),
-          "answer" => (row.answer == nil ? "" : row.answer),
+          "question" => row.question,
+          "answer" =>  row.answer,
           "user_name" => User.find(row.user_id).name,
           "user_id" => row.user_id,
-          "answered_by" => (row.answered_by == nil ? "" : User.find(row.user_id))
+          "answered_by" => row.answered_by
     }
 
     end
