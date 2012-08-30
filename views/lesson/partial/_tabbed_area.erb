@@ -39,7 +39,7 @@
               <% @lesson.references.each do |ref| %>
                   <li>
                     <div style="margin: 0 30px 15px 0;">
-                      <% unless ref.photo.nil? %>
+                      <% unless ref.photo.empty? %>
                           <img src="/<%= settings.ref_img_dir + "/" + ref.photo %>"
                                style="float: left; margin: 10px 10px 0 10px; border: 1px solid gray;
                                        max-height: 150px; padding: 5px; background-color: #FFF;">
@@ -56,46 +56,11 @@
       </div>
       <!-- \- References -->
 
-    </div>
+      </div>
     <!--------------------------------------Main Script Content ------------------------------------>
 
     <!--------------------------------------Micro Blog Content ------------------------------------>
-    <div id="tabs-2" class="MicroBlog body">
-      <div class="post proto">
-        <h2>__title__</h2>
-        <span class="date">posted on __date__</span>
-        <span class="comments"><a href="#dialog__id__">__num__ comments</a></span>
-        <p>__content__</p>
-      </div>
-      <div class="comment_post proto">
-        <span class="id">__user_name__</span> <small>says:</small>
-        <p>__comment_body__</p>
-      </div>
-      <div class="microblog_comment proto" id="dialog__id__" title="Comments on __title__"></div>
-
-      <% if @lesson.blog_posts.any? %>
-          <% @lesson.blog_posts.each do |mcblog| %>
-              <div class="post">
-                <h2><%= mcblog.title %></h2>
-                <span class="date">posted on <%= mcblog.posted_on.strftime('%B %e, %Y') %></span>
-                <span class="comments"><a href="#dialog<%= mcblog.id %>"><%= mcblog.comments.size %> comments</a></span>
-                <p><%= mcblog.content %></p>
-
-                <% if mcblog.comments.any? %>
-                    <div class="microblog_comment" id="dialog<%= mcblog.id %>" title="Comments on <%=mcblog.title %>">
-                      <% mcblog.comments.each do |comment| %>
-                          <div class="comment_post">
-                            <span class="id"><%= comment.user.name %></span> <small>says:</small>
-                            <p><%= comment.comment %></p>
-                          </div>
-                      <% end %>
-                    </div>
-                <% end %>
-              </div>
-          <% end %>
-      <% end %>
-
-    </div>
+    <%= erb :"lesson/partial/_microblog" %>
     <!--------------------------------------Micro Blog Content ------------------------------------>
 
     <!--------------------------------------Q and A Content ------------------------------------>
@@ -106,7 +71,7 @@
     <%= erb :'lesson/partial/_discussion' %>
     <!-- \- Discussion Content -->
 
-    <div id="lastPostsLoader" style="display: none;">
+    <div id="lastPostsLoader" style="display: none; text-align: center;">
       <img src="/images/bigLoader.gif">
     </div>
 

@@ -9,7 +9,7 @@ task :environment do
 
   Dir.glob("./db/models/*.rb").each { |r| require r }
   ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => DB_FILE
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
+  #ActiveRecord::Base.logger = Logger.new(STDOUT)
 end
 
 namespace :db do
@@ -79,22 +79,15 @@ namespace :category do
 
     require "faker"
 
-    unless ENV["FAKE_COUNT"]
-      puts "How many fake categories do you want? (ie. FAKE_COUNT=5)"
-      next
-    end
+    count = ENV['COUNT'] ? ENV['COUNT'].to_i : 1
 
-    cats = Faker::Lorem.words ENV["FAKE_COUNT"].to_i
-    cats.each do |cat|
-
-      c = Category.new
-      c.name = cat
-      c.description = cat
-      c.save
+    count.times do
+      Category.create!(:name => Faker::Lorem.words(rand(1..3)).join(' '),
+                       :description => Faker::Lorem.sentences(1))
 
     end
 
-    puts "#{ENV['FAKE_COUNT']} fake categories created."
+    puts "#{count} fake categories were created."
   end
 
   desc "Generate child for categories"
@@ -127,20 +120,6 @@ namespace :category do
     puts "All categories removed."
 
   end
-
-
-  desc "Run arbitrary custom commands"
-  task :run => :environment do
-
-    c = Category.find(1)
-
-    l = Lesson.new
-    l.title = "lesson 1"
-    l.category = c
-    p l.save
-
-  end
-
 
 end
 
@@ -225,4 +204,45 @@ namespace :lesson do
       puts "A new lesson created. The id is #{lesson.id}."
     end
   end
+end
+
+namespace :doc do
+
+  desc "Create ERD for the project and saves it to /docs/erd.pdf"
+  task :erd => :environment do
+
+    require "rails_erd/diagram/graphviz"
+    require "fileutils"
+
+    RailsERD::Diagram::Graphviz.create()
+
+    FileUtils.mkdir("docs") unless File.directory?("docs")
+
+    # the "erd" file name format is: erd_{current datetime}_{current schema version}
+    FileUtils.mv('erd.pdf',
+                 "docs/erd_#{Time.now.strftime('%Y%m%d%H%M%S')}_#{ActiveRecord::Migrator.current_version}.pdf")
+
+  end
+
+end
+
+namespace :user do
+
+  desc "Create fake users"
+  task :create_fake => :environment do
+
+    require "faker"
+
+    count = ENV['COUNT'] ? ENV['COUNT'].to_i : 1
+
+    count.times do
+      User.create!(:name => Faker::Name.name,
+                   :mail_address => Faker::Internet.email,
+                   :password => "12345",
+                   :enable => true)
+    end
+
+    puts "#{count} fake users were created."
+  end
+
 end
