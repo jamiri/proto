@@ -78,22 +78,15 @@ namespace :category do
 
     require "faker"
 
-    unless ENV["FAKE_COUNT"]
-      puts "How many fake categories do you want? (ie. FAKE_COUNT=5)"
-      next
-    end
+    count = ENV['COUNT'] ? ENV['COUNT'].to_i : 1
 
-    cats = Faker::Lorem.words ENV["FAKE_COUNT"].to_i
-    cats.each do |cat|
-
-      c = Category.new
-      c.name = cat
-      c.description = cat
-      c.save
+    count.times do
+      Category.create!(:name => Faker::Lorem.words(rand(1..3)).join(' '),
+                       :description => Faker::Lorem.sentences(1))
 
     end
 
-    puts "#{ENV['FAKE_COUNT']} fake categories created."
+    puts "#{count} fake categories were created."
   end
 
   desc "Generate child for categories"
@@ -126,20 +119,6 @@ namespace :category do
     puts "All categories removed."
 
   end
-
-
-  desc "Run arbitrary custom commands"
-  task :run => :environment do
-
-    c = Category.find(1)
-
-    l = Lesson.new
-    l.title = "lesson 1"
-    l.category = c
-    p l.save
-
-  end
-
 
 end
 
@@ -242,6 +221,27 @@ namespace :doc do
     FileUtils.mv('erd.pdf',
                  "docs/erd_#{Time.now.strftime('%Y%m%d%H%M%S')}_#{ActiveRecord::Migrator.current_version}.pdf")
 
+  end
+
+end
+
+namespace :user do
+
+  desc "Create fake users"
+  task :create_fake => :environment do
+
+    require "faker"
+
+    count = ENV['COUNT'] ? ENV['COUNT'].to_i : 1
+
+    count.times do
+      User.create!(:name => Faker::Name.name,
+                   :mail_address => Faker::Internet.email,
+                   :password => "12345",
+                   :enable => true)
+    end
+
+    puts "#{count} fake users were created."
   end
 
 end
