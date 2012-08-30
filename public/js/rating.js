@@ -15,7 +15,7 @@ function vote(amnt){
         success: function(amnt){
             $('#current-rating').width(amnt * 25);
 //            $('#current-rating-result').html(amnt);
-            alert(amnt + " saved!");
+//            alert(amnt + " saved!");
         }
 });
 }

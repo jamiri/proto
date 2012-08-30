@@ -60,16 +60,16 @@ class Main < Sinatra::Base
   get :lesson_rating do
 
     lesson_id = params[:lesson_id]
-    amount = params[:rate_val]
+    rate_val = params[:rate_val]
 
     vote = LessonRating.new
     vote.lesson_id = lesson_id
     vote.user_id = 1
-    vote.rating = amount
+    vote.rating = rate_val
 
     vote.save
 
-    amount
+    rate_val
 
   end
   # ----------- End rating --------------------------------
