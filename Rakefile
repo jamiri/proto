@@ -9,7 +9,7 @@ task :environment do
 
   Dir.glob("./db/models/*.rb").each { |r| require r }
   ActiveRecord::Base.establish_connection :adapter => 'sqlite3', :database => DB_FILE
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
+  #ActiveRecord::Base.logger = Logger.new(STDOUT)
 end
 
 namespace :db do
