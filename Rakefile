@@ -31,6 +31,7 @@ namespace :db do
   desc "create an ActiveRecord migration in ./db/migrate"
   task :create_migration => :environment do
     name = ENV['NAME']
+
     if name.nil?
       raise "No NAME specified. Example usage: `rake db:create_migration NAME=create_users`"
     end

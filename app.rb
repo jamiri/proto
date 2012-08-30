@@ -32,6 +32,8 @@ class Main < Sinatra::Base
   map(:sign_out).to('/sign_out')
   map(:question_page).to('/lesson/:lesson_id/question/page/:page')
   map(:fetch_microblog).to('/lesson/:lesson_id/microblog/:page')
+  map(:vote).to('/vote')
+
 
 
   configure :development do
@@ -51,6 +53,25 @@ class Main < Sinatra::Base
     erb :index
 
   end
+
+
+  # ----------- Begin Vote --------------------------------
+  get :vote do
+
+    lesson_id = params[:lesson_id]
+    amount = params[:vote_val]
+
+    vote = LessonRating.new
+    vote.lesson_id = lesson_id
+    vote.user_id = 1
+    vote.rating = amount
+
+    vote.save
+
+    amount
+
+  end
+  # ----------- End Vote --------------------------------
 
   # -----------Sign Up--------------------------
   post :sign_up do
@@ -120,11 +141,11 @@ class Main < Sinatra::Base
 
     @lesson_id = params[:lesson_id].to_i
     @page = params[:page].to_i
-    @rows = Lesson.find(@lesson_id).questions.offset(5 * @page).limit(5)
+    rows = Lesson.where(@lesson_id).questions.offset(5 * @page).limit(5)
 
     ids = {}
 
-    @rows.each do |row|
+    rows.each do |row|
 
       ids[row.id] = {
           "question" => (row.question == nil ? "" : row.question),
@@ -132,7 +153,7 @@ class Main < Sinatra::Base
           "user_name" => User.find(row.user_id).name,
           "user_id" => row.user_id,
           "answered_by" => (row.answered_by == nil ? "" : User.find(row.user_id))
-      }
+    }
 
     end
 
