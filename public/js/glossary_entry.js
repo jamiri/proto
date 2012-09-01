@@ -5,7 +5,7 @@ $(window).ready(function () {
         var lesson_id = document.getElementById("lesson_script").getAttribute("lesson_id");
 
         // get all the words with their respective meanings from the server in Json format
-        $.getJSON("/lesson/" + lesson_id + "/lookup_words", addTags);
+//        $.getJSON("/lesson/" + lesson_id + "/lookup_words", addTags);
 
     }
 

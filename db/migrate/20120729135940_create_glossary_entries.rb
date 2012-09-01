@@ -4,7 +4,7 @@ class CreateGlossaryEntries < ActiveRecord::Migration
 
     create_table :glossary_entries do |t|
 
-      t.string :entry
+      t.string :name
 
       # Short definition that will be appeared in the lesson
       t.string :short_definition
@@ -18,4 +18,3 @@ class CreateGlossaryEntries < ActiveRecord::Migration
 
   end
 end
-

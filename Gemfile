@@ -16,4 +16,5 @@ group :development do
   gem "sinatra-contrib"
   gem "sinatra-reloader"
   gem "rails-erd"
+  gem "racksh"
 end

@@ -18,6 +18,7 @@ GEM
     choice (0.1.6)
     daemons (1.1.8)
     eventmachine (0.12.10)
+    eventmachine (0.12.10-java)
     faker (1.0.1)
       i18n (~> 0.4)
     i18n (0.6.0)
@@ -27,6 +28,9 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
+    racksh (0.9.11)
+      rack (>= 1.0)
+      rack-test (>= 0.5)
     rails-erd (1.0.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
@@ -73,6 +77,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   faker
+  racksh
   rails-erd
   rake
   sinatra
