@@ -214,16 +214,13 @@ class Main < Sinatra::Base
 
 
   get :lookup_words do
+    # TODO: exception handling
 
-    words = Lesson.find(params[:id]).glossary_words
+    words = GlossaryEntry.joins(:lessons).where('lesson_id = ?', params[:id])
 
-    #TODO: word lookup can be optimized
-    #word_w_defs = GlossaryEntry.where(:entry => words.split(','))
-
-    definitions = get_meaning_for words
     content_type :json
 
-    Hash[words.split(",").zip(definitions)].to_json
+    words.to_json
 
   end
 
