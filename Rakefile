@@ -173,8 +173,9 @@ namespace :lesson do
       sample_words.each do |word|
         if word.length > 2
           lesson.glossary_entries.build(
-              :name => word,
-              :short_definition => Faker::Lorem.sentences(1).first
+            :name => word,
+            :short_definition => Faker::Lorem.sentences(1).first,
+            :full_definition => Faker::Lorem.sentences(rand(2..5)).join(''),
           )
         end
       end
