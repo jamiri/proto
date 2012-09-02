@@ -34,7 +34,7 @@ class Main < Sinatra::Base
   map(:fetch_microblog).to('/lesson/:lesson_id/microblog/:page')
   map(:lesson_rating).to('/lesson/:lesson_id/rating/:rate_val')
   map(:new_microblog).to('/lesson/:lesson_id/microblog/create')
-
+  map(:lookup_term).to('/glossary/:term.json')
 
 
   configure :development do
@@ -220,8 +220,20 @@ class Main < Sinatra::Base
 
     content_type :json
 
-    words.to_json
+    words.to_json(:only => [:id, :name, :short_definition])
 
+  end
+
+  get :lookup_term , :provides => :json do
+    # TODO: exception handling
+
+    halt 404 unless request.xhr?
+
+    word = GlossaryEntry.where(:name => params[:term]).first
+
+    halt 404 unless word
+
+    word.to_json(:only => [:name, :full_definition, :image_file, :pronun_file, :ext_link])
   end
 
   # ----- Content Suggestion -----

@@ -5,6 +5,12 @@ $(document).ready(function () {
 
         // get all the words with their respective meanings from the server in Json format
         $.getJSON("/lesson/" + lesson_id + "/lookup_words", addTags);
+
+        $('#play_pronun').click(function(e){
+            e.preventDefault();
+
+            $('#term_pronun').get(0).play();
+        })
     }
 
 );
@@ -27,9 +33,15 @@ function addTags(data) {
             }).replaceWith(function() {
 
                 return this.nodeValue.replace(new RegExp(["(\\s)", "(", ge.name, ")", "(\\s)"].join(''), "ig"),
+
                     function(match, p1, p2, p3) {
-                        return [p1, "<a href='#' class='glossary_entry' title='", htmlEntities(ge.short_definition),
-                            "'>", p2, "</a>", p3].join('');
+                        var aElem = $('<a>')
+                            .addClass('glossary_entry')
+                            .attr('href', '/glossary/' + ge.name)
+                            .attr('title', htmlEntities(ge.short_definition))
+                            .html(p2);
+
+                        return [p1, aElem.prop('outerHTML'), p3].join('');
                     }
                 );
 
@@ -37,6 +49,48 @@ function addTags(data) {
     });
 
     $(".glossary_entry").tipTip({defaultPosition:"top"});
+
+    $('.glossary_entry').click(function(e) {
+
+        e.preventDefault();
+
+        $.getJSON($(this).attr('href') + '.json', function(data) {
+            var ge = data.glossary_entry;
+            var gd = $('#glossary_dialog');
+
+            gd.find('#term_name').html(ge.name);
+            gd.find('#term_full_def').html(ge.full_definition);
+
+            if (ge.pronun_file) {
+                gd.find('#term_pronun')
+                    .empty()
+                    .append(
+                        $('<source>')
+                            .attr('type', 'audio/mpeg')
+                            .attr('src', '/assets/' + ge.pronun_file)
+                    );
+
+                gd.find('#play_pronun').show();
+            } else {
+                gd.find('#play_pronun').hide();
+            }
+
+            if (ge.image_file) {
+                gd.find('#term_image').attr('src', '/assets/' + ge.image_file).show();
+            } else {
+                gd.find('#term_image').hide();
+            }
+
+            if (ge.ext_link) {
+                gd.find('#term_link_wrapper').show();
+                gd.find('#term_link').attr('href', ge.ext_link).html(ge.ext_link);
+            } else {
+                gd.find('#term_link_wrapper').hide();
+            }
+
+            showModal($('#glossary_dialog'));
+        });
+    });
 }
 
 
@@ -46,7 +100,10 @@ function addTags(data) {
  * ReplaceAll by Fagner Brack (MIT Licensed)
  * Replaces all occurrences of a substring in a string
  */
+
 /*
+ * No need to this function anymore!
+ *
 String.prototype.replaceAll = function (token, newToken, ignoreCase) {
     var str, i = -1, _token;
     if ((str = this.toString()) && typeof token === "string") {
