@@ -176,7 +176,9 @@ class Main < Sinatra::Base
       .first
 
     @categories = Category.where(:parent_id => nil).includes(:sub_categories)
-    @avg_rate = @lesson.lesson_ratings.average("rating").to_s
+
+    @avg_rate = @lesson.lesson_ratings.average("rating")
+
     erb :'lesson/index'
 
   end
