@@ -234,7 +234,7 @@ class Main < Sinatra::Base
 
     halt 404 unless word
 
-    word.to_json(:only => [:name, :full_definition, :image_file, :pronun_file, :ext_link])
+    word.to_json(:only => [:name, :short_definition, :full_definition, :image_file, :pronun_file, :ext_link])
   end
 
   # ----- Content Suggestion -----
