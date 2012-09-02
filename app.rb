@@ -69,7 +69,8 @@ class Main < Sinatra::Base
 
     vote.save
 
-    rate_val
+    LessonRating.where(:lesson_id => lesson_id).average("rating").to_s
+
 
   end
   # ----------- End rating --------------------------------
@@ -171,11 +172,11 @@ class Main < Sinatra::Base
     #exception handling required!
 
     @lesson = Lesson.where(:id => params[:id])
-      .includes(:objectives, :references, :category)
+      .includes(:objectives, :references, :category , :lesson_ratings)
       .first
 
     @categories = Category.where(:parent_id => nil).includes(:sub_categories)
-
+    @avg_rate = @lesson.lesson_ratings.average("rating").to_s
     erb :'lesson/index'
 
   end

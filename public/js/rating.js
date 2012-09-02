@@ -13,9 +13,8 @@ function vote(amnt){
         url: window.location.href+"/rating/" + amnt,
         dataType: "json",
         success: function(amnt){
+
             $('#current-rating').width(amnt * 25);
-//            $('#current-rating-result').html(amnt);
-//            alert(amnt + " saved!");
         }
 });
 }
