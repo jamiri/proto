@@ -33,6 +33,7 @@ class Main < Sinatra::Base
   map(:question_page).to('/lesson/:lesson_id/question/page/:page')
   map(:fetch_microblog).to('/lesson/:lesson_id/microblog/:page')
   map(:lesson_rating).to('/lesson/:lesson_id/rating/:rate_val')
+  map(:question_rating).to('/lesson/:lesson_id/question/:question_id/rating/:rate_val')
   map(:new_microblog).to('/lesson/:lesson_id/microblog/create')
 
   map(:lookup_term).to('/glossary/:term.json')
@@ -56,6 +57,24 @@ class Main < Sinatra::Base
 
   end
 
+  # ----------- Begin Question Rating --------------------------------
+  get :question_rating do
+
+    question_id = params[:question_id]
+    rate_val = params[:rate_val]
+
+    vote = QuestionRating.new
+    vote.question_id = question_id
+    vote.user_id = 1
+    vote.rating = rate_val
+
+    vote.save
+
+    QuestionRating.where(:question_id => question_id).average("rating").to_s
+
+
+  end
+  # ----------- End  Question Rating --------------------------------
 
   # ----------- Begin rating --------------------------------
   get :lesson_rating do
@@ -158,7 +177,6 @@ class Main < Sinatra::Base
           "user_name" => User.find(row.user_id).name,
           "user_id" => row.user_id,
           "answered_by" => row.answered_by,
-          "id" => row.id ,
           "rate_avg" => row.question_ratings.average("rating")
     }
 

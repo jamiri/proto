@@ -6,15 +6,15 @@
  * To change this template use File | Settings | File Templates.
  */
 
-function vote(amnt){
-
+function question_vote(question_id , amnt){
     $.ajax({
         type: "GET",
-        url: window.location.href+"/rating/" + amnt,
+        url: document.URL + "/question/" + question_id + "/rating/" + amnt,
         dataType: "json",
         success: function(amnt){
 
-            $('#current-rating').width(amnt * 25);
+            $("ul#li#star-rating-question" + question_id).width(amnt * 25);
+
         }
 });
 }
