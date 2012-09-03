@@ -76,7 +76,7 @@ class Main < Sinatra::Base
   end
   # ----------- End  Question Rating --------------------------------
 
-  # ----------- Begin rating --------------------------------
+  # ----------- Begin Lesson rating --------------------------------
   get :lesson_rating do
 
     lesson_id = params[:lesson_id]
@@ -93,7 +93,7 @@ class Main < Sinatra::Base
 
 
   end
-  # ----------- End rating --------------------------------
+  # ----------- End Lesson rating --------------------------------
 
   # -----------Sign Up--------------------------
   post :sign_up do
