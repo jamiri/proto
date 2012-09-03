@@ -1,4 +1,4 @@
-.star-rating{
+ .star-rating-question{
     list-style:none;
     margin-left:5px !important;
     padding:0px;
@@ -7,14 +7,14 @@
     position: relative;
     background: url(/images/alt_star.png) ;
 }
-.star-rating li{
+.star-rating-question li{
     padding:0px;
     margin:0px;
     /*\*/
     float: left;
     /* */
 }
-.star-rating li a{
+.star-rating-question li a{
     display:block;
     width:25px;
     height: 25px;
@@ -24,52 +24,53 @@
     position: absolute;
     padding: 0px;
 }
-.star-rating li a:hover{
+.star-rating-question li a:hover{
     background: url(/images/alt_star.png) left bottom;
     z-index: 2;
     left: 0px;
 }
-.star-rating a:focus,
-.star-rating a:active{
+.star-rating-question a:focus,
+.star-rating-question a:active{
     border:0;
     -moz-outline-style: none;
     outline: none;
 }
-.star-rating a.one-star{
+.star-rating-question a.one-star{
     left: 0px;
 }
-.star-rating a.one-star:hover{
+.star-rating-question a.one-star:hover{
     width:25px;
 }
-.star-rating a.two-stars{
+.star-rating-question a.two-stars{
     left:25px;
 }
-.star-rating a.two-stars:hover{
+.star-rating-question a.two-stars:hover{
     width: 50px;
 }
-.star-rating a.three-stars{
+.star-rating-question a.three-stars{
     left: 50px;
 }
-.star-rating a.three-stars:hover{
+.star-rating-question a.three-stars:hover{
     width: 75px;
 }
-.star-rating a.four-stars{
+.star-rating-question a.four-stars{
     left: 75px;
 }
-.star-rating a.four-stars:hover{
+.star-rating-question a.four-stars:hover{
     width: 100px;
 }
-.star-rating a.five-stars{
+.star-rating-question a.five-stars{
     left: 100px;
 }
-.star-rating a.five-stars:hover{
+.star-rating-question a.five-stars:hover{
     width: 125px;
 }
-.star-rating li.current-rating{
+.star-rating-question li.current-rating-question {
     background: url(/images/alt_star.png) left center;
     position: absolute;
     height: 25px;
     display: block;
     text-indent: -9000px;
     z-index: 1;
+
 }

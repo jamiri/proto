@@ -1,4 +1,4 @@
-class CreateQuestionRating < ActiveRecord::Migration
+class CreateQuestionRatings < ActiveRecord::Migration
 
   def change
     create_table :question_ratings do |t|

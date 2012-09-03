@@ -34,6 +34,8 @@ class Main < Sinatra::Base
   map(:fetch_microblog).to('/lesson/:lesson_id/microblog/:page')
   map(:lesson_rating).to('/lesson/:lesson_id/rating/:rate_val')
   map(:new_microblog).to('/lesson/:lesson_id/microblog/create')
+  map(:new).to('/lesson//new')
+
 
 
 
@@ -123,6 +125,12 @@ class Main < Sinatra::Base
 
   end
 
+  get :new do
+
+    erb :"new"
+
+  end
+
   # ----- Feedback -----
   post :feedback do
 
@@ -155,7 +163,9 @@ class Main < Sinatra::Base
           "answer" =>  row.answer,
           "user_name" => User.find(row.user_id).name,
           "user_id" => row.user_id,
-          "answered_by" => row.answered_by
+          "answered_by" => row.answered_by,
+          "id" => row.id ,
+          "rate_avg" => row.question_ratings.average("rating")
     }
 
     end

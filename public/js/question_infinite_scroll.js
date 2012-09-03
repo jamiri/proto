@@ -25,8 +25,8 @@ $(document).ready(function () {
         question_page = question_page + 1;
     }
 
-    ;
     lastAddedLiveFunc();
+
     $(window).scroll(function () {
 
         var wintop = $(window).scrollTop(),
@@ -45,17 +45,16 @@ $(document).ready(function () {
 
 });
 
-
 function addTags_question_row(data) {
 
-    var txt, i = 0;
+    var  i = 0;
+    var txt="";
 
     // Load data rows.And create question And answer in javascript.
     for (var row in data) {
 
         i++;
-
-        txt = '<div class="QAbody"><div class="question"><span class="id">' +
+        txt = txt + '<div class="QAbody">' + getTags_question_rating(data[row]["id"] , (data[row]["rate_avg"]) * 25 ) + '<div class="question"><span class="id">' +
             data[row]["user_name"] + '</span><p>' + data[row]["question"] + '</p></div>';
 
         txt = txt + '<div class="answer"><span class="id">' + data[row]["answered_by"] + '</span><p>' +
@@ -73,3 +72,21 @@ function addTags_question_row(data) {
     $('div#lastPostsLoader').empty();
 
 }
+function getTags_question_rating(id_question , average_value)
+{
+    var tx='';
+    txt = '<ul class="star-rating-question">';
+    txt =  txt + '<li class="current-rating-question" id="current-rating-question" style="width: ' + average_value + 'px"></li>';
+    txt =  txt + '<li><a href="#" onclick="vote(1); return false;"';
+    txt =  txt + ' title="1 star out of 5" class="one-star">1</a></li>';
+    txt =  txt + '<li><a href="#" onclick="vote(2); return false;"';
+    txt =  txt + 'title="2 star out of 5" class="two-stars">2</a></li>';
+    txt =  txt + '<li><a href="#" onclick="vote(3); return false;"';
+    txt =  txt + ' title="3 star out of 5" class="three-stars">3</a></li>';
+    txt =  txt + ' <li><a href="#" onclick="vote(4); return false;"';
+    txt =  txt + ' title="4 star out of 5" class="four-stars">4</a></li>';
+    txt =  txt + '<li><a href="#" onclick="vote(5); return false;"';
+    txt =  txt + ' title="5 star out of 5" class="five-stars">5</a></li></ul>';
+    return txt;
+}
+
