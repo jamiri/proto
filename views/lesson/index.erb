@@ -9,6 +9,20 @@
         .proto {
             display: none;
         }
+
+        .cross {
+            position: absolute;
+            top: -19px;
+            right: -19px;
+            display: block;
+            background: url('/images/cross.png') no-repeat 0 0;
+            width: 36px;
+            height: 35px;
+        }
+
+        .cross:hover {
+            background: url('/images/cross.png') no-repeat 0 -36px;
+        }
     </style>
 <% end %>
 
@@ -39,6 +53,8 @@
 <%= erb :"partial/header" %>
 
 <div id="content" class="container_24 clearfix">
+  <%= erb :"lesson/partial/_glossary" %>
+
   <%= erb :"lesson/partial/_lesson_header" %>
 
   <%= erb :"lesson/partial/_sidebar" %>

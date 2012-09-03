@@ -34,9 +34,8 @@ class Main < Sinatra::Base
   map(:fetch_microblog).to('/lesson/:lesson_id/microblog/:page')
   map(:lesson_rating).to('/lesson/:lesson_id/rating/:rate_val')
   map(:new_microblog).to('/lesson/:lesson_id/microblog/create')
-  map(:new).to('/lesson//new')
 
-
+  map(:lookup_term).to('/glossary/:term.json')
 
 
   configure :development do
@@ -125,11 +124,6 @@ class Main < Sinatra::Base
 
   end
 
-  get :new do
-
-    erb :"new"
-
-  end
 
   # ----- Feedback -----
   post :feedback do
@@ -227,17 +221,26 @@ class Main < Sinatra::Base
 
 
   get :lookup_words do
+    # TODO: exception handling
 
-    words = Lesson.find(params[:id]).glossary_words
+    words = GlossaryEntry.joins(:lessons).where('lesson_id = ?', params[:id])
 
-    #TODO: word lookup can be optimized
-    #word_w_defs = GlossaryEntry.where(:entry => words.split(','))
-
-    definitions = get_meaning_for words
     content_type :json
 
-    Hash[words.split(",").zip(definitions)].to_json
+    words.to_json(:only => [:id, :name, :short_definition])
 
+  end
+
+  get :lookup_term , :provides => :json do
+    # TODO: exception handling
+
+    halt 404 unless request.xhr?
+
+    word = GlossaryEntry.where(:name => params[:term]).first
+
+    halt 404 unless word
+
+    word.to_json(:only => [:name, :short_definition, :full_definition, :image_file, :pronun_file, :ext_link])
   end
 
   # ----- Content Suggestion -----

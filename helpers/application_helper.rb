@@ -21,32 +21,6 @@ def create_child_for_category(root_categories)
 
 end
 
-
-#
-def get_meaning_for(words_list)
-
-  definition_list = []
-
-  words = words_list.split(",")
-
-  words.each do |word|
-
-    entry = GlossaryEntry.find_by_entry(word)
-
-    if entry
-      definition = GlossaryEntry.find_by_entry(word).short_definition
-    else
-      definition = "No Definition Found"
-    end
-
-    definition_list << definition
-
-  end
-
-  definition_list
-end
-
-
 # This code can be optimized.
 def create_navbar(id)
 

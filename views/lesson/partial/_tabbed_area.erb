@@ -28,7 +28,9 @@
       <!-- \- Objective -->
       <div class="script" id="lesson_script" lesson_id="<%= @lesson.id %>" >
         <h4>Script of Lesson</h4>
-        <%= @lesson.script %>
+        <div id="lesson_script_body">
+          <%= @lesson.script %>
+        </div>
       </div>
 
       <!-- /- References -->
