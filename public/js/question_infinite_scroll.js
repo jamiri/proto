@@ -19,7 +19,7 @@ $(document).ready(function () {
 
             $('div#lastPostsLoader').html('<img src="/images/bigLoader.gif">');
 
-            $.getJSON(window.location.href + "/question/page/" + String(question_page), addTags_question_row);
+            $.getJSON(location.href + "/question/page/" + String(question_page), addTags_question_row);
 
         }
         question_page = question_page + 1;
