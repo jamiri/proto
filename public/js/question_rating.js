@@ -13,7 +13,7 @@ function question_vote(question_id , amnt){
         dataType: "json",
         success: function(amnt){
 
-            $("ul#li#star-rating-question" + question_id).width(amnt * 25);
+            $("#current-rating-question" + question_id).width(amnt * 25);
 
         }
 });
