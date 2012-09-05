@@ -10,64 +10,71 @@
 
   <div id="featured">
     <ul class="ui-tabs-nav">
-      <li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-1">
-        <a href="#fragment-1"><h4 class="title">Lesson Title</h4>
-          <span class="description">Added: 2 days ago<br/>Category: Towhid</span></a></li>
-      <li class="ui-tabs-nav-item" id="nav-fragment-2"><a href="#fragment-2"><h4 class="title">Lesson Title</h4>
-        <span class="description">Added: 2 days ago<br/>Category: Towhid</span></a></li>
-      <li class="ui-tabs-nav-item" id="nav-fragment-3"><a href="#fragment-3"><h4 class="title">Lesson Title</h4>
-        <span class="description">Added: 2 days ago<br/>Category: Towhid</span></a></li>
-      <li class="ui-tabs-nav-item" id="nav-fragment-4"><a href="#fragment-4"><h4 class="title">Lesson Title</h4>
-        <span class="description">Added: 5 days ago<br/>Category: Towhid</span></a></li>
+      <%
+         i = 0
+         @top_lessons.each  do |lesson_row|
+         i+=1
+      %>
+
+      <li class="ui-tabs-nav-item <%=(i==1 ? "ui-tabs-selected" : "") %>" id="nav-fragment-<%=lesson_row.id %>">
+        <a href="#fragment-<%=i%>"><h4 class="title"><%=lesson_row.title %></h4>
+          <span class="description">Added: <%=calculate_date_difference(Date.today() , lesson_row.created_at) %><br/>Category: <%=lesson_row.category.name %></span></a></li>
+      <% end %>
+
     </ul>
 
     <!-- First Content -->
-    <div id="fragment-1" class="ui-tabs-panel" style="">
+    <%
+       i = 0
+       @top_lessons.each  do |lesson_row|
+       i+=1
+
+    %>
+    <div id="fragment-<%=i %>" class="ui-tabs-panel <%=(i!=1 ? "ui-tabs-hide" : "") %>" style="">
       <img src="images/slide1.jpg" alt=""/>
 
       <div class="info">
-        <h2>Lesson Title</h2>
+        <h2><%=lesson_row.title %></h2>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut
-          diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit....<a href="#">View This Lesson!</a></p>
+        <p><%=lesson_row.description %>....<a href="/lesson/<%=lesson_row.id %>">View This Lesson!</a></p>
       </div>
     </div>
-
+    <% end %>
     <!-- Second Content -->
-    <div id="fragment-2" class="ui-tabs-panel ui-tabs-hide" style="">
-      <img src="images/slide2.jpg" alt=""/>
+    <!--<div id="fragment-2" class="ui-tabs-panel ui-tabs-hide" style="">-->
+      <!--<img src="images/slide2.jpg" alt=""/>-->
 
-      <div class="info">
-        <h2>Lesson Title</h2>
+      <!--<div class="info">-->
+        <!--<h2>Lesson Title</h2>-->
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut
-          diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit....<a href="#">View This Lesson!</a></p>
-      </div>
-    </div>
+        <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut-->
+          <!--diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit....<a href="#">View This Lesson!</a></p>-->
+      <!--</div>-->
+    <!--</div>-->
 
     <!-- Third Content -->
-    <div id="fragment-3" class="ui-tabs-panel ui-tabs-hide" style="">
-      <img src="images/slide3.jpg" alt=""/>
+    <!--<div id="fragment-3" class="ui-tabs-panel ui-tabs-hide" style="">-->
+      <!--<img src="images/slide3.jpg" alt=""/>-->
 
-      <div class="info">
-        <h2>Lesson Title</h2>
+      <!--<div class="info">-->
+        <!--<h2>Lesson Title</h2>-->
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut
-          diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit....<a href="#">View This Lesson!</a></p>
-      </div>
-    </div>
+        <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut-->
+          <!--diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit....<a href="#">View This Lesson!</a></p>-->
+      <!--</div>-->
+    <!--</div>-->
 
     <!-- Fourth Content -->
-    <div id="fragment-4" class="ui-tabs-panel ui-tabs-hide" style="">
-      <img src="images/slide4.jpg" alt=""/>
+    <!--<div id="fragment-4" class="ui-tabs-panel ui-tabs-hide" style="">-->
+      <!--<img src="images/slide4.jpg" alt=""/>-->
 
-      <div class="info">
-        <h2>Lesson Title</h2>
+      <!--<div class="info">-->
+        <!--<h2>Lesson Title</h2>-->
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut
-          diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit....<a href="#">View This Lesson!</a></p>
-      </div>
-    </div>
+        <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut-->
+          <!--diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit....<a href="#">View This Lesson!</a></p>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
   <!--end of Slider -->
 </div>

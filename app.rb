@@ -33,7 +33,10 @@ class Main < Sinatra::Base
   map(:question_page).to('/lesson/:lesson_id/question/page/:page')
   map(:fetch_microblog).to('/lesson/:lesson_id/microblog/:page')
   map(:lesson_rating).to('/lesson/:lesson_id/rating/:rate_val')
+
+  #map(:question_rating).to(%r{/lesson/:lesson_id/question/:question_id/rating/(:rate_val#? | :rate_val )})
   map(:question_rating).to('/lesson/:lesson_id/question/:question_id/rating/:rate_val')
+
   map(:new_microblog).to('/lesson/:lesson_id/microblog/create')
 
   map(:lookup_term).to('/glossary/:term.json')
@@ -51,6 +54,7 @@ class Main < Sinatra::Base
 
   get :home do
 
+    @top_lessons = Lesson.limit(4).order('created_at').reverse_order
     @categories = Category.where(:parent_id => nil)
 
     erb :index

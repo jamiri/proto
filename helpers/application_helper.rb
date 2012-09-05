@@ -38,7 +38,16 @@ def create_navbar(id)
    create_navbar(cat.parent_id) + str
 
   end
+
+  # The variable 'from' and 'to' is type of date
+
+
 end
 
+def calculate_date_difference(from , to )
+
+  dt = Date.parse(to.to_s) - Date.parse(from.to_s)
+
+end
 
 
