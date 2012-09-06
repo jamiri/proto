@@ -11,13 +11,11 @@
   <div id="featured">
     <ul class="ui-tabs-nav">
       <%
-         i = 0
-         @top_lessons.each  do |lesson_row|
-         i+=1
+         @top_lessons.each_with_index  do |lesson_row , index|
       %>
 
-      <li class="ui-tabs-nav-item <%=(i==1 ? "ui-tabs-selected" : "") %>" id="nav-fragment-<%=lesson_row.id %>">
-        <a href="#fragment-<%=i%>"><h4 class="title"><%=lesson_row.title %></h4>
+      <li class="ui-tabs-nav-item <%=(index == 0 ? "ui-tabs-selected" : "") %>" id="nav-fragment-<%=index %>">
+        <a href="#fragment-<%=index %>"><h4 class="title"><%=lesson_row.title %></h4>
           <span class="description">Added: <%=calculate_date_difference(Date.today() , lesson_row.created_at) %><br/>Category: <%=lesson_row.category.name %></span></a></li>
       <% end %>
 
@@ -25,12 +23,9 @@
 
     <!-- First Content -->
     <%
-       i = 0
-       @top_lessons.each  do |lesson_row|
-       i+=1
-
+       @top_lessons.each_with_index  do |lesson_row , index|
     %>
-    <div id="fragment-<%=i %>" class="ui-tabs-panel <%=(i!=1 ? "ui-tabs-hide" : "") %>" style="">
+    <div id="fragment-<%=index %>" class="ui-tabs-panel <%=(index != 0 ? "ui-tabs-hide" : "") %>" style="">
       <img src="images/slide1.jpg" alt=""/>
 
       <div class="info">
