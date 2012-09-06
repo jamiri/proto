@@ -164,7 +164,7 @@ class Main < Sinatra::Base
 
   end
 
-  # TODO: this code can still be optimized.
+  # ------------------- Question Make Page for ajax Interactions --------------------
   get :question_page do
 
     lesson_id = params[:lesson_id].to_i
@@ -185,6 +185,7 @@ class Main < Sinatra::Base
     }
 
     end
+    # ---------------------------- End -------------------------------------------------
 
     content_type :json
 
