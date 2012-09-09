@@ -463,6 +463,8 @@ sons, etc.",
 
     lesson.save
 
+    system "mkdir -p public/assets/ref_img"
+
     %w(hijab mahram ulama khimaar shahaadat miraaj).each do |file_name|
       system "tar xzf sample_content.tar.gz -C public/assets/ #{file_name}.mp3"
     end
@@ -515,3 +517,7 @@ namespace :user do
   end
 
 end
+
+# Run the RSpec tests
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:test)

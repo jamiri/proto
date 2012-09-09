@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 
-#gem "sinatra", :require => "sinatra/base"
 gem "sinatra"
 gem "activerecord"
-#gem "haml"
 gem "sqlite3"
 gem "sinatra_more"
 gem "sinatra-flash"
@@ -17,4 +15,9 @@ group :development do
   gem "sinatra-reloader"
   gem "rails-erd"
   gem "racksh"
+end
+
+group :test do
+  gem "rspec"
+  gem "rack-test", :require => "rack/test"
 end
