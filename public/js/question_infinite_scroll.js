@@ -6,72 +6,25 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var question_page = 0;
-
-var ended = false;
-
 $(document).ready(function () {
+    var item = $('.QAbody').clone();
+    $('.QAbody').html("");
+    initInfiniScroll($('.items'), function (page) {
+        return "/lesson/" + $('.script:first').attr('lesson_id') + "/question/page/" + page;
+    }, function (data) {
+            $(data).each(function () {
+                item.clone()
+                    .find(".question").find(".id").html(this.question.user.name).end().end()
+                    .find(".question").find("p").html(this.question.question).end().end()
+                    .find(".answer").find(".id").html(this.question.answered_by).end().end()
+                    .find(".answer").find("p").html(this.question.answer).end().end()
+                    .find(".rating").html(getTags_question_rating(this.question.id, this.question.rating_average * 25)).end()
+                    .appendTo($(".items"));
+            });
 
-    function lastAddedLiveFunc() {
 
-        if (ended) {
-        } else {
-
-            $('div#lastPostsLoader').html('<img src="/images/bigLoader.gif">');
-
-            $.getJSON(location.href + "/question/page/" + String(question_page), addTags_question_row);
-
-        }
-        question_page = question_page + 1;
-    }
-
-    lastAddedLiveFunc();
-
-    $(window).scroll(function () {
-
-        var wintop = $(window).scrollTop(),
-            docheight = $(document).height(),
-            winheight = $(window).height();
-        var scrolltrigger = 0.98;
-
-        var qaIsSelected = $('#qa').hasClass("ui-tabs-selected");
-
-        if (((wintop / (docheight - winheight)) > scrolltrigger)
-            && qaIsSelected && !ended) {
-
-            lastAddedLiveFunc();
-        }
     });
-
 });
-
-function addTags_question_row(data) {
-
-    var  i = 0;
-    var txt="";
-
-    // Load data rows.And create question And answer in javascript.
-    for (var row in data) {
-
-        i++;
-        txt = txt + '<div class="QAbody">' + getTags_question_rating(row , (data[row]["rate_avg"]) * 25 ) + '<div class="question"><span class="id">' +
-            data[row]["user_name"] + '</span><p>' + data[row]["question"] + '</p></div>';
-
-        txt = txt + '<div class="answer"><span class="id">' + data[row]["answered_by"] + '</span><p>' +
-            data[row]["answer"] + '</p></div></div>';
-        $(".items").append(txt);
-        txt="";
-
-    }
-
-    // This code is for end of load the new page.Because we need end the new page.
-    if (i < 1) {
-        ended = true;
-    }
-
-    $('div#lastPostsLoader').empty();
-
-}
 function getTags_question_rating(id_question , average_value)
 {
     var tx='';

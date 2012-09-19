@@ -167,33 +167,22 @@ class Main < Sinatra::Base
   # ------------------- Question Make Page for ajax Interactions --------------------
   get :question_page do
 
-    lesson_id = params[:lesson_id].to_i
+    lesson_id = params[:lesson_id].to_s
     page = params[:page].to_i
-    rows = Lesson.find(lesson_id).questions.offset(5 * page).limit(5)
 
-    ids = {}
-
-    rows.each do |row|
-
-      ids[row.id] = {
-          "question" => row.question,
-          "answer" =>  row.answer,
-          "user_name" => User.find(row.user_id).name,
-          "user_id" => row.user_id,
-          "answered_by" => row.answered_by,
-          "rate_avg" => row.question_ratings.average("rating")
-    }
-
-    end
-    # ---------------------------- End -------------------------------------------------
+    rows = Question.find(:all,
+               :select => "questions.* , avg(question_ratings.rating) as rating_average",
+               :conditions => ["questions.lesson_id=" + lesson_id],
+               :joins => "left outer join question_ratings ON question_ratings.question_id = questions.id",
+    :group => "questions.id",:offset => 5 * page , :limit => 5)
 
     content_type :json
 
-    ids.to_json
+    rows.to_json(:include => :user)
 
   end
 
-  # ----- Lesson -----
+  # ------------------------------------- Lesson -------------------------------------
 
   get :view_lesson do
     #exception handling required!

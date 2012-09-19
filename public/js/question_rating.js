@@ -9,7 +9,7 @@
 function question_vote(question_id , amnt){
     $.ajax({
         type: "GET",
-        url: document.URL + "/question/" + question_id + "/rating/" + amnt,
+        url: $('.script:first').attr('lesson_id') + "/question/" + question_id + "/rating/" + amnt,
         dataType: "json",
         success: function(amnt){
 

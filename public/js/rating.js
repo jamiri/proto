@@ -10,7 +10,7 @@ function vote(amnt){
 
     $.ajax({
         type: "GET",
-        url: window.location.href+"/rating/" + amnt,
+        url: $('.script:first').attr('lesson_id') + "/rating/" + amnt,
         dataType: "json",
         success: function(amnt){
 
