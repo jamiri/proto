@@ -21,8 +21,6 @@ $(document).ready(function () {
                     .find(".rating").html(getTags_question_rating(this.question.id, this.question.rating_average * 25)).end()
                     .appendTo($(".items"));
             });
-
-
     });
 });
 function getTags_question_rating(id_question , average_value)

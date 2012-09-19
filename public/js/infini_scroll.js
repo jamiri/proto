@@ -8,6 +8,7 @@ function initInfiniScroll(elem, url, callback) {
 
     elem.page = 1;
     elem.fetching = false;
+
     $(window).scroll(function () {
 
         if (elem.is(':visible')) {
