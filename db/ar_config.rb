@@ -8,6 +8,6 @@ ActiveRecord::Base.establish_connection(
 
 Dir.glob('./models/*').each { |r| require r }
 
-if ENV['RACK_ENV'].to_sym != :production
+if ENV['RACK_ENV'] && ENV['RACK_ENV'].to_sym == :development
   ActiveRecord::Base.logger = Logger.new(STDOUT)
 end
