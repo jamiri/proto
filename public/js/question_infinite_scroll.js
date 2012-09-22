@@ -5,7 +5,6 @@
  * Time: 12:42 PM
  * To change this template use File | Settings | File Templates.
  */
-
 $(document).ready(function () {
     var item = $('.QAbody').clone();
     $('.QAbody').html("");

@@ -174,7 +174,7 @@ class Main < Sinatra::Base
                :select => "questions.* , avg(question_ratings.rating) as rating_average",
                :conditions => ["questions.lesson_id=" + lesson_id],
                :joins => "left outer join question_ratings ON question_ratings.question_id = questions.id",
-    :group => "questions.id",:offset => 5 * page , :limit => 5)
+    :group => "questions.id",:offset => 5 * (page - 1) , :limit => 5)
 
     content_type :json
 
