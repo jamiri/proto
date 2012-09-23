@@ -174,7 +174,7 @@ class Main < Sinatra::Base
                :select => "questions.* , avg(question_ratings.rating) as rating_average",
                :conditions => ["questions.lesson_id=" + lesson_id],
                :joins => "left outer join question_ratings ON question_ratings.question_id = questions.id",
-    :group => "questions.id",:offset => 5 * (page - 1) , :limit => 5)
+    :group => "questions.id",:offset => 5 * page , :limit => 5)
 
     content_type :json
 
@@ -192,6 +192,12 @@ class Main < Sinatra::Base
       .first
 
     @categories = Category.where(:parent_id => nil).includes(:sub_categories)
+
+    @lesson_questions = Question.find(:all,
+                         :select => "questions.* , avg(question_ratings.rating) as rating_average",
+                         :conditions => ["questions.lesson_id=" + @lesson.id.to_s],
+                         :joins => "left outer join question_ratings ON question_ratings.question_id = questions.id",
+                         :group => "questions.id",:offset => 0 , :limit => 5)
 
     @avg_rate = @lesson.lesson_ratings.average("rating")
 

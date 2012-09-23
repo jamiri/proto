@@ -6,8 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 $(document).ready(function () {
-    var item = $('.QAbody').clone();
-    $('.QAbody').html("");
+    var item = $('.QAbody').first().clone();
+    $('.QAbody').first().html("");
     initInfiniScroll($('.items'), function (page) {
         return "/lesson/" + $('.script:first').attr('lesson_id') + "/question/page/" + page;
     }, function (data) {
